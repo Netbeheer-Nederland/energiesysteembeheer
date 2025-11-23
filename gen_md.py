@@ -144,9 +144,9 @@ permalink: {info['permalink']}
     if scope_notes or comments or examples:
         md += "\n## Opmerkingen\n{: .text-delta }\n"
         md += "\n| Soort | Waarde |\n| :--- | :--- |\n"
-        if comments: md += f"| Uitleg {{: .fw-500 }} | {NEWLINE.join(comments)} |\n"
-        if scope_notes: md += f"| Toelichting {{: .fw-500 }} | {NEWLINE.join(scope_notes)} |\n"
-        if examples: md += f"| Voorbeeld {{: .fw-500 }} | {NEWLINE.join(examples)} |\n"
+        if comments: md += f'| <span class="fw-500">Uitleg</span> | {NEWLINE.join(comments)} |\n'
+        if scope_notes: md += f'| <span class="fw-500">Toelichting</span> | {NEWLINE.join(scope_notes)} |\n'
+        if examples: md += f'| <span class="fw-500">Voorbeeld</span> | {NEWLINE.join(examples)} |\n'
         md += "{: .hide-header}\n\n"
 
     # Terminologie
@@ -155,9 +155,9 @@ permalink: {info['permalink']}
     if alt_labels or hidden_labels or notation:
         md += "\n## Terminologie\n{: .text-delta }\n"
         md += "\n| Type | Term |\n| :--- | :--- |\n"
-        md += f"| Voorkeursterm {{: .fw-500 }} | {label} |\n"
-        if alt_labels: md += f"| Alternatieve term {{: .fw-500 }} | {NEWLINE.join(alt_labels)} |\n"
-        if hidden_labels: md += f"| Zoekterm {{: .fw-500 }} | {NEWLINE.join(hidden_labels)} |\n"
+        md += f'| <span class="fw-500">Voorkeursterm</span> | {label} |\n'
+        if alt_labels: md += f'| <span class="fw-500">Alternatieve term</span> | {NEWLINE.join(alt_labels)} |\n'
+        if hidden_labels: md += f'| <span class="fw-500">Zoekterm</span> | {NEWLINE.join(hidden_labels)} |\n'
         md += "{: .hide-header}\n\n"
 
     # Relaties
@@ -167,9 +167,9 @@ permalink: {info['permalink']}
     if broader or narrower or related:
         md += "\n## Relaties\n{: .text-delta }\n\n"
         md += "\n| Soort | Begrip |\n| :--- | :--- |\n"
-        if broader: md += f"| Bovenliggend {{: .fw-500 }} | {NEWLINE.join(broader)} |\n"
-        if narrower: md += f"| Onderliggend {{: .fw-500 }} | {NEWLINE.join(narrower)} |\n"
-        if related: md += f"| Gerelateerd {{: .fw-500 }} | {NEWLINE.join(related)} |\n"
+        if broader: md += f'| <span class="fw-500">Bovenliggend</span> | {NEWLINE.join(broader)} |\n'
+        if narrower: md += f'| <span class="fw-500">Onderliggend</span> | {NEWLINE.join(narrower)} |\n'
+        if related: md += f'| <span class="fw-500">Gerelateerd</span> | {NEWLINE.join(related)} |\n'
         md += "{: .hide-header}\n\n"
 
     # Overeenkomstig
@@ -181,11 +181,11 @@ permalink: {info['permalink']}
     if broad_match or narrow_match or close_match or exact_match or related_match:
         md += "\n## Overeenkomstig\n{: .text-delta }\n"
         md += "\n| Overeenkomst | Begrip |\n| :--- | :--- |\n"
-        if broad_match: md += f"| Overeenkomstig bovenliggend {{: .fw-500 }} | {NEWLINE.join(broad_match)} |\n"
-        if narrow_match: md += f"| Overeenkomstig onderliggend {{: .fw-500 }} | {NEWLINE.join(narrow_match)} |\n"
-        if close_match: md += f"| Vrijwel overeenkomstig {{: .fw-500 }} | {NEWLINE.join(close_match)} |\n"
-        if exact_match: md += f"| Exact overeenkomstig {{: .fw-500 }} | {NEWLINE.join(exact_match)} |\n"
-        if related_match: md += f"| Overeenkomstig verwant {{: .fw-500 }} | {NEWLINE.join(related_match)} |\n"
+        if broad_match: md += f'| <span class="fw-500">Overeenkomstig bovenliggend</span> | {NEWLINE.join(broad_match)} |\n'
+        if narrow_match: md += f'| <span class="fw-500">Overeenkomstig onderliggend</span> | {NEWLINE.join(narrow_match)} |\n'
+        if close_match: md += f'| <span class="fw-500">Vrijwel overeenkomstig</span> | {NEWLINE.join(close_match)} |\n'
+        if exact_match: md += f'| <span class="fw-500">Exact overeenkomstig</span> | {NEWLINE.join(exact_match)} |\n'
+        if related_match: md += f'| <span class="fw-500">Overeenkomstig verwant</span> | {NEWLINE.join(related_match)} |\n'
         md += "{: .hide-header}\n\n"
 
     # Verantwoording
@@ -194,9 +194,9 @@ permalink: {info['permalink']}
     history_notes = [str(l) for l in g.objects(s, SKOS.historyNote)]
     if sources or change_notes or history_notes:
         md += "\n## Verantwoording\n{: .text-delta }\n\n| Eigenschap | Waarde |\n| :--- | :--- |\n"
-        if sources: md += f"| Bron {{: .fw-500 }} | {NEWLINE.join(sources)} |\n"
-        if change_notes: md += f"| Wijzigingsnotitie {{: .fw-500 }} | {NEWLINE.join(change_notes)} |\n"
-        if history_notes: md += f"| Historie {{: .fw-500 }} | {NEWLINE.join(history_notes)} |\n"
+        if sources: md += f'| <span class="fw-500">Bron</span> | {NEWLINE.join(sources)} |\n'
+        if change_notes: md += f'| <span class="fw-500">Wijzigingsnotitie</span> | {NEWLINE.join(change_notes)} |\n'
+        if history_notes: md += f'| <span class="fw-500">Historie</span> | {NEWLINE.join(history_notes)} |\n'
         md += "{: .hide-header}\n\n"
 
     # Gebruik (placeholder voor gebruik door client-side JavaScript)
