@@ -1,10 +1,11 @@
-@media (min-width: 85rem) {
-    .side-bar {
-        width: calc((100% - 85rem) / 2 + 25rem);
-        min-width: 25rem;
-    }
+@media (min-width: 66.5rem) {
     .site-nav, .site-header, .site-footer {
-        width: 25rem;
+        width: 100%;
+    }
+}
+@media (min-width: 85rem) {
+    .site-nav, .site-header, .site-footer {
+        width: 24rem;
     }
 }
 
