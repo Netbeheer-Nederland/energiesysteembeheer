@@ -239,7 +239,7 @@ def get_external_links(g, subject, predicate):
         
         # Probeer eigenschappen van het object zelf op te halen
         # (Dit werkt alleen als 'obj' ook als subject elders in je graaf staat)
-        label = g.value(obj, RDFS.label) or g.value(obj, SKOS.prefLabel)
+        label = g.value(obj, RDFS.label) or g.value(obj, SKOS.prefLabel) or g.value(obj, DCTERMS.title)
         page = g.value(obj, FOAF.page)
         
         # SCENARIO A: Het is een 'Rijke Node' (zoals jouw Bron-document)
