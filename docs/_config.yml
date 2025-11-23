@@ -1,0 +1,13 @@
+title: Begrippenkader | Netbeheer Nederland
+theme: just-the-docs
+baseurl: /begrippen
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+color_scheme: nbnl
+logo: "/assets/images/logo.svg"
+fav_icon: "/assets/images/favicon.png"

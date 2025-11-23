@@ -1,0 +1,1781 @@
+@prefix : <https://modellen.netbeheernederland.nl/begrippen/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+<https://modellen.netbeheernederland.nl/begrippen/> a owl:Ontology;
+  owl:imports <http://xmlns.com/foaf/0.1/> .
+
+:energiesysteembeheer a skos:ConceptScheme;
+  rdfs:comment "Dit begrippenkader definieert de soorten dingen die worden beheerd door de Nederlanse <a href=\"https://wetten.overheid.nl/BWBR0050714\">transmissie- en distributiesysteembeheerders</a> bij de uitvoering van de economische activiteiten <a href=\"https://sbi-api.cbs.nl/api/SBIData/SBIInfo/3513\">3513</a> (Transmissie van elektriciteit), <a href=\"https://sbi-api.cbs.nl/api/SBIData/SBIInfo/3514\">3514</a> (Distributie van elektriciteit), <a href=\"https://sbi-api.cbs.nl/api/SBIData/SBIInfo/4950\">4950</a> (Transport via pijpleidingen) en <a href=\"https://sbi-api.cbs.nl/api/SBIData/SBIInfo/3522\">3522</a> (Distributie van gasvormige brandstoffen via leidingen). De begrippen op het hoogste niveau in de hiërarchie zijn gedefinieerd door <a href=\"https://nbility-model.github.io\">NBility</a>."@nl;
+  skos:prefLabel "Energiesysteembeheer"@nl .
+
+:energiedrager a skos:Concept;
+  skos:definition "medium dat bruikbare energie bevat"@nl;
+  skos:example "elektriciteit"@nl, "gas"@nl, "waterstof"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "energiedrager"@nl;
+  skos:altLabel "productsoort"@nl;
+  skos:broader :energie-uitwisseling;
+  skos:exactMatch <https://www.cbs.nl/nl-nl/onze-diensten/methoden/begrippen/energiedrager> .
+
+:afname a skos:Concept;
+  skos:definition "onttrekking van energie aan het energienet"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "afname"@nl;
+  skos:altLabel "levering"@nl;
+  skos:broader :energie-uitwisseling;
+  skos:related :energienet .
+
+:energie-uitwisseling a skos:Concept;
+  skos:definition "afname dan wel invoeding van energie op een energienet"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "energie-uitwisseling"@nl;
+  skos:broader :energiemarkt-domein;
+  dct:source :nbility .
+
+:energienet a skos:Concept;
+  skos:definition "stelsel van leidingen en daarmee verbonden hulpmiddelen ten behoeve van transport van energie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "energienet"@nl;
+  skos:broader :netfunctie;
+  skos:related :aangeslotene;
+  dct:source :elektriciteitswet-1998, :gaswet, :nbility .
+
+:standaardjaarafname a skos:Concept;
+  skos:definition "verwachte afname op een aansluiting bij gestandaardiseerde condities en op basis van een genormaliseerd jaar"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "standaardjaarafname"@nl;
+  skos:altLabel "SJA"@nl;
+  skos:broader :standaardjaarvolume;
+  skos:related :afname, :aansluiting;
+  dct:source :begrippencode-elektriciteit .
+
+:aansluiting a skos:Concept;
+  skos:definition "recht op het gebruik van één of meer verbindingen tussen een energienet en een onroerende zaak"@nl;
+  skos:scopeNote "In deze definitie is een aansluiting een gebruiksrecht op één of meer verbindingen met een energienet zoals een appartementsrecht een gebruiksrecht is op één of meer delen van een gebouw. Dit onderscheid tussen de aansluiting als gebruiksrecht en de aansluitverbindingen waar dat recht op rust, maakt de aansluiting eenduidig identificeerbaar."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "aansluiting"@nl;
+  skos:broader :energiemarkt-domein;
+  dct:source :nbility .
+
+:invoeding a skos:Concept;
+  skos:definition "inbrenging van energie op het energienet"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "invoeding"@nl;
+  skos:altLabel "teruglevering"@nl;
+  skos:broader :energie-uitwisseling .
+
+:standaardjaarinvoeding a skos:Concept;
+  skos:definition "verwachte invoeding op een aansluiting bij gestandaardiseerde condities en op basis van een genormaliseerd jaar"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "standaardjaarinvoeding"@nl;
+  skos:altLabel "SJI"@nl;
+  skos:broader :standaardjaarvolume;
+  skos:related :aansluiting, :invoeding;
+  dct:source :begrippencode-elektriciteit .
+
+:aangeslotene a skos:Concept;
+  skos:definition "ieder die van een netbeheerder de beschikking heeft gekregen over een aansluiting"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "aangeslotene"@nl;
+  skos:altLabel "afnemer"@nl;
+  skos:broader :klant;
+  skos:related :aansluiting, :netbeheerder;
+  dct:source :energiewet .
+
+:gesloten-distributiesysteem a skos:Concept;
+  skos:definition "energienet waarvoor ontheffing is verleend om het beheer toe te staan aan een andere partij dan de netbeheerder"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "gesloten distributiesysteem"@nl;
+  skos:altLabel "GDS"@nl;
+  skos:broader :energienet;
+  skos:related :netbeheerder;
+  dct:source :elektriciteitswet-1998, :gaswet .
+
+:netbeheerder a skos:Concept;
+  skos:definition "vennootschap die op grond van de wet is aangewezen voor het beheer van een of meer energienetten, niet zijnde gesloten distributiesystemen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netbeheerder"@nl;
+  skos:altLabel "NB"@nl;
+  skos:broader :marktpartij;
+  skos:related :energienet, :gesloten-distributiesysteem;
+  dct:source :elektriciteitswet-1998, :gaswet .
+
+:kleinverbruikaansluiting a skos:Concept;
+  skos:definition "kleine aansluiting, niet zijnde een aansluiting op een gesloten distributiesysteem of een aansluiting van een afnemer zoals bedoeld in <a href=\"https://wetten.overheid.nl/jci1.3:c:BWBR0009755&hoofdstuk=1&paragraaf=1&artikel=1&z=2022-10-01&g=2022-10-01\">artikel 1, tweede of derde lid, van de Elektriciteitswet 1998</a>"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "kleinverbruikaansluiting"@nl;
+  skos:altLabel "KVB"@nl;
+  skos:editorialNote "In aanvulling op de definities in de begrippencodes, wordt ook een aansluiting op een gesloten distributiesysteem niet beschouwd als kleinverbruikaansluiting."@nl;
+  skos:broader :aansluiting;
+  skos:related :gesloten-distributiesysteem, :kleine-aansluiting;
+  dct:source :begrippencode-elektriciteit, :begrippencode-gas .
+
+:laaguren a skos:Concept;
+  skos:definition "uren van de dag waarvoor, in geval van een meetinrichting met dubbel telwerk, de met het energienet uitgewisselde energie wordt geregistreerd door het laagtelwerk"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "laaguren"@nl;
+  skos:broader :energie-uitwisseling;
+  skos:related :laagtelwerk;
+  dct:source :begrippencode-elektriciteit .
+
+:laagtelwerk a skos:Concept;
+  skos:definition "telwerk van een meetinrichting met twee of meer telwerken dat gebruikt wordt of kan worden voor de bepaling van de met het energienet uitgewisselde energie tijdens laaguren"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "laagtelwerk"@nl;
+  skos:broader :telwerk;
+  skos:related :laaguren;
+  dct:source :begrippencode-elektriciteit .
+
+:meetinrichting a skos:Concept;
+  skos:definition "instrument of samenstel van instrumenten met een meetfunctie dat ten minste de invoeding, onttrekking of het verbruik van elektriciteit of gas meet, met uitzondering van hulpmiddelen die de meetfunctie ondersteunen en die onderdeel zijn van een aansluiting"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "meetinrichting"@nl;
+  skos:hiddenLabel "meter"@nl;
+  skos:broader :netcomponent;
+  dct:source :energiewet .
+
+:kleinverbruikmeetinrichting a skos:Concept;
+  skos:definition "meetinrichting bij een kleinverbruikaansluiting"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "kleinverbruikmeetinrichting"@nl;
+  skos:broader :meetinrichting;
+  skos:related :kleinverbruikaansluiting;
+  dct:source :begrippencode-elektriciteit .
+
+:op-afstand-uitleesbare-kleinverbruikmeetinrichting a skos:Concept;
+  skos:definition "meetinrichting die voldoet aan het Besluit op afstand uitleesbare meetinrichtingen"@nl;
+  skos:scopeNote "(Mogelijk enige) deel van een op afstand uitleesbare kleinverbruikmeetinrichting is de comptabele energiehoeveelheidsmeter met communicatiefunctionaliteit. Deze staat ook wel bekend als slimme meter."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "op afstand uitleesbare kleinverbruikmeetinrichting"@nl;
+  skos:altLabel "slimme meter"@nl;
+  skos:broader :kleinverbruikmeetinrichting;
+  dct:source :begrippencode-elektriciteit .
+
+:telwerk a skos:Concept;
+  skos:definition "samenstel van cijferrollen dan wel een dataregister waarin de totale hoeveelheid uitgewisselde energie wordt vastgelegd"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "telwerk"@nl;
+  skos:broader :meter;
+  dct:source :begrippencode-elektriciteit .
+
+:aansluitcapaciteit a skos:Concept;
+  skos:definition "door aangeslotene gevraagde en door de netbeheerder ter beschikking gestelde hoeveelheid energie per tijdseenheid die via het overdrachtspunt van een aansluiting kan worden uitgewisseld"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "aansluitcapaciteit"@nl;
+  skos:broader :overdrachtspunt;
+  skos:related :overdrachtspunt;
+  dct:source :begrippencode-elektriciteit .
+
+:begrippencode-elektriciteit a foaf:Document;
+  rdfs:label "Begrippencode elektriciteit"@nl;
+  foaf:page <https://wetten.overheid.nl/jci1.3:c:BWBR0037938> .
+
+:netcode-elektriciteit a foaf:Document;
+  rdfs:label "Netcode elektriciteit"@nl;
+  foaf:page <https://wetten.overheid.nl/jci1.3:c:BWBR0037940> .
+
+:elektriciteitswet-1998 a foaf:Document;
+  rdfs:label "Elektriciteitswet 1998"@nl;
+  foaf:page <https://wetten.overheid.nl/jci1.3:c:BWBR0009755> .
+
+:gaswet a foaf:Document;
+  rdfs:label "Gaswet"@nl;
+  foaf:page <https://wetten.overheid.nl/jci1.3:c:BWBR0011440> .
+
+:begrippencode-gas a foaf:Document;
+  rdfs:label "Begrippencode gas"@nl;
+  foaf:page <https://wetten.overheid.nl/jci1.3:c:BWBR0037923> .
+
+:aanwezige-transportcapaciteit a skos:Concept;
+  skos:definition "maximale capaciteit die een energienet aankan, met inachtneming van de van toepassing zijnde netontwerpcriteria en operationele veiligheidsgrenzen"@nl;
+  skos:scopeNote "De transportcapaciteit beschikbaar door congestiemanagement of 'verzwaren tenzij' telt niet als aanwezige transportcapaciteit. Dit is in lijn met de Handleiding congestierapporten (ACM, 2023)."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "aanwezige transportcapaciteit"@nl;
+  skos:broader :transportcapaciteit;
+  skos:related :energienet;
+  dct:source :begrippencode-elektriciteit .
+
+:benodigde-transportcapaciteit a skos:Concept;
+  skos:definition "transportcapaciteit nodig om transportovereenkomsten uit te voeren"@nl;
+  skos:scopeNote "Het betreft de transportcapaciteit die tijdens spitsmomenten nodig is op het beperkende netelement."@nl,
+    "Het deel van een transportovereenkomst waarvoor een zogenaamde transportbeperking is opgelegd, geldt niet als benodigde transportcapaciteit."@nl,
+    "In de praktijk reserveren netbeheerders transportcapaciteit voor maatschappelijk belangrijke doelen zoals woningbouw, en rekenen die in sommige gevallen tot de benodigde transportcapaciteit. Zuiverder zou zijn om deze in een aparte categorie onder te brengen zoals 'maatschappelijke reserve'. In de Evaluatie congestiemanagement (2023) merkt de ACM op dat deze vorm van transportcapaciteit nog niet als zodanig in de Netcode is opgenomen."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "benodigde transportcapaciteit"@nl;
+  skos:editorialNote "De definitie uit de Begrippencode elektriciteit is verfijnd om nieuwe transportverzoeken van reeds gecontracteerde aangeslotenen uit te sluiten. Dit is in lijn met de Handleiding congestierapporten (ACM, 2023)."@nl;
+  skos:broader :transportcapaciteit;
+  dct:source :begrippencode-elektriciteit .
+
+:gevraagde-transportcapaciteit a skos:Concept;
+  skos:definition "transportcapaciteit nodig om transportverzoeken uit te voeren"@nl;
+  skos:scopeNote "Het betreft de transportcapaciteit die tijdens spitsmomenten nodig is op het beperkende netelement."@nl,
+    "Het deel van een transportovereenkomst waarvoor een zogenaamde transportbeperking is opgelegd, geldt als gevraagde transportcapaciteit."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "gevraagde transportcapaciteit"@nl;
+  skos:editorialNote "De definitie uit de Begrippencode elektriciteit is verfijnd om de vraag naar transport waar reeds een transportovereenkomst voor bestaat uit te sluiten en om de suggestie weg te nemen dat de waarden niet optelbaar zijn. Dit is in lijn met de Handleiding congestierapporten (ACM, 2023)."@nl;
+  skos:broader :transportcapaciteit;
+  dct:source :begrippencode-elektriciteit .
+
+:transportcapaciteit a skos:Concept;
+  skos:definition "vermogen om een energiedrager te verplaatsen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "transportcapaciteit"@nl;
+  skos:broader :netfunctie;
+  skos:related :energiedrager .
+
+:installatie a skos:Concept;
+  skos:definition "samenstel van energietechnisch materiaal en leidingen van een aangeslotene, te rekenen na het overdrachtspunt van de aansluiting"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "installatie"@nl;
+  skos:broader :energiemarkt-domein;
+  dct:source :nbility .
+
+:elektriciteitsproductie-eenheid a skos:Concept;
+  skos:definition "synchrone elektriciteitsproductie-eenheid of power park module"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "elektriciteitsproductie-eenheid"@nl;
+  skos:broader :productie-installatie;
+  dct:source :nc-rfg .
+
+:overdrachtspunt a skos:Concept;
+  skos:definition "overeengekomen grens waarop de verantwoordelijkheid overgaat van het energienet van de netbeheerder naar de installatie van de aangeslotene, of tussen twee energienetten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "overdrachtspunt"@nl;
+  skos:altLabel "aansluitpunt"@nl;
+  skos:editorialNote "Ten opzichte van de regelgeving, waarin het overdrachtspunt als een ‘fysiek punt’ wordt opgevat, biedt dit begrippenkader een preciezere definitie: een overeengekomen grens voor een eenduidige verantwoordelijkheidsverdeling, los van de fysieke realisatie."@nl;
+  skos:broader :aansluiting;
+  dct:source :begrippencode-elektriciteit, :begrippencode-gas .
+
+:synchrone-elektriciteitsproductie-eenheid a skos:Concept;
+  skos:definition "ondeelbaar geheel van installaties die samen elektrische energie kunnen opwekken op dusdanige wijze dat de frequentie van de opgewekte spanning, het toerental van de generator en de frequentie van de netspanning in constante verhouding tot elkaar staan en dus synchroon lopen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "synchrone elektriciteitsproductie-eenheid"@nl;
+  skos:broader :elektriciteitsproductie-eenheid;
+  dct:source :nc-rfg .
+
+:power-park-module a skos:Concept;
+  skos:definition "eenheid of verzameling van eenheden die elektriciteit opwekt, die ofwel niet-synchroon ofwel via vermogenselektronica via één overdrachtspunt met het energienet is verbonden"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "power park module"@nl;
+  skos:broader :elektriciteitsproductie-eenheid;
+  skos:related :energienet, :overdrachtspunt;
+  dct:source :nc-rfg .
+
+:maximumcapaciteit a skos:Concept;
+  skos:definition "hoogste hoeveelheid energie per tijdseenheid die een installatie continu met het energienet kan en mag uitwisselen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "maximumcapaciteit"@nl;
+  skos:broader :installatie;
+  skos:related :energienet;
+  dct:source :nc-rfg .
+
+:nc-rfg a foaf:Document;
+  rdfs:label "Verordening (EU) 2016/631 (NC RfG)"@nl;
+  foaf:page <http://data.europa.eu/eli/reg/2016/631/oj> .
+
+:laadinstallatie a skos:Concept;
+  skos:definition "installatie voor het opladen en/of ontladen van mobiele apparaten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "laadinstallatie"@nl;
+  skos:broader :installatie .
+
+:opslaginstallatie a skos:Concept;
+  skos:definition "installatie voor het opslaan van energie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "opslaginstallatie"@nl;
+  skos:broader :installatie;
+  dct:source :netcode-elektriciteit .
+
+:productie-installatie a skos:Concept;
+  skos:definition "installatie voor het produceren van energie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "productie-installatie"@nl;
+  skos:broader :installatie;
+  dct:source :elektriciteitswet-1998, :gaswet .
+
+:verbruiksinstallatie a skos:Concept;
+  skos:definition "installatie voor het verbruiken van energie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "verbruiksinstallatie"@nl;
+  skos:broader :installatie;
+  dct:source :netcode-elektriciteit .
+
+:transportverzoek a skos:Concept;
+  skos:definition "aanvraag voor het beschikbaar stellen van capaciteit voor het transport van energie"@nl;
+  skos:scopeNote "Hieronder wordt verstaan een verzoek om het verhogen van de gecontracteerde transportcapaciteit. Bij een kleinverbruikaansluiting is de gecontracteerde transportcapaciteit gelijk aan de aansluitcapaciteit en is een verhoging van de aansluitcapaciteit een impliciet transportverzoek."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "transportverzoek"@nl;
+  skos:broader :klantverzoek;
+  dct:source :netcode-elektriciteit .
+
+:capaciteitsbeperkingscontract a skos:Concept;
+  skos:definition "afspraak om tijdelijk, geheel of gedeeltelijk af te zien van het gebruik van de gecontracteerde en beschikbaar gestelde transportcapaciteit"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "capaciteitsbeperkingscontract"@nl;
+  skos:altLabel "CBC"@nl;
+  skos:broader :klantovereenkomst;
+  skos:related :gecontracteerde-transportcapaciteit;
+  dct:source :netcode-elektriciteit .
+
+:verbinding a skos:Concept;
+  skos:definition "object bestemd om daardoorheen of daarlangs energie te transporteren"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "verbinding"@nl;
+  skos:broader :netfunctie .
+
+:netuitbreiding a skos:Concept;
+  skos:definition "toename in lengte, capaciteit of functionaliteit van een energienet"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netuitbreiding"@nl;
+  skos:broader :netaanpassingsopdracht;
+  skos:related :energienet .
+
+:netvervanging a skos:Concept;
+  skos:definition "wisseling van één of meer netcomponenten als gevolg van economische veroudering of slijtage, zonder significante verandering in lengte, capaciteit of functionaliteit van het energienet"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netvervanging"@nl;
+  skos:broader :onderhouds-of-inspectieopdracht;
+  skos:related :energienet .
+
+:gecontracteerde-transportcapaciteit a skos:Concept;
+  skos:definition "maximale capaciteit die op een aansluiting of groep van aansluitingen mag worden gebruikt"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "gecontracteerde transportcapaciteit"@nl;
+  skos:hiddenLabel "gecontracteerd transportvermogen"@nl, "GTV"@nl;
+  skos:broader :transportcapaciteit;
+  skos:related :aansluiting, :aangeslotene;
+  dct:source :begrippencode-elektriciteit .
+
+:bieding-redispatch a skos:Concept;
+  skos:definition "aanbod om op een aansluiting op te regelen of af te regelen ten opzichte van een prognose voor die aansluiting"@nl;
+  skos:scopeNote "Een prognose wordt op de dag voorafgaand aan het transport ingediend."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "bieding redispatch"@nl;
+  skos:broader :opregel-of-afregelaanbod;
+  skos:related :aansluiting, :transportprognose;
+  dct:source :netcode-elektriciteit .
+
+:balanceringsverantwoordelijke a skos:Concept;
+  skos:definition "natuurlijk persoon of rechtspersoon die verantwoordelijk is voor de onbalans die hij, of degene die hij vertegenwoordigt, veroorzaakt in het energienet en die door de netbeheerder als balancerinsverantwoordelijke is toegelaten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "balanceringsverantwoordelijke"@nl;
+  skos:altLabel "BRP"@nl;
+  skos:broader :marktpartij;
+  skos:related :energienet, :netbeheerder .
+
+:voedingsgebied a skos:Concept;
+  skos:definition "deel van het aardoppervlak waar zich de overdrachtspunten van aansluitingen bevinden die worden gevoed door een bepaald deel van het energienet"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "voedingsgebied"@nl;
+  skos:broader :netfunctie;
+  skos:related :energienet, :aansluiting, :overdrachtspunt .
+
+:in-concept a skos:Collection;
+  rdfs:comment "Concepten in deze collectie zijn nog niet gevalideerd."@nl;
+  skos:prefLabel "in concept"@nl;
+  skos:member <https://modellen.netbeheernederland.nl/begrippen/>,
+    :bieding-redispatch, :voedingsgebied, :publieke-laadinstallatie, :private-laadinstallatie,
+    :snellaadinstallatie, :laadpunt, :spanningsniveau, :aansluittermijn, :extrahoogspanning,
+    :hoogspanning, :laagspanning, :middenspanning, :tussenspanning, :lage-druk, :drukniveau,
+    :hoge-druk, :extrahoge-druk, :knooppunt, :standaardjaarvolume, :gezamenlijke-aansluiting,
+    :transportrecht, :volledig-vast-transportrecht, :volledig-variabel-transportrecht,
+    :tijdsduurgebonden-transportrecht, :tijdsblokgebonden-transportrecht, :groepscapaciteitsbeperkingscontract,
+    :collectief-capaciteitsbeperkingscontract, :vrije-bieding-redispatch, :bieding-onder-contract-voor-redispatchcapaciteit,
+    :niet-marktgebaseerde-bieding-redispatch, :contract-voor-redispatchcapaciteit, :transmissie,
+    :distributie, :alternatief-transportrecht, :csp, :transportprognose, :aansluitlocatie,
+    :netgebied, :elektriciteitslaadeenheid, :opregel-of-afregelaanbod, :bedieningshandeling,
+    :opregel-of-afregelactie, :opregel-of-afregelbehoefte .
+
+:grootverbruikaansluiting a skos:Concept;
+  skos:definition "grote aansluiting, een aansluiting op een gesloten distributiesysteem, of een aansluiting van een afnemer zoals bedoeld in <a href=\"https://wetten.overheid.nl/jci1.3:c:BWBR0009755&hoofdstuk=1&paragraaf=1&artikel=1&z=2022-10-01&g=2022-10-01\">artikel 1, tweede of derde lid, van de Elektriciteitswet 1998</a>"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "grootverbruikaansluiting"@nl;
+  skos:altLabel "GVB"@nl;
+  skos:editorialNote "In aanvulling op de definities in de begrippencodes, wordt ook een aansluiting op een gesloten distributiesysteem beschouwd als grootverbruikaansluiting."@nl;
+  skos:broader :aansluiting;
+  skos:related :gesloten-distributiesysteem, :grote-aansluiting;
+  dct:source :begrippencode-elektriciteit, :begrippencode-gas .
+
+:publieke-laadinstallatie a skos:Concept;
+  skos:definition "algemeen toegankelijke laadinstallatie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "publieke laadinstallatie"@nl;
+  skos:broader :laadinstallatie .
+
+:private-laadinstallatie a skos:Concept;
+  skos:definition "niet algemeen toegankelijke laadinstallatie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "private laadinstallatie"@nl;
+  skos:broader :laadinstallatie .
+
+:snellaadinstallatie a skos:Concept;
+  skos:definition "laadinstallatie met een laadpunt geschikt voor het laden met een capaciteit van 50 kW of meer"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "snellaadinstallatie"@nl;
+  skos:broader :laadinstallatie;
+  skos:related :laadpunt .
+
+:laadpunt a skos:Concept;
+  skos:definition "één of meer connectoren voor het laden of ontladen van één mobiel apparaat tegelijk"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "laadpunt"@nl;
+  skos:broader :elektriciteitslaadeenheid .
+
+:spanningsniveau a skos:Concept;
+  skos:definition "elektrisch spanningsbereik waarin een systeem opereert"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "spanningsniveau"@nl;
+  skos:broader :overdrachtspunt .
+
+:aansluittermijn a skos:Concept;
+  skos:definition "periode tussen de ontvangst van de aansluitovereenkomst door de netbeheerder en de beschikbaarstelling van de daarin overeengekomen fysieke aansluitverbinding(en) aan de contractpartij"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "aansluittermijn"@nl;
+  skos:broader :klantovereenkomst;
+  skos:related :aansluiting, :netbeheerder .
+
+:extrahoogspanning a skos:Concept;
+  skos:definition "spanningsniveau van 220 kV of hoger"@nl;
+  skos:scopeNote "Spanningsniveaus worden op verschillende manieren gedefinieerd. Deze definitie gaat uit van de door netbeheerders meest gebruikte indeling. Andere indelingen kennen vaak geen extrahoogspanning."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "extrahoogspanning"@nl;
+  skos:altLabel "EHS"@nl;
+  skos:broader :spanningsniveau .
+
+:hoogspanning a skos:Concept;
+  skos:definition "spanningsniveau van 110 kV of hoger en lager dan 220 kV"@nl;
+  skos:scopeNote "Spanningsniveaus worden op verschillende manieren gedefinieerd. Deze definitie gaat uit van de door netbeheerders meest gebruikte indeling. Andere veelgebruikte ondergrenzen voor hoogspanning zijn 1, 25, 35 en 50 kV. Er is niet altijd een bovengrens."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "hoogspanning"@nl;
+  skos:altLabel "HS"@nl;
+  skos:broader :spanningsniveau .
+
+:laagspanning a skos:Concept;
+  skos:definition "spanningsniveau van 1 kV of lager in geval van wisselspanning en 1,5 kV of lager in geval van gelijkspanning"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "laagspanning"@nl;
+  skos:altLabel "LS"@nl;
+  skos:broader :spanningsniveau .
+
+:middenspanning a skos:Concept;
+  skos:definition "spanningsniveau hoger dan 1 kV in geval van wisselspanning en hoger dan 1,5 kV in geval van gelijkspanning en gewoonlijk lager dan 25 kV"@nl;
+  skos:scopeNote "Spanningsniveaus worden op verschillende manieren gedefinieerd. Deze definitie gaat uit van de door netbeheerders meest gebruikte indeling. Andere veelgebruikte bovengrenzen voor middenspanning zijn 35, 50 en 110 kV."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "middenspanning"@nl;
+  skos:altLabel "MS"@nl;
+  skos:broader :spanningsniveau .
+
+:tussenspanning a skos:Concept;
+  skos:definition "spanningsniveau van doorgaans 25 kV of hoger en lager dan 110 kV"@nl;
+  skos:scopeNote "Spanningsniveaus worden op verschillende manieren gedefinieerd. Deze definitie gaat uit van de door netbeheerders meest gebruikte indeling. Andere indelingen kennen vaak geen tussenspanning."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "tussenspanning"@nl;
+  skos:altLabel "TS"@nl;
+  skos:broader :spanningsniveau .
+
+:lage-druk a skos:Concept;
+  skos:definition "drukniveau van 200 mbar of lager"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "lage druk"@nl;
+  skos:altLabel "LD"@nl;
+  skos:broader :drukniveau;
+  dct:source :begrippencode-gas .
+
+:drukniveau a skos:Concept;
+  skos:definition "bereik van overdruk waarin een systeem opereert"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "drukniveau"@nl;
+  skos:broader :overdrachtspunt .
+
+:hoge-druk a skos:Concept;
+  skos:definition "drukniveau hoger dan 200 mbar en lager dan of gelijk aan 8 bar"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "hoge druk"@nl;
+  skos:altLabel "HD"@nl;
+  skos:broader :drukniveau;
+  dct:source :begrippencode-gas .
+
+:extrahoge-druk a skos:Concept;
+  skos:definition "drukniveau hoger dan 8 bar"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "extrahoge druk"@nl;
+  skos:altLabel "EHD"@nl;
+  skos:broader :drukniveau;
+  dct:source :begrippencode-gas .
+
+:energierichting a skos:Concept;
+  skos:definition "kant waarop energie beweegt"@nl;
+  skos:example "invoeding"@nl, "afname"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "energierichting"@nl;
+  skos:altLabel "leveringsrichting"@nl;
+  skos:broader :energie-uitwisseling;
+  skos:related :afname, :invoeding .
+
+:knooppunt a skos:Concept;
+  skos:definition "locatie in een energienet waar energiestromen worden verdeeld, omgezet of geregeld"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "knooppunt"@nl;
+  skos:broader :netfunctie .
+
+:standaardjaarvolume a skos:Concept;
+  skos:definition "hoeveelheid energie-uitwisseling op basis van een genormaliseerd jaar"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "standaardjaarvolume"@nl;
+  skos:broader :energie-uitwisseling;
+  skos:related :energie-uitwisseling .
+
+:gezamenlijke-aansluiting a skos:Concept;
+  skos:definition "aansluiting waarbij meerdere onroerende zaken voor de toepassing van de aansluiting worden beschouwd als één onroerende zaak"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "gezamenlijke aansluiting"@nl;
+  skos:hiddenLabel "cable pooling"@nl;
+  skos:broader :aansluiting;
+  dct:source :energiewet .
+
+:energiewet a foaf:Document;
+  skos:prefLabel "Energiewet"@nl;
+  foaf:page <https://wetten.overheid.nl/jci1.3:c:BWBR0050714> .
+
+:transportrecht a skos:Concept;
+  skos:definition "recht van een aangeslotene om energie te transporteren over het energienet"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "transportrecht"@nl;
+  skos:broader :aansluiting;
+  skos:related :energienet, :aangeslotene;
+  foaf:page :netcode-elektriciteit .
+
+:volledig-vast-transportrecht a skos:Concept;
+  skos:definition "transportrecht dat altijd geldt"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "volledig vast transportrecht"@nl;
+  skos:broader :transportrecht;
+  foaf:page :netcode-elektriciteit .
+
+:volledig-variabel-transportrecht a skos:Concept;
+  skos:definition "transportrecht dat de netbeheerder kort voor gebruik vrijgeeft"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "volledig variabel transportrecht"@nl;
+  skos:altLabel "reststroom"@nl;
+  skos:broader :alternatief-transportrecht;
+  foaf:page :netcode-elektriciteit .
+
+:tijdsduurgebonden-transportrecht a skos:Concept;
+  skos:definition "transportrecht dat geldt gedurende een vooraf bepaald aandeel van de totale tijd, zonder koppeling aan vaste tijdstippen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "tijdsduurgebonden transportrecht"@nl;
+  skos:broader :alternatief-transportrecht;
+  foaf:page :netcode-elektriciteit .
+
+:tijdsblokgebonden-transportrecht a skos:Concept;
+  skos:definition "transportrecht dat geldt gedurende vooraf vastgestelde tijdsblokken"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "tijdsblokgebonden transportrecht"@nl;
+  skos:altLabel "blokstroom"@nl;
+  skos:broader :alternatief-transportrecht;
+  foaf:page :netcode-elektriciteit .
+
+:groepscapaciteitsbeperkingscontract a skos:Concept;
+  skos:definition "capaciteitsbeperkingscontract tussen een netbeheerder en een CSP voor een groep van aansluitingen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "groepscapaciteitsbeperkingscontract"@nl;
+  skos:altLabel "G-CBC"@nl;
+  skos:broader :capaciteitsbeperkingscontract;
+  skos:related :aansluiting, :netbeheerder, :csp .
+
+:collectief-capaciteitsbeperkingscontract a skos:Concept;
+  skos:definition "capaciteitsbeperkingscontract met betrekking tot meerdere aansluitingen en met meerdere aangeslotenen als collectieve contractpartij"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "collectief capaciteitsbeperkingscontract"@nl;
+  skos:altLabel "C-CBC"@nl;
+  skos:broader :capaciteitsbeperkingscontract;
+  skos:related :aansluiting, :aangeslotene .
+
+:vrije-bieding-redispatch a skos:Concept;
+  skos:definition "bieding redispatch zonder verzoek van de netbeheerder"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "vrije bieding redispatch"@nl;
+  skos:broader :bieding-redispatch;
+  skos:related :netbeheerder .
+
+:bieding-onder-contract-voor-redispatchcapaciteit a skos:Concept;
+  skos:definition "bieding op verzoek van de netbeheerder, op basis van een contract voor redispatchcapaciteit en tegen marktgebaseerde voorwaarden"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "bieding onder contract voor redispatchcapaciteit"@nl;
+  skos:altLabel "biedplichtcontract"@nl;
+  skos:broader :bieding-redispatch;
+  skos:related :netbeheerder, :contract-voor-redispatchcapaciteit .
+
+:niet-marktgebaseerde-bieding-redispatch a skos:Concept;
+  skos:definition "bieding redispatch op verzoek van de netbeheerder, tegen niet-marktgebaseerde voorwaarden"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "niet-marktgebaseerde bieding redispatch"@nl;
+  skos:broader :bieding-redispatch;
+  skos:related :netbeheerder .
+
+:contract-voor-redispatchcapaciteit a skos:Concept;
+  skos:definition "afspraak om op verzoek van de netbeheerder biedingen redispatch te doen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "contract voor redispatchcapaciteit"@nl;
+  skos:broader :klantovereenkomst;
+  skos:related :netbeheerder .
+
+:energietransport a skos:Concept;
+  skos:definition "verplaatsing van energie via een energienet"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "energietransport"@nl;
+  skos:broader :energietransport-domein;
+  dct:source :nbility .
+
+:transmissie a skos:Concept;
+  skos:definition "energietransport op nationaal of internationaal niveau"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "transmissie"@nl;
+  skos:broader :energietransport;
+  dct:source :energiewet .
+
+:distributie a skos:Concept;
+  skos:definition "energietransport op regionaal of lokaal niveau"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "distributie"@nl;
+  skos:broader :energietransport;
+  dct:source :energiewet .
+
+:alternatief-transportrecht a skos:Concept;
+  skos:definition "transportrecht dat niet altijd geldt"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "alternatief transportrecht"@nl;
+  skos:broader :transportrecht .
+
+:csp a skos:Concept;
+  skos:definition "partij die namens of met instemming van een aangeslotene congestiemanagementdiensten levert aan een netbeheerder"@nl;
+  skos:scopeNote "CSP staat voor congestion service provider."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "CSP"@nl;
+  skos:hiddenLabel "congestiemanagementdienstverlener"@nl, "congestiebeheersdienstverlener"@nl;
+  skos:broader :marktpartij;
+  foaf:page :begrippencode-elektriciteit .
+
+:netcomponent a skos:Concept;
+  skos:definition "fysiek onderdeel van het energienet"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netcomponent"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:netaanpassingsopdracht a skos:Concept;
+  skos:definition "autorisatie voor de functionele wijziging van een energienet"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netaanpassingsopdracht"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:onderhouds-of-inspectieopdracht a skos:Concept;
+  skos:definition "autorisatie voor activiteiten die als doel hebben het in een voor de netbeheerder aanvaardbare conditie houden (of terugbrengen) van netcomponenten teneinde de gevraagde mate van functionaliteit te borgen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "onderhouds- of inspectieopdracht"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:klant a skos:Concept;
+  skos:definition "(potentiële) afnemer van een product of dienst van de netbeheerder"@nl;
+  skos:scopeNote "Iemand die impact ondervindt van bedrijfsactiviteiten van de netbeheerder, beschouwen we ook als klant. In dat geval neemt deze klant bijvoorbeeld informatiediensten af."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "klant"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:marktpartij a skos:Concept;
+  skos:definition "partij die een rol vervult binnen de energiemarkt"@nl;
+  skos:scopeNote "Onder marktpartijen verstaan we niet de afnemers of toezichthouders van de energiemarkt."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "marktpartij"@nl;
+  skos:broader :energiemarkt-domein;
+  dct:source :nbility .
+
+:netfunctie a skos:Concept;
+  skos:definition "taak of doel van een of meer (geplande) netcomponenten op een bepaalde locatie in het energienet"@nl;
+  skos:scopeNote "De netfuncties worden onderscheiden naar primair, secundiar, tertiair en telecom. Primaire netfunctie: een netfunctie voor energietransport. Secundaire netfunctie: een netfunctie voor het meten en/of sturen (inclusief beveiligen) van energietransport. Tertiaire netfunctie: een facilitaire voorziening voor de fysieke bescherming en/of ondersteuning van netcomponenten. Telecomnetfunctie: een onderdeel van een telecommunicatienetwerk bedoeld voor gegevensoverdracht van of naar een netfunctie."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netfunctie"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:klantovereenkomst a skos:Concept;
+  skos:definition "afspraak tussen een klant en de netbeheerder over wat ze met elkaar of voor elkaar zullen gaan doen of laten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "klantovereenkomst"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:klantverzoek a skos:Concept;
+  skos:definition "vraag van een klant om iets te doen of te laten"@nl;
+  skos:scopeNote "Hoewel een klacht slechts een uiting is van ontevredenheid, beschouwen we deze als een klantverzoek omdat de netbeheerder hier binnen een bepaalde termijn opvolging aan moet geven."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "klantverzoek"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:transportprognose a skos:Concept;
+  skos:definition "bij een netbeheerder ingediende planning van energie-uitwisseling"@nl;
+  skos:scopeNote "In een volgende versie van NBility wordt deze mogelijk gewijzigd naar energieplanning."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "transportprognose"@nl;
+  skos:broader :energietransport-domein;
+  dct:source :nbility .
+
+:aansluitlocatie a skos:Concept;
+  skos:definition "plek waar zich het overdrachtspunt van een aansluiting of netkoppeling bevindt"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "aansluitlocatie"@nl;
+  skos:broader :overdrachtspunt .
+
+:allocatiepunt a skos:Concept;
+  skos:definition "administratief punt waar energie-uitwisseling wordt toegerekend aan een marktdeelnemer"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "allocatiepunt"@nl;
+  skos:broader :aansluiting;
+  dct:source :energiewet .
+
+:netgebied a skos:Concept;
+  skos:definition "aaneengesloten en samenhangend deel van een energienet van één netbeheerder, waarbinnen de processen allocatie en reconciliatie plaatsvinden"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netgebied"@nl;
+  skos:broader :aansluiting;
+  skos:related :energienet, :netbeheerder;
+  dct:source :begrippencode-elektriciteit, :begrippencode-gas .
+
+:grote-aansluiting a skos:Concept;
+  skos:definition "aansluiting met een doorlaatwaarde groter dan 3 x 80 Ampère voor elektriciteit of 40 m3(n) per uur voor gas"@nl;
+  skos:scopeNote "Een aansluiting voor een streng van lichtmasten, waarbij elke lichtmast een eigen overdrachtspunt heeft met een doorlaatwaarde van ten hoogste 1 x 6 Ampère, geldt als kleine aansluiting, ongeacht het aantal overdrachtspunten."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "grote aansluiting"@nl;
+  skos:broader :aansluiting;
+  skos:related :overdrachtspunt;
+  dct:source :energiewet .
+
+:kleine-aansluiting a skos:Concept;
+  skos:definition "aansluiting met een doorlaatwaarde kleiner dan of gelijk aan 3 x 80 Ampère voor elektriciteit of 40 m3(n) per uur voor gas"@nl;
+  skos:scopeNote "Een aansluiting voor een streng van lichtmasten, waarbij elke lichtmast een eigen overdrachtspunt heeft met een doorlaatwaarde van ten hoogste 1 x 6 Ampère, geldt als kleine aansluiting, ongeacht het aantal overdrachtspunten."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "kleine aansluiting"@nl;
+  skos:broader :aansluiting;
+  dct:source :energiewet .
+
+:elektriciteitslaadeenheid a skos:Concept;
+  skos:definition "ondeelbaar geheel van elektrisch materieel en leidingen voor het opladen en/of ontladen van mobiele apparaten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "elektriciteitslaadeenheid"@nl;
+  skos:broader :laadinstallatie .
+
+:elektriciteitsopslageenheid a skos:Concept;
+  skos:definition "eenheid die actief vermogen vanuit het net kan afnemen en in het net kan injecteren door omzetting van elektrische energie in een vorm van energie die kan worden opgeslagen, de opslag van die energie en de daaropvolgende omzetting van die energie in elektrische energie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "elektriciteitsopslageenheid"@nl;
+  skos:broader :opslaginstallatie;
+  dct:source :begrippencode-elektriciteit .
+
+:meter a skos:Concept;
+  skos:definition "apparaat bedoeld om energie-uitwisseling te meten ten behoeve van de verrekening"@nl;
+  skos:scopeNote "Een apparaat dat niet ten behoeve van de verrekening meet, noemen we een sensor."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "meter"@nl;
+  skos:broader :meetinrichting;
+  skos:related :energie-uitwisseling .
+
+:technische-bedrijfsstandaard a skos:Concept;
+  skos:definition "norm die aangeeft waaraan een bepaald product in technisch opzicht zou moeten voldoen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "technische bedrijfsstandaard"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:opregel-of-afregelaanbod a skos:Concept;
+  rdfs:isDefinedBy <https://nbility-model.github.io>, "aanbod aan een netbeheerder om het productie- en/of belastingspatroon op een of meer aansluitingen te wijzigen"@nl;
+  skos:scopeNote "In NBility 2.3 bekend als 'opregel- of afregelaanbod', maar verandert in NBility 2.4 naar verwachting van naam."@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "opregel- of afregelaanbod"@nl;
+  skos:broader :energiemarkt-domein .
+
+:arbeidsplaats a skos:Concept;
+  skos:definition "functie binnen een organisatieonderdeel, te vervullen door één medewerker"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "arbeidsplaats"@nl;
+  skos:broader :medewerker-domein;
+  dct:source :nbility .
+
+:archiefstuk a skos:Concept;
+  skos:definition "document dat bestemd is om te bewaren door de organisatie die het heeft gemaakt of ontvangen bij de uitvoering van haar activiteiten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "archiefstuk"@nl;
+  skos:broader :proces-en-data-domein;
+  dct:source :nbility .
+
+:architectuurproduct a skos:Concept;
+  skos:definition "beschrijving van de huidige en/of toekomstige structuur en werking van een organisatie om deze te begrijpen, te communiceren en te beheren"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "architectuurproduct"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:bedieningshandeling a skos:Concept;
+  skos:definition "verrichting die de bedrijfstoestand van een netdeel wijzigt"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "bedieningshandeling"@nl;
+  skos:broader :energietransport-domein;
+  dct:source :nbility .
+
+:bedieningsplan a skos:Concept;
+  skos:definition "omschrijving van de bedieningshandelingen die uitgevoerd moeten worden en die leiden tot een gewenste bedrijfssituatie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "bedieningsplan"@nl;
+  skos:broader :energietransport-domein;
+  dct:source :nbility .
+
+:bedieningssituatie a skos:Concept;
+  skos:definition "toestand van een of meer regelbare eenheden (zoals schakelaars) in het energienet die van invloed zijn op het energietransport"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "bedieningssituatie"@nl;
+  skos:broader :energietransport-domein;
+  dct:source :nbility .
+
+:bedrijfscontinuiteitsplan a skos:Concept;
+  skos:definition "document dat een organisatie gebruikt om haar activiteiten te herstellen na een ontwrichtend incident"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "bedrijfscontinuïteitsplan"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:bedrijfsgebouw a skos:Concept;
+  skos:definition "gebouw waar duurzame uitoefening van de activiteiten van de netbeheerder plaatsvindt, niet zijnde een gebouw dat onderdeel uitmaakt van het energienet"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "bedrijfsgebouw"@nl;
+  skos:broader :bedrijfsgebouw-domein;
+  dct:source :nbility .
+
+:bedrijfsgebouwenstrategie a skos:Concept;
+  skos:definition "algemene aanpak die een organisatie hanteert om bedrijfsgebouwen en faciliteiten te beheren zodat zij haar doelstellingen realiseert"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "bedrijfsgebouwenstrategie"@nl;
+  skos:broader :bedrijfsgebouw-domein;
+  dct:source :nbility .
+
+:bedrijfsplan a skos:Concept;
+  skos:definition "door een organisatie in detail voorgenomen handelswijze om haar doelstellingen te realiseren"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "bedrijfsplan"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:bedrijfsprestatie a skos:Concept;
+  skos:definition "mate waarin een organisatie een gesteld doel of verplichting volbrengt"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "bedrijfsprestatie"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:bedrijfsrisico a skos:Concept;
+  skos:definition "effect van onzekerheid ten aanzien van de doelstellingen of resultaten van een organisatie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "bedrijfsrisico"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:bedrijfsstrategie a skos:Concept;
+  skos:definition "algemene aanpak die een organisatie hanteert om haar missie, visie, kernwaarden en doelstellingen te realiseren"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "bedrijfsstrategie"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:betalingsopdracht a skos:Concept;
+  skos:definition "opdracht aan een financiële instelling om geld over te dragen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "betalingsopdracht"@nl;
+  skos:broader :financien-domein;
+  dct:source :nbility .
+
+:campagne a skos:Concept;
+  skos:definition "samenhangende reeks activiteiten in communicatie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "campagne"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:capaciteitsknelpunt a skos:Concept;
+  skos:definition "delen van het energienet waarvan wordt verwacht dat zij vanwege een tekort aan transportcapaciteit of functionaliteit een aanzienlijk risico vormen voor een goede uitvoering van de bij of krachtens de wet aan de netbeheerder toegekende taken"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "capaciteitsknelpunt"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:case a skos:Concept;
+  skos:definition "samenhangende hoeveelheid werk met een welgedefinieerde aanleiding en een welgedefinieerd eindresultaat, waarvan kwaliteit en doorlooptijd bewaakt moeten worden"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "case"@nl;
+  skos:broader :proces-en-data-domein;
+  dct:source :nbility .
+
+:competentie a skos:Concept;
+  skos:definition "verzameling van kennis, ervaring en persoonlijke vaardigheden om een functie, taak of rol met succes te vervullen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "competentie"@nl;
+  skos:broader :medewerker-domein;
+  dct:source :nbility .
+
+:congestiegebied a skos:Concept;
+  skos:definition "gebied waarin de te verwachten behoefte aan transport redelijkerwijs kan leiden tot een structureel tekort aan transportcapaciteit"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "congestiegebied"@nl;
+  skos:broader :energiemarkt-domein;
+  dct:source :nbility .
+
+:contractloze-situatie a skos:Concept;
+  skos:definition "toestand waarin er een actieve aansluiting is zonder leveringsovereenkomst"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "contractloze situatie"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:crisis a skos:Concept;
+  skos:definition "noodsituatie waarbij het energietransport ernstig verstoord kan raken"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "crisis"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:data-analysemodel a skos:Concept;
+  skos:definition "algoritme bedoeld om bij toepassing op een dataset waardevolle informatie te genereren"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "data-analysemodel"@nl;
+  skos:broader :proces-en-data-domein;
+  dct:source :nbility .
+
+:datakwaliteitsregel a skos:Concept;
+  skos:definition "beperking waar een dataset aan moet voldoen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "datakwaliteitsregel"@nl;
+  skos:broader :proces-en-data-domein;
+  dct:source :nbility .
+
+:dataservice a skos:Concept;
+  skos:definition "verzameling handelingen die toegang biedt tot één of meer datasets"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "dataservice"@nl;
+  skos:broader :proces-en-data-domein;
+  dct:source :nbility .
+
+:dataset a skos:Concept;
+  skos:definition "verzameling gegevens die als geheel wordt verwerkt"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "dataset"@nl;
+  skos:broader :proces-en-data-domein;
+  dct:source :nbility .
+
+:digitaal-product a skos:Concept;
+  skos:definition "dienst voor het leveren van beheerde software"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "digitaal product"@nl;
+  skos:broader :digitaal-product-domein;
+  dct:source :nbility .
+
+:digitaalproductinstantie a skos:Concept;
+  skos:definition "levering van een digitaal product"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "digitaalproductinstantie"@nl;
+  skos:broader :digitaal-product-domein;
+  dct:source :nbility .
+
+:digitaalproductprestatie a skos:Concept;
+  skos:definition "mate waarin de instantie van een digitaal product afgesproken prestatiedoelen behaalt"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "digitaalproductprestatie"@nl;
+  skos:broader :digitaal-product-domein;
+  dct:source :nbility .
+
+:digitaalproductstrategie a skos:Concept;
+  skos:definition "algemene aanpak die een organisatie hanteert om digitale producten te ontwikkelen en beheren zodat zij haar doelstellingen realiseert"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "digitaalproductstrategie"@nl;
+  skos:broader :digitaal-product-domein;
+  dct:source :nbility .
+
+:digitaalproductwijziging a skos:Concept;
+  skos:definition "verandering van een digitaal product"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "digitaalproductwijziging"@nl;
+  skos:broader :digitaal-product-domein;
+  dct:source :nbility .
+
+:energiediefstal a skos:Concept;
+  skos:definition "situatie waarbij op illegale wijze energie wordt onttrokken aan het energienet"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "energiediefstal"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:energiemarkt a skos:Concept;
+  skos:definition "(virtuele) handelsplaats voor energie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "energiemarkt"@nl;
+  skos:broader :energiemarkt-domein;
+  dct:source :nbility .
+
+:energietoerekening a skos:Concept;
+  skos:definition "verklaring dat uitgewisselde energie een marktpartij toebehoort"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "energietoerekening"@nl;
+  skos:broader :energiemarkt-domein;
+  dct:source :nbility .
+
+:facilitair-product a skos:Concept;
+  skos:definition "voorwerp of dienst die het gebruik van een bedrijfsgebouw ondersteunt"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "facilitair product"@nl;
+  skos:broader :bedrijfsgebouw-domein;
+  dct:source :nbility .
+
+:financieel-advies a skos:Concept;
+  skos:definition "raadgeving die primair verband houdt met de financiën"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "financieel advies"@nl;
+  skos:broader :financien-domein;
+  dct:source :nbility .
+
+:financieel-feit a skos:Concept;
+  skos:definition "geldelijke waardering van een gebeurtenis"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "financieel feit"@nl;
+  skos:broader :financien-domein;
+  dct:source :nbility .
+
+:financieel-plan a skos:Concept;
+  skos:definition "door een organisatie in detail voorgenomen handelswijze om financiën te besturen zodat zij haar doelstellingen realiseert"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "financieel plan"@nl;
+  skos:broader :financien-domein;
+  dct:source :nbility .
+
+:financieel-verslag a skos:Concept;
+  skos:definition "overzicht van de financiële situatie van een organisatie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "financieel verslag"@nl;
+  skos:broader :financien-domein;
+  dct:source :nbility .
+
+:financiering a skos:Concept;
+  skos:definition "verstrekking van benodigde geldmiddelen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "financiering"@nl;
+  skos:broader :financien-domein;
+  dct:source :nbility .
+
+:financiele-beheersmaatregel a skos:Concept;
+  skos:definition "handeling waarmee een organisatie het gebruik van haar financiële middelen bewaakt"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "financiële beheersmaatregel"@nl;
+  skos:broader :financien-domein;
+  dct:source :nbility .
+
+:financiele-stand a skos:Concept;
+  skos:definition "geldelijke waardering van een toestand"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "financiële stand"@nl;
+  skos:broader :financien-domein;
+  dct:source :nbility .
+
+:financiele-strategie a skos:Concept;
+  skos:definition "algemene aanpak die een organisatie hanteert om financiën te besturen zodat zij haar doelstellingen realiseert"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "financiële strategie"@nl;
+  skos:broader :financien-domein;
+  dct:source :nbility .
+
+:functioneel-ontwerp a skos:Concept;
+  skos:definition "specificatie van eisen aan een netaanpassing en de gekozen oplossingsrichting"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "functioneel ontwerp"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:goederenbeweging a skos:Concept;
+  skos:definition "fysieke of logische verplaatsing van goederen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "goederenbeweging"@nl;
+  skos:broader :werk-domein;
+  dct:source :nbility .
+
+:graafbericht a skos:Concept;
+  skos:definition "bericht aan de netbeheerder van de Dienst voor het kadaster en de openbare registers nadat deze een oriëntatieverzoek of graafmelding heeft ontvangen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "graafbericht"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:informatiebeveiligingsrisico a skos:Concept;
+  skos:definition "effect van onzekerheid ten aanzien van het behoud van de vertrouwelijkheid, de integriteit en de beschikbaarheid van informatie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "informatiebeveiligingsrisico"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:inkomstenverlies a skos:Concept;
+  skos:definition "verlies van potentiële inkomsten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "inkomstenverlies"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:inkoopleverancier a skos:Concept;
+  skos:definition "partij die tegen betaling goederen of diensten levert aan de netbeheerder"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "inkoopleverancier"@nl;
+  skos:broader :inkoopproduct-domein;
+  dct:source :nbility .
+
+:inkoopleveranciersprestatie a skos:Concept;
+  skos:definition "mate waarin een inkoopleverancier gestelde doelen of verplichtingen volbrengt"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "inkoopleveranciersprestatie"@nl;
+  skos:broader :inkoopproduct-domein;
+  dct:source :nbility .
+
+:inkooporder a skos:Concept;
+  skos:definition "afspraak om goederen of diensten te leveren aan de netbeheerder tegen een overeengekomen prijs, eventueel onder de voorwaarden van een inkoopovereenkomst"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "inkooporder"@nl;
+  skos:broader :inkoopproduct-domein;
+  dct:source :nbility .
+
+:inkoopovereenkomst a skos:Concept;
+  skos:definition "afspraak over de voorwaarden waaronder een partij goederen of diensten levert aan de netbeheerder"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "inkoopovereenkomst"@nl;
+  skos:broader :inkoopproduct-domein;
+  dct:source :nbility .
+
+:inkoopplan a skos:Concept;
+  skos:definition "door een organisatie in detail voorgenomen handelswijze om goederen en diensten te verkrijgen zodat zij haar doelstellingen realiseert"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "inkoopplan"@nl;
+  skos:broader :inkoopproduct-domein;
+  dct:source :nbility .
+
+:inkoopproduct a skos:Concept;
+  skos:definition "tegen betaling verkregen product of dienst"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "inkoopproduct"@nl;
+  skos:broader :inkoopproduct-domein;
+  dct:source :nbility .
+
+:inkoopstrategie a skos:Concept;
+  skos:definition "algemene aanpak die een organisatie hanteert om goederen en diensten te verkrijgen zodat zij haar doelstellingen realiseert"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "inkoopstrategie"@nl;
+  skos:broader :inkoopproduct-domein;
+  dct:source :nbility .
+
+:innovatie a skos:Concept;
+  skos:definition "idee voor een nieuw goed, dienst of proces, of combinatie daarvan"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "innovatie"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:investeringsplan a skos:Concept;
+  skos:definition "door de netbeheerder periodiek opgesteld plan waarin alle noodzakelijke uitbreidings- en vervangingsinvesteringen worden beschreven en onderbouwd"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "investeringsplan"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:juridisch-advies a skos:Concept;
+  skos:definition "raadgeving die primair verband houdt met het recht"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "juridisch advies"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:klantcontactmoment a skos:Concept;
+  skos:definition "aaneengesloten periode waarbij interactief informatie wordt uitgewisseld tussen een klant en de netbeheerder"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "klantcontactmoment"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:klantervaring a skos:Concept;
+  skos:definition "subjectieve beleving van een klant naar aanleiding van direct of indirect contact met de netbeheerder"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "klantervaring"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:klantfactuur a skos:Concept;
+  skos:definition "weergave van een betalingsverplichting van of aan een klant"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "klantfactuur"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:klantnotificatie a skos:Concept;
+  skos:definition "aan een klant gerichte officiële kennisgeving van een verandering in de status van een dienst"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "klantnotificatie"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:klantofferte a skos:Concept;
+  skos:definition "formeel aanbod tot het sluiten van een overeenkomst, opgesteld op verzoek van een (potentiële) klant"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "klantofferte"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:klantproduct a skos:Concept;
+  skos:definition "al dan niet tastbaar iets dat de netbeheerder aanbiedt om aan een wens of behoefte te voldoen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "klantproduct"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:kwaliteitsknelpunt a skos:Concept;
+  skos:definition "delen van het energienet waarvan wordt verwacht dat zij vanwege vanwege afnemende functionaliteit, betrouwbaarheid of veroudering een aanzienlijk risico vormen voor een goede uitvoering van de bij of krachtens de wet aan de netbeheerder toegekende taken"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "kwaliteitsknelpunt"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:liquide-middel a skos:Concept;
+  skos:definition "direct beschikbaar geld of direct opeisbaar tegoed"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "liquide middel"@nl;
+  skos:broader :financien-domein;
+  dct:source :nbility .
+
+:marktactiviteit a skos:Concept;
+  skos:definition "verrichten van een dienst door een marktpartij op een aansluiting"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "marktactiviteit"@nl;
+  skos:broader :energiemarkt-domein;
+  dct:source :nbility .
+
+:marktverzoek a skos:Concept;
+  skos:definition "vraag van een marktpartij om iets te doen, niet zijnde een marktprocesverzoek"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "marktverzoek"@nl;
+  skos:broader :energiemarkt-domein;
+  dct:source :nbility .
+
+:materiaal a skos:Concept;
+  skos:definition "product bestemd om verwerkt te worden tot netcomponent"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "materiaal"@nl;
+  skos:broader :werk-domein;
+  dct:source :nbility .
+
+:medewerker a skos:Concept;
+  skos:definition "natuurlijk persoon die activiteiten uitvoert in opdracht van een organisatie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "medewerker"@nl;
+  skos:broader :medewerker-domein;
+  dct:source :nbility .
+
+:medewerkerinzet a skos:Concept;
+  skos:definition "(gevraagde, geplande of daadwerkelijke) verbruik van de capaciteit van medewerkers"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "medewerkerinzet"@nl;
+  skos:broader :werk-domein;
+  dct:source :nbility .
+
+:medewerkersbeloning a skos:Concept;
+  skos:definition "(meestal financiële) vergoeding voor arbeid en de daaraan verbonden onkosten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "medewerkersbeloning"@nl;
+  skos:broader :medewerker-domein;
+  dct:source :nbility .
+
+:medewerkersovereenkomst a skos:Concept;
+  skos:definition "afspraak waarbij een natuurlijk persoon, niet als onderneming, zich verbindt in opdracht van een organisatie werk te verrichten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "medewerkersovereenkomst"@nl;
+  skos:broader :medewerker-domein;
+  dct:source :nbility .
+
+:medewerkersplan a skos:Concept;
+  skos:definition "door een organisatie in detail voorgenomen handelswijze om medewerkers te werven en inzetbaar te houden zodat zij haar doelstellingen realiseert"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "medewerkersplan"@nl;
+  skos:broader :medewerker-domein;
+  dct:source :nbility .
+
+:medewerkersprestatie a skos:Concept;
+  skos:definition "mate waarin een medewerker gestelde doelen of verplichtingen volbrengt"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "medewerkersprestatie"@nl;
+  skos:broader :medewerker-domein;
+  dct:source :nbility .
+
+:medewerkersstrategie a skos:Concept;
+  skos:definition "algemene aanpak die een organisatie hanteert om medewerkers te werven en inzetbaar te houden zodat zij haar doelstellingen realiseert"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "medewerkersstrategie"@nl;
+  skos:broader :medewerker-domein;
+  dct:source :nbility .
+
+:meting a skos:Concept;
+  skos:definition "aan het energienet gerelateerde waardebepaling met behulp van een meetinstrument"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "meting"@nl;
+  skos:broader :meting-domein;
+  dct:source :nbility .
+
+:netbeheerdataverstrekking a skos:Concept;
+  skos:definition "handeling waarbij de netbeheerder gegevens toegankelijk maakt, buiten de reguliere bedrijfsactiviteiten om"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netbeheerdataverstrekking"@nl;
+  skos:broader :energiemarkt-domein;
+  dct:source :nbility .
+
+:netberekening a skos:Concept;
+  skos:definition "kwantitatieve analyse om te bepalen of energietransporten in de toekomst met het huidige energienet zijn te realiseren"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netberekening"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:netcomponentconditie a skos:Concept;
+  skos:definition "(technische) toestand waarin een netcomponent verkeert"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netcomponentconditie"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:netcomponentconfiguratie a skos:Concept;
+  skos:definition "verzameling van instellingen van een netcomponent die de werking ervan bepalen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netcomponentconfiguratie"@nl;
+  skos:broader :energietransport-domein;
+  dct:source :nbility .
+
+:netcomponentprestatie a skos:Concept;
+  skos:definition "vermogen van een netcomponent om te voldoen aan functionele eisen of doelstellingen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netcomponentprestatie"@nl;
+  skos:broader :energietransport-domein;
+  dct:source :nbility .
+
+:netkwaliteit a skos:Concept;
+  skos:definition "mate waarin het energienet voldoet aan bepaalde normen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netkwaliteit"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:netrevisie_of_bevinding a skos:Concept;
+  skos:definition "weergave van een ter plaatse aangebrachte of geconstateerde wijziging van het energienet"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netrevisie of bevinding"@nl;
+  skos:broader :werk-domein;
+  dct:source :nbility .
+
+:netstrategie a skos:Concept;
+  skos:definition "algemene aanpak die een organisatie hanteert om de ontwikkeling en instandhouding van energienetten te besturen zodat zij haar doelstellingen realiseert"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netstrategie"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:netverliescompensatie a skos:Concept;
+  skos:definition "verkrijgen van energie om het technische dan wel administratieve verschil tussen de invoeding en afname te compenseren"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "netverliescompensatie"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:niet-beschikbaarheid a skos:Concept;
+  skos:definition "situatie waarbij een of meer netfuncties tijdelijk niet kunnen worden gebruikt"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "niet-beschikbaarheid"@nl;
+  skos:broader :energietransport-domein;
+  dct:source :nbility .
+
+:omgevingsanalyse a skos:Concept;
+  skos:definition "omschrijving van de fysieke leefomgeving en het eigenaarschap van de grond, waar rekening mee moet worden gehouden bij de uitvoering van de bedrijfsactiviteiten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "omgevingsanalyse"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:onderbreking a skos:Concept;
+  skos:definition "interruptie of beperking van het transport van energie bij één of meer afnemers"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "onderbreking"@nl;
+  skos:broader :energietransport-domein;
+  dct:source :nbility .
+
+:onderhouds-of-inspectieplan a skos:Concept;
+  skos:definition "omschrijving van de beoogde activiteiten aan netcomponenten die nodig zijn om het energienet in aanvaardbare conditie te houden"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "onderhouds- of inspectieplan"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:opregel-of-afregelactie a skos:Concept;
+  skos:definition "maatregel die door de netbeheerder wordt geactiveerd door een wijziging van het productie- en/of belastingspatroon op een of meer aansluitingen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "opregel- of afregelactie"@nl;
+  skos:broader :energietransport-domein;
+  dct:source :nbility .
+
+:opregel-of-afregelbehoefte a skos:Concept;
+  skos:definition "verwachting van de hoeveelheid energie die moet worden opgeregeld of afgeregeld om het energietransport te handhaven"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "opregel- of afregelbehoefte"@nl;
+  skos:broader :energiemarkt-domein;
+  dct:source :nbility .
+
+:organisatieonderdeel a skos:Concept;
+  skos:definition "groep mensen binnen een organisatie die een gezamenlijk doel nastreven"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "organisatieonderdeel"@nl;
+  skos:broader :medewerker-domein;
+  dct:source :nbility .
+
+:persoonscertificaat a skos:Concept;
+  skos:definition "document dat bevestigt dat een natuurlijk persoon kennis, vaardigheden, competenties of kwalificaties heeft behaald"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "persoonscertificaat"@nl;
+  skos:broader :medewerker-domein;
+  dct:source :nbility .
+
+:privacyrisico a skos:Concept;
+  skos:definition "effect van onzekerheid ten aanzien van de beperking van rechten en vrijheden van personen als gevolg van de verwerking van hun persoonsgegevens"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "privacyrisico"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:proces a skos:Concept;
+  skos:definition "ordening van repetitief uit te voeren werk, gericht op een beoogd resultaat"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "proces"@nl;
+  skos:broader :proces-en-data-domein;
+  dct:source :nbility .
+
+:rechtsregel a skos:Concept;
+  skos:definition "algemene bepaling in het recht die in beginsel een bindende werking heeft"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "rechtsregel"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:reisbeweging a skos:Concept;
+  skos:definition "vrijwillige verplaatsing van een persoon van een bepaalde locatie naar een andere locatie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "reisbeweging"@nl;
+  skos:broader :bedrijfsgebouw-domein;
+  dct:source :nbility .
+
+:samenwerkingsverband a skos:Concept;
+  skos:definition "afspraak tussen partijen in of rond de energiesector om een gemeenschappelijk doel na te streven"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "samenwerkingsverband"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:schadevergoeding a skos:Concept;
+  skos:definition "geldbedrag dat een klant krijgt voor schade aan diens installatie ten gevolge van werkzaamheden in opdracht van de netbeheerder"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "schadevergoeding"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:schadeverhaal a skos:Concept;
+  skos:definition "aansprakelijkstelling van schade aan het energienet veroorzaakt door derden, anders dan door energiediefstal"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "schadeverhaal"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:storing a skos:Concept;
+  skos:definition "niet gewenste verandering in de werking van een netcomponent, netdeel of bijbehorende bedrijfsomstandigheden"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "storing"@nl;
+  skos:broader :energietransport-domein;
+  dct:source :nbility .
+
+:storingscompensatie a skos:Concept;
+  skos:definition "geldbedrag dat een klant krijgt voor de onderbreking van de transportdienst ten gevolge van een storing"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "storingscompensatie"@nl;
+  skos:broader :klant-domein;
+  dct:source :nbility .
+
+:storingsgrondoorzaak a skos:Concept;
+  skos:definition "fundamentele reden voor het optreden van een of meer storingen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "storingsgrondoorzaak"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:toestemming-van-aangeslotene a skos:Concept;
+  skos:definition "goedkeuring door een (natuurlijk of niet-natuurlijk) persoon die beschikt over een aansluiting, aan een marktpartij om gegevens op te vragen of te verstrekken voor een bepaald doel"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "toestemming van aangeslotene"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:transportanalyse a skos:Concept;
+  skos:definition "analyse van energietransport binnen het bestaande energienet om benodigde aanpassingen in transport te bepalen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "transportanalyse"@nl;
+  skos:broader :energietransport-domein;
+  dct:source :nbility .
+
+:transportbehoefte a skos:Concept;
+  skos:definition "gewenste energietransport op lange termijn"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "transportbehoefte"@nl;
+  skos:broader :energiemarkt-domein;
+  dct:source :nbility .
+
+:uitvoeringscapaciteit a skos:Concept;
+  skos:definition "vermogen van medewerkers om werkactiviteiten uit te voeren"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "uitvoeringscapaciteit"@nl;
+  skos:broader :werk-domein;
+  dct:source :nbility .
+
+:uitvoeringsvergunning a skos:Concept;
+  skos:definition "beschikking op een aanvraag, die toestaat voorgenomen activiteiten voor bepaalde tijd te verrichten die in de wet- of regelgeving verboden zijn"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "uitvoeringsvergunning"@nl;
+  skos:broader :werk-domein;
+  dct:source :nbility .
+
+:veranderinitiatief a skos:Concept;
+  skos:definition "verandering van de structuur en/of werkwijze van een organisatie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "veranderinitiatief"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:veranderportfolio a skos:Concept;
+  skos:definition "globale planning van gewenste veranderingen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "veranderportfolio"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:verantwoordingsrapport a skos:Concept;
+  skos:definition "officiële uitleg of verklaring van de activiteiten van de netbeheerder aan een niet-financiële regulator"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "verantwoordingsrapport"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:verlof a skos:Concept;
+  skos:definition "toestemming om gedurende een bepaalde periode afwezig te zijn op het werk"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "verlof"@nl;
+  skos:broader :medewerker-domein;
+  dct:source :nbility .
+
+:vgmk-incident a skos:Concept;
+  skos:definition "ongewenst voorval dat voortvloeit uit bedrijfsactiviteiten en mogelijk schade of letsel tot gevolg heeft"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "VGMK-incident"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:vgmk-richtlijn a skos:Concept;
+  skos:definition "voorschrift ter bescherming van de veiligheid, de gezondheid, het milieu en/of de kwaliteit van werk"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "VGMK-richtlijn"@nl;
+  skos:broader :richting-domein;
+  dct:source :nbility .
+
+:vitaliteitsprogramma a skos:Concept;
+  skos:definition "gestructureerd en georganiseerd initiatief gericht op het bevorderen van de algehele gezondheid, welzijn en veerkracht van medewerkers"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "vitaliteitsprogramma"@nl;
+  skos:broader :medewerker-domein;
+  dct:source :nbility .
+
+:voorlopig-of-definitief-ontwerp a skos:Concept;
+  skos:definition "omschrijving die laat zien hoe een netaanpassing er technisch uit gaat zien"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "voorlopig of definitief ontwerp"@nl;
+  skos:broader :werk-domein;
+  dct:source :nbility .
+
+:waardering a skos:Concept;
+  skos:definition "vaststelling van de geldelijke waarde van bezittingen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "waardering"@nl;
+  skos:broader :financien-domein;
+  dct:source :nbility .
+
+:werkactiviteit a skos:Concept;
+  skos:definition "ter plaatse aanbrengen van wenselijk geachte veranderingen aan energienetten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "werkactiviteit"@nl;
+  skos:broader :werk-domein;
+  dct:source :nbility .
+
+:werkmiddel a skos:Concept;
+  skos:definition "gebruiksvoorwerp zoals een stuk gereedschap (bouwmaterieel) of voertuig (rollend materieel) dat wordt gebruikt om te werken aan het energienet"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "werkmiddel"@nl;
+  skos:broader :werk-domein;
+  dct:source :nbility .
+
+:werkopdracht a skos:Concept;
+  skos:definition "autorisatie voor het uitvoeren van werk aan een energienet"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "werkopdracht"@nl;
+  skos:broader :werk-domein;
+  dct:source :nbility .
+
+:werkplan a skos:Concept;
+  skos:definition "omschrijving van alle werkzaamheden die uitgevoerd moeten worden"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "werkplan"@nl;
+  skos:broader :werk-domein;
+  dct:source :nbility .
+
+:werkportfolio a skos:Concept;
+  skos:definition "globale planning van werkzaamheden aan energienetten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "werkportfolio"@nl;
+  skos:broader :werk-domein;
+  dct:source :nbility .
+
+:wervingsactie a skos:Concept;
+  skos:definition "activiteit gericht op het aantrekken van nieuwe medewerkers"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "wervingsactie"@nl;
+  skos:broader :medewerker-domein;
+  dct:source :nbility .
+
+:zakelijk-recht-of-tracevergunning a skos:Concept;
+  skos:definition "(volledig of beperkt) recht op een stuk grond (zakelijk recht), of een toestemming van het bevoegd gezag (vergunning), om in een bepaald tracé netcomponenten in bezit te hebben"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "zakelijk recht of tracévergunning"@nl;
+  skos:broader :energienet-domein;
+  dct:source :nbility .
+
+:ziekteverzuim a skos:Concept;
+  skos:definition "afwezigheid op het werk als gevolg van ziekte of gezondheidsproblemen"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "ziekteverzuim"@nl;
+  skos:broader :medewerker-domein;
+  dct:source :nbility .
+
+:standaard-werkproduct a skos:Concept;
+  skos:definition "regelmatig terugkerend werk, met een norm voor de benodigde uren, materialen en/of instructies"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:prefLabel "standaard werkproduct"@nl;
+  skos:broader :werk-domein;
+  dct:source :nbility .
+
+:klant-domein a skos:Concept;
+  skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het bedienen van klanten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:topConceptOf :energiesysteembeheer;
+  skos:prefLabel "klant (domein)"@nl;
+  dct:source :nbility .
+
+:energietransport-domein a skos:Concept;
+  skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het transporteren van energie"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:topConceptOf :energiesysteembeheer;
+  skos:prefLabel "energietransport (domein)"@nl;
+  dct:source :nbility .
+
+:energienet-domein a skos:Concept;
+  skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het besturen van de ontwikkeling en instandhouding van energienetten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:topConceptOf :energiesysteembeheer;
+  skos:prefLabel "energienet (domein)"@nl;
+  dct:source :nbility .
+
+:meting-domein a skos:Concept;
+  skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het meten van energietransport en energienetten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:topConceptOf :energiesysteembeheer;
+  skos:prefLabel "meting (domein)"@nl;
+  dct:source :nbility .
+
+:werk-domein a skos:Concept;
+  skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het uitvoeren van werkzaamheden aan energienetten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:topConceptOf :energiesysteembeheer;
+  skos:prefLabel "werk (domein)"@nl;
+  dct:source :nbility .
+
+:energiemarkt-domein a skos:Concept;
+  skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het faciliteren van de energiemarkt"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:topConceptOf :energiesysteembeheer;
+  skos:prefLabel "energiemarkt (domein)"@nl;
+  dct:source :nbility .
+
+:richting-domein a skos:Concept;
+  skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het opstellen en besturen van de bedrijfsrichting"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:topConceptOf :energiesysteembeheer;
+  skos:prefLabel "richting (domein)"@nl;
+  dct:source :nbility .
+
+:proces-en-data-domein a skos:Concept;
+  skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het ontwikkelen en beheren van processen en data"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:topConceptOf :energiesysteembeheer;
+  skos:prefLabel "proces en data (domein)"@nl;
+  dct:source :nbility .
+
+:medewerker-domein a skos:Concept;
+  skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het werven en inzetbaar houden van medewerkers"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:topConceptOf :energiesysteembeheer;
+  skos:prefLabel "medewerker (domein)"@nl;
+  dct:source :nbility .
+
+:digitaal-product-domein a skos:Concept;
+  skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het ontwikkelen en beheren van digitale producten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:topConceptOf :energiesysteembeheer;
+  skos:prefLabel "digitaal product (domein)"@nl;
+  dct:source :nbility .
+
+:inkoopproduct-domein a skos:Concept;
+  skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het verkrijgen van goederen en diensten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:topConceptOf :energiesysteembeheer;
+  skos:prefLabel "inkoopproduct (domein)"@nl;
+  dct:source :nbility .
+
+:bedrijfsgebouw-domein a skos:Concept;
+  skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het beheren van bedrijfsgebouwen en beschikbaar stellen van faciliteiten"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:topConceptOf :energiesysteembeheer;
+  skos:prefLabel "bedrijfsgebouw (domein)"@nl;
+  dct:source :nbility .
+
+:financien-domein a skos:Concept;
+  skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het verkrijgen en beheren van financiën"@nl;
+  skos:inScheme :energiesysteembeheer;
+  skos:topConceptOf :energiesysteembeheer;
+  skos:prefLabel "financiën (domein)"@nl;
+  dct:source :nbility .
+
+:nbility a foaf:Document;
+  skos:label "NBility"@nl;
+  foaf:page <https://nbility-model.github.io> .
