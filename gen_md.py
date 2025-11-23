@@ -65,6 +65,7 @@ def create_homepage():
 title: Home
 nav_exclude: true
 permalink: /
+hash_redirect: true
 ---
 
 # Begrippenkader

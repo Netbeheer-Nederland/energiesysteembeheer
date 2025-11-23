@@ -1,4 +1,4 @@
-@prefix : <https://modellen.netbeheernederland.nl/begrippen/> .
+@prefix : <https://modellen.netbeheernederland.nl/begrippen#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -7,7 +7,7 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
-<https://modellen.netbeheernederland.nl/begrippen/> a owl:Ontology;
+<https://modellen.netbeheernederland.nl/begrippen#> a owl:Ontology;
   owl:imports <http://xmlns.com/foaf/0.1/> .
 
 :energiesysteembeheer a skos:ConceptScheme;
@@ -379,7 +379,7 @@
 :in-concept a skos:Collection;
   rdfs:comment "Concepten in deze collectie zijn nog niet gevalideerd."@nl;
   skos:prefLabel "in concept"@nl;
-  skos:member <https://modellen.netbeheernederland.nl/begrippen/>,
+  skos:member <https://modellen.netbeheernederland.nl/begrippen#>,
     :bieding-redispatch, :voedingsgebied, :publieke-laadinstallatie, :private-laadinstallatie,
     :snellaadinstallatie, :laadpunt, :spanningsniveau, :aansluittermijn, :extrahoogspanning,
     :hoogspanning, :laagspanning, :middenspanning, :tussenspanning, :lage-druk, :drukniveau,
