@@ -29,7 +29,7 @@ def main():
         g.parse(file_path, format="turtle")
 
     # Maak de Homepage (index.md)
-    create_homepage()
+    create_homepage(g)
 
     # Indexeren van alle concepten
     concept_map = {}
@@ -59,18 +59,38 @@ def main():
 
     print(f"Klaar! {len(concept_map)} begrippen gegenereerd in de root.")
 
-def create_homepage():
-    """Maakt de index.md die als 'Home' fungeert"""
-    md = """---
+def create_homepage(g):
+    """Maakt de index.md die als 'Home' fungeert, gevuld met ConceptScheme data."""
+    
+    # We zoeken het subject dat gedefinieerd is als een skos:ConceptScheme
+    # g.value zoekt één willekeurige match (er is er meestal maar 1)
+    scheme = g.value(predicate=RDF.type, object=SKOS.ConceptScheme)
+    
+    # Standaard teksten voor fallback
+    title_text = "Begrippenkader"
+    description_text = "Gebruik het navigatiemenu of de zoekbalk om begrippen te vinden."
+
+    if scheme:
+        # Haal de titel op (skos:prefLabel)
+        label = g.value(scheme, SKOS.prefLabel)
+        if label:
+            title_text = str(label)
+        
+        # Haal de beschrijving op (rdfs:comment)
+        comment = g.value(scheme, RDFS.comment)
+        if comment:
+            description_text = str(comment)
+
+    md = f"""---
 title: Home
 nav_exclude: true
 permalink: /
 hash_redirect: true
 ---
 
-# Begrippenkader
+# Begrippen
 
-Gebruik het nagivatiemenu of de zoekbalk om begrippen te vinden.
+{description_text}
 """
     with open(os.path.join(OUTPUT_DIR, "index.md"), "w", encoding="utf-8") as f:
         f.write(md)
