@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async function() {
         let html = `
             <h2 class="text-delta">Gebruik</h2>
             <div class="table-wrapper">
-                <table class="hide-header">
+                <table>
                     <thead>
                         <tr>
                             <th style="text-align:left">Model</th>
