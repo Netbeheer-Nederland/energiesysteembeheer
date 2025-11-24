@@ -1,21 +1,14 @@
-// --- NAVBAR ---
-
-// breder
-$nav-width: 24rem;
-
-// smallere scrollbalk
-.site-nav {
-    scrollbar-width: thin;
-}
-
-// --- DEFINITION LIST ---
-
-// Fix margin in multi-line definition items
+// Definition list: fix margin in multi-line items
 .main-content dt {
     margin-bottom: 0;
 }
 
-// Add border to definition lists
+// Definition list: add border
 .main-content dl {
     border-top: 1px dotted $grey-lt-300;
+}
+
+// Navbar
+.site-nav {
+    scrollbar-width: thin;
 }
