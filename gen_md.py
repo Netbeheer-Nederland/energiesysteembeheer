@@ -7,7 +7,7 @@ from slugify import slugify
 # --- CONFIG ---
 INPUT_DIR = "begrippenkaders"
 OUTPUT_DIR = "docs"
-BASE_URL = "/begrippen/"
+BASE_URL = "/begrippen"
 
 # Namespaces
 PROV = Namespace("http://www.w3.org/ns/prov#")
