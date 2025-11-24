@@ -237,29 +237,6 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
     # Gebruik (placeholder voor gebruik door client-side JavaScript)
     md += '<div id="concept-usages" class="mt-6"></div>'
 
-    # Reacties
-    md += '''
-## Reacties
-{: .text-delta }
-
-<script src="https://giscus.app/client.js"
-    data-repo="Netbeheer-Nederland/begrippen"
-    data-repo-id="R_kgDOQbdEvg"
-    data-category="Announcements"
-    data-category-id="DIC_kwDOQbdEvs4Cy4mX"
-    data-mapping="pathname"
-    data-strict="1"
-    data-reactions-enabled="0"
-    data-emit-metadata="0"
-    data-input-position="bottom"
-    data-theme="light"
-    data-lang="nl"
-    data-loading="lazy"
-    crossorigin="anonymous"
-    async>
-</script>
-'''
-
     # Opslaan in de root van docs/
     filename = f"{info['slug']}.md"
     with open(os.path.join(OUTPUT_DIR, filename), "w", encoding="utf-8") as f:
