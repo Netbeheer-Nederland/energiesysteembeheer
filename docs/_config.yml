@@ -15,3 +15,7 @@ fav_icon: "/assets/images/favicon.png"
 callouts:
   note:
     color: purple
+
+aux_links:
+  "Home":
+    - "/"
