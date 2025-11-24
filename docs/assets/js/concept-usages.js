@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     const currentUri = metaTag.getAttribute('content');
     // TODO: allow multiple and move to config
-    const jsonPath = 'https://netbeheer-nederland.github.io/stelsel/registers/concept_usages.json'; 
+    const jsonPath = 'https://modellen.netbeheernederland.nl/stelsel/registers/concept_usages.json'; 
 
     try {
         const response = await fetch(jsonPath);
