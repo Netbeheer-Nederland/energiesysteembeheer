@@ -21,3 +21,8 @@
 .main-content dl {
     border-top: 1px dotted $grey-lt-300;
 }
+
+// A thin navigation scrollbar
+.site-nav {
+    scrollbar-width: thin;
+}
