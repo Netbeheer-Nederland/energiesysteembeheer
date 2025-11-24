@@ -138,23 +138,33 @@ permalink: {info['permalink']}
     comments = [str(l) for l in g.objects(s, RDFS.comment)]
     examples = [str(l) for l in g.objects(s, SKOS.example)]
     if scope_notes or comments or examples:
-        md += "\n## Opmerkingen\n{: .text-delta }\n"
-        md += "\n| Soort | Waarde |\n| :--- | :--- |\n"
-        if comments: md += f'| <span class="fw-500">Uitleg</span> | {NEWLINE.join(comments)} |\n'
-        if scope_notes: md += f'| <span class="fw-500">Toelichting</span> | {NEWLINE.join(scope_notes)} |\n'
-        if examples: md += f'| <span class="fw-500">Voorbeeld</span> | {NEWLINE.join(examples)} |\n'
-        md += "{: .hide-header}\n\n"
+        md += "\n## Opmerkingen\n{: .text-delta }\n\n"
+        md += "<dl>"
+        if comments:
+            md += "<dt>Uitleg</dt>"
+            for comment in comments: md += f"<dd>{comment}</dd>"
+        if scope_notes:
+            md += "<dt>Toelichting</dt>"
+            for scope_note in scope_notes: md += f"<dd>{scope_note}</dd>"
+        if examples:
+            md += "<dt>Voorbeeld</dt>"
+            for example in examples: md += f"<dd>{example}</dd>"
+        md += "</dl>"
 
     # Terminologie
     alt_labels = [str(l) for l in g.objects(s, SKOS.altLabel)]
     hidden_labels = [str(l) for l in g.objects(s, SKOS.hiddenLabel)]
     if alt_labels or hidden_labels or notation:
         md += "\n## Terminologie\n{: .text-delta }\n"
-        md += "\n| Type | Term |\n| :--- | :--- |\n"
-        md += f'| <span class="fw-500">Voorkeursterm</span> | {label} |\n'
-        if alt_labels: md += f'| <span class="fw-500">Alternatieve term</span> | {NEWLINE.join(alt_labels)} |\n'
-        if hidden_labels: md += f'| <span class="fw-500">Zoekterm</span> | {NEWLINE.join(hidden_labels)} |\n'
-        md += "{: .hide-header}\n\n"
+        md += "<dl>"
+        md += f"<dt>Voorkeursterm</dt><dd>{label}</dd>"
+        if alt_labels:
+            md += "<dt>Alternatieve term</dt>"
+            for alt_label in alt_labels: md += f"<dd>{alt_label}</dd>"
+        if hidden_labels:
+            md += "<dt>Zoekterm</dt>"
+            for hidden_label in hidden_labels: md += f"<dd>{hidden_label}</dd>"
+        md += "</dl>"
 
     # Relaties
     broader = get_internal_links(g, s, SKOS.broader, concept_map)
@@ -162,11 +172,17 @@ permalink: {info['permalink']}
     related = get_internal_links(g, s, SKOS.related, concept_map)
     if broader or narrower or related:
         md += "\n## Relaties\n{: .text-delta }\n\n"
-        md += "\n| Soort | Begrip |\n| :--- | :--- |\n"
-        if broader: md += f'| <span class="fw-500">Bovenliggend</span> | {NEWLINE.join(broader)} |\n'
-        if narrower: md += f'| <span class="fw-500">Onderliggend</span> | {NEWLINE.join(narrower)} |\n'
-        if related: md += f'| <span class="fw-500">Gerelateerd</span> | {NEWLINE.join(related)} |\n'
-        md += "{: .hide-header}\n\n"
+        md += "<dl>"
+        if broader:
+            md += "<dt>Bovenliggend</dt>"
+            for broader_i in broader: md += f"<dd>{broader_i}</dd>"
+        if narrower:
+            md += "<dt>Onderliggend</dt>"
+            for narrower_i in narrower: md += f"<dd>{narrower_i}</dd>"
+        if related:
+            md += "<dt>Gerelateerd</dt>"
+            for related_i in related: md += f"<dd>{related_i}</dd>"
+        md += "</dl>"
 
     # Overeenkomstig
     broad_match = get_external_links(g, s, SKOS.broadMatch)
@@ -175,25 +191,42 @@ permalink: {info['permalink']}
     exact_match = get_external_links(g, s, SKOS.exactMatch)
     related_match = get_external_links(g, s, SKOS.relatedMatch)
     if broad_match or narrow_match or close_match or exact_match or related_match:
-        md += "\n## Overeenkomstig\n{: .text-delta }\n"
-        md += "\n| Overeenkomst | Begrip |\n| :--- | :--- |\n"
-        if broad_match: md += f'| <span class="fw-500">Overeenkomstig bovenliggend</span> | {NEWLINE.join(broad_match)} |\n'
-        if narrow_match: md += f'| <span class="fw-500">Overeenkomstig onderliggend</span> | {NEWLINE.join(narrow_match)} |\n'
-        if close_match: md += f'| <span class="fw-500">Vrijwel overeenkomstig</span> | {NEWLINE.join(close_match)} |\n'
-        if exact_match: md += f'| <span class="fw-500">Exact overeenkomstig</span> | {NEWLINE.join(exact_match)} |\n'
-        if related_match: md += f'| <span class="fw-500">Overeenkomstig verwant</span> | {NEWLINE.join(related_match)} |\n'
-        md += "{: .hide-header}\n\n"
+        md += "\n## Overeenkomstig\n{: .text-delta }\n\n"
+        md += "<dl>"
+        if broad_match:
+            md += "<dt>Overeenkomstig bovenliggend</dt>"
+            for broad_match_i in broad_match: md += f"<dd>{broad_match_i}</dd>"
+        if narrow_match:
+            md += "<dt>Overeenkomstig onderliggend</dt>"
+            for narrow_match_i in narrow_match: md += f"<dd>{narrow_match_i}</dd>"
+        if close_match:
+            md += "<dt>Vrijwel overeenkomstig</dt>"
+            for close_match_i in close_match: md += f"<dd>{close_match_i}</dd>"
+        if exact_match:
+            md += "<dt>Exact overeenkomstig</dt>"
+            for exact_match_i in exact_match: md += f"<dd>{exact_match_i}</dd>"
+        if related_match:
+            md += "<dt>Overeenkomstig verwant</dt>"
+            for related_match_i in related_match: md += f"<dd>{related_match_i}</dd>"
+        md += "</dl>"
 
     # Verantwoording
     sources = get_external_links(g, s, DCTERMS.source)
     change_notes = [str(l) for l in g.objects(s, SKOS.changeNote)]
     history_notes = [str(l) for l in g.objects(s, SKOS.historyNote)]
     if sources or change_notes or history_notes:
-        md += "\n## Verantwoording\n{: .text-delta }\n\n| Eigenschap | Waarde |\n| :--- | :--- |\n"
-        if sources: md += f'| <span class="fw-500">Bron</span> | {NEWLINE.join(sources)} |\n'
-        if change_notes: md += f'| <span class="fw-500">Wijzigingsnotitie</span> | {NEWLINE.join(change_notes)} |\n'
-        if history_notes: md += f'| <span class="fw-500">Historie</span> | {NEWLINE.join(history_notes)} |\n'
-        md += "{: .hide-header}\n\n"
+        md += "\n## Verantwoording\n{: .text-delta }\n\n"
+        md += "<dl>"
+        if sources:
+            md += "<dt>Bron</dt>"
+            for source in sources: md += f"<dd>{source}</dd>"
+        if change_notes:
+            md += "<dt>Wijzigingsnotities</dt>"
+            for change_note in change_notes: md += f"<dd>{change_note}</dd>"
+        if history_notes:
+            md += "<dt>Historie</dt>"
+            for history_note in history_notes: md += f"<dd>{history_note}</dd>"
+        md += "</dl>"
 
     # Gebruik (placeholder voor gebruik door client-side JavaScript)
     md += '<div id="concept-usages" class="mt-6"></div>'
