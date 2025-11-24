@@ -1,14 +1,22 @@
-@media (min-width: 66.5rem) {
-    .site-nav, .site-header, .site-footer {
-        width: 100%;
-    }
-}
+// Broader navigation sidebar
 @media (min-width: 85rem) {
     .site-nav, .site-header, .site-footer {
         width: 24rem;
     }
 }
+// Override the theme's default
+@media (min-width: 66.5rem) {
+    .site-nav, .site-header, .site-footer {
+        width: 100%;
+    }
+}
 
+// Fix margin in multi-line definition items
 .main-content dt {
     margin-bottom: 0;
+}
+
+// Add border to definition lists
+.main-content dl {
+    border-top: 1px dotted $grey-lt-300
 }
