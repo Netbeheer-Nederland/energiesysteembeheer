@@ -88,6 +88,9 @@ permalink: /
 hash_redirect: true
 ---
 
+{{: .note }}
+Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
+
 # {title_text}
 
 {description_text}
@@ -119,6 +122,9 @@ title: {label}
 {parent_line}
 permalink: {info['permalink']}
 ---
+
+{{: .note }}
+Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
 
 # {label}
 """
