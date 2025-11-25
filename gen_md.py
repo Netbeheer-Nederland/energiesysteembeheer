@@ -131,6 +131,8 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
 
     # --- Content (NL-SBB Standaard) ---
 
+    # Denk aan whitespace tussen HTML-elementen vanwege de zoekfunctie
+
     # URI, code en definitie
     md += f'\n<meta name="concept-uri" content="{ str(s) }">\n'
     md += f"\n{str(s)}\n{{: .fs-2 .text-mono .text-grey-dk-000 .mb-4}}\n"
@@ -145,32 +147,32 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
     examples = [str(l) for l in g.objects(s, SKOS.example)]
     if scope_notes or comments or examples:
         md += "\n## Opmerkingen\n{: .text-delta }\n\n"
-        md += "<dl>"
+        md += "<dl>\n"
         if comments:
-            md += "<dt>Uitleg</dt>"
-            for comment in comments: md += f"<dd>{comment}</dd>"
+            md += "<dt>Uitleg</dt>\n"
+            for comment in comments: md += f"<dd>{comment}</dd>\n"
         if scope_notes:
-            md += "<dt>Toelichting</dt>"
-            for scope_note in scope_notes: md += f"<dd>{scope_note}</dd>"
+            md += "<dt>Toelichting</dt>\n"
+            for scope_note in scope_notes: md += f"<dd>{scope_note}</dd>\n"
         if examples:
-            md += "<dt>Voorbeeld</dt>"
-            for example in examples: md += f"<dd>{example}</dd>"
-        md += "</dl>"
+            md += "<dt>Voorbeeld</dt>\n"
+            for example in examples: md += f"<dd>{example}</dd>\n"
+        md += "</dl>\n"
 
     # Terminologie
     alt_labels = [str(l) for l in g.objects(s, SKOS.altLabel)]
     hidden_labels = [str(l) for l in g.objects(s, SKOS.hiddenLabel)]
     if alt_labels or hidden_labels or notation:
-        md += "\n## Terminologie\n{: .text-delta }\n"
-        md += "<dl>"
-        md += f"<dt>Voorkeursterm</dt><dd>{label}</dd>"
+        md += "\n## Terminologie\n{: .text-delta }\n\n"
+        md += "<dl>\n"
+        md += f"<dt>Voorkeursterm</dt>\n<dd>{label}</dd>\n"
         if alt_labels:
-            md += "<dt>Alternatieve term</dt>"
-            for alt_label in alt_labels: md += f"<dd>{alt_label}</dd>"
+            md += "<dt>Alternatieve term</dt>\n"
+            for alt_label in alt_labels: md += f"<dd>{alt_label}</dd>\n"
         if hidden_labels:
-            md += "<dt>Zoekterm</dt>"
-            for hidden_label in hidden_labels: md += f"<dd>{hidden_label}</dd>"
-        md += "</dl>"
+            md += "<dt>Zoekterm</dt>\n"
+            for hidden_label in hidden_labels: md += f"<dd>{hidden_label}</dd>\n"
+        md += "</dl>\n"
 
     # Relaties
     broader = get_internal_links(g, s, SKOS.broader, concept_map)
@@ -178,17 +180,17 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
     related = get_internal_links(g, s, SKOS.related, concept_map)
     if broader or narrower or related:
         md += "\n## Relaties\n{: .text-delta }\n\n"
-        md += "<dl>"
+        md += "<dl>\n"
         if broader:
-            md += "<dt>Bovenliggend</dt>"
-            for broader_i in broader: md += f"<dd>{broader_i}</dd>"
+            md += "<dt>Bovenliggend</dt>\n"
+            for broader_i in broader: md += f"<dd>{broader_i}</dd>\n"
         if narrower:
-            md += "<dt>Onderliggend</dt>"
-            for narrower_i in narrower: md += f"<dd>{narrower_i}</dd>"
+            md += "<dt>Onderliggend</dt>\n"
+            for narrower_i in narrower: md += f"<dd>{narrower_i}</dd>\n"
         if related:
-            md += "<dt>Gerelateerd</dt>"
-            for related_i in related: md += f"<dd>{related_i}</dd>"
-        md += "</dl>"
+            md += "<dt>Gerelateerd</dt>\n"
+            for related_i in related: md += f"<dd>{related_i}</dd>\n"
+        md += "</dl>\n"
 
     # Overeenkomstig
     broad_match = get_external_links(g, s, SKOS.broadMatch)
@@ -198,23 +200,23 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
     related_match = get_external_links(g, s, SKOS.relatedMatch)
     if broad_match or narrow_match or close_match or exact_match or related_match:
         md += "\n## Overeenkomstig\n{: .text-delta }\n\n"
-        md += "<dl>"
+        md += "<dl>\n"
         if broad_match:
-            md += "<dt>Overeenkomstig bovenliggend</dt>"
-            for broad_match_i in broad_match: md += f"<dd>{broad_match_i}</dd>"
+            md += "<dt>Overeenkomstig bovenliggend</dt>\n"
+            for broad_match_i in broad_match: md += f"<dd>{broad_match_i}</dd>\n"
         if narrow_match:
-            md += "<dt>Overeenkomstig onderliggend</dt>"
-            for narrow_match_i in narrow_match: md += f"<dd>{narrow_match_i}</dd>"
+            md += "<dt>Overeenkomstig onderliggend</dt>\n"
+            for narrow_match_i in narrow_match: md += f"<dd>{narrow_match_i}</dd>\n"
         if close_match:
-            md += "<dt>Vrijwel overeenkomstig</dt>"
-            for close_match_i in close_match: md += f"<dd>{close_match_i}</dd>"
+            md += "<dt>Vrijwel overeenkomstig</dt>\n"
+            for close_match_i in close_match: md += f"<dd>{close_match_i}</dd>\n"
         if exact_match:
-            md += "<dt>Exact overeenkomstig</dt>"
-            for exact_match_i in exact_match: md += f"<dd>{exact_match_i}</dd>"
+            md += "<dt>Exact overeenkomstig</dt>\n"
+            for exact_match_i in exact_match: md += f"<dd>{exact_match_i}</dd>\n"
         if related_match:
-            md += "<dt>Overeenkomstig verwant</dt>"
-            for related_match_i in related_match: md += f"<dd>{related_match_i}</dd>"
-        md += "</dl>"
+            md += "<dt>Overeenkomstig verwant</dt>\n"
+            for related_match_i in related_match: md += f"<dd>{related_match_i}</dd>\n"
+        md += "</dl>\n"
 
     # Verantwoording
     sources = get_external_links(g, s, DCTERMS.source)
@@ -222,17 +224,17 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
     history_notes = [str(l) for l in g.objects(s, SKOS.historyNote)]
     if sources or change_notes or history_notes:
         md += "\n## Verantwoording\n{: .text-delta }\n\n"
-        md += "<dl>"
+        md += "<dl>\n"
         if sources:
-            md += "<dt>Bron</dt>"
-            for source in sources: md += f"<dd>{source}</dd>"
+            md += "<dt>Bron</dt>\n"
+            for source in sources: md += f"<dd>{source}</dd>\n"
         if change_notes:
-            md += "<dt>Wijzigingsnotities</dt>"
-            for change_note in change_notes: md += f"<dd>{change_note}</dd>"
+            md += "<dt>Wijzigingsnotities</dt>\n"
+            for change_note in change_notes: md += f"<dd>{change_note}</dd>\n"
         if history_notes:
-            md += "<dt>Historie</dt>"
-            for history_note in history_notes: md += f"<dd>{history_note}</dd>"
-        md += "</dl>"
+            md += "<dt>Historie</dt>\n"
+            for history_note in history_notes: md += f"<dd>{history_note}</dd>\n"
+        md += "</dl>\n"
 
     # Gebruik (placeholder voor gebruik door client-side JavaScript)
     md += '<div id="concept-usages" class="mt-6"></div>'
