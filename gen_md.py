@@ -127,7 +127,6 @@ permalink: {info['permalink']}
 Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
 
 # {label}
-{{: .no-toc }}
 """
 
     # --- Content (NL-SBB Standaard) ---
@@ -140,14 +139,14 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
     notation = g.value(s, SKOS.notation)
     if notation: md += f"\n{notation}\n{{: .fs-4 .text-grey-dk-000 .fw-300 .float-right}}\n"
     definition = g.value(s, SKOS.definition)
-    if definition: md += f"\n## Definitie\n{{: .no-toc .text-delta }}\n\n{definition}\n"
+    if definition: md += f"\n## Definitie\n{{: .text-delta }}\n\n{definition}\n"
 
     # Opmerkingen
     scope_notes = [str(l) for l in g.objects(s, SKOS.scopeNote)]
     comments = [str(l) for l in g.objects(s, RDFS.comment)]
     examples = [str(l) for l in g.objects(s, SKOS.example)]
     if scope_notes or comments or examples:
-        md += "\n## Opmerkingen\n{: .no-toc .text-delta }\n\n"
+        md += "\n## Opmerkingen\n{: .text-delta }\n\n"
         md += "<dl>\n"
         if comments:
             md += "<dt>Uitleg</dt>\n"
@@ -164,7 +163,7 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
     alt_labels = [str(l) for l in g.objects(s, SKOS.altLabel)]
     hidden_labels = [str(l) for l in g.objects(s, SKOS.hiddenLabel)]
     if alt_labels or hidden_labels or notation:
-        md += "\n## Terminologie\n{: .no-toc .text-delta }\n\n"
+        md += "\n## Terminologie\n{: .text-delta }\n\n"
         md += "<dl>\n"
         md += f"<dt>Voorkeursterm</dt>\n<dd>{label}</dd>\n"
         if alt_labels:
@@ -180,7 +179,7 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
     narrower = get_internal_links(g, s, SKOS.narrower, concept_map)
     related = get_internal_links(g, s, SKOS.related, concept_map)
     if broader or narrower or related:
-        md += "\n## Relaties\n{: .no-toc .text-delta }\n\n"
+        md += "\n## Relaties\n{: .text-delta }\n\n"
         md += "<dl>\n"
         if broader:
             md += "<dt>Bovenliggend</dt>\n"
@@ -193,14 +192,14 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
             for related_i in related: md += f"<dd>{related_i}</dd>\n"
         md += "</dl>\n"
 
-    # Overeenkomstig
+    # Overeenkomsten
     broad_match = get_external_links(g, s, SKOS.broadMatch)
     narrow_match = get_external_links(g, s, SKOS.narrowMatch)
     close_match = get_external_links(g, s, SKOS.closeMatch)
     exact_match = get_external_links(g, s, SKOS.exactMatch)
     related_match = get_external_links(g, s, SKOS.relatedMatch)
     if broad_match or narrow_match or close_match or exact_match or related_match:
-        md += "\n## Overeenkomsten\n{: .no-toc .text-delta }\n\n"
+        md += "\n## Overeenkomsten\n{: .text-delta }\n\n"
         md += "<dl>\n"
         if broad_match:
             md += "<dt>Overeenkomstig bovenliggend</dt>\n"
@@ -224,7 +223,7 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
     change_notes = [str(l) for l in g.objects(s, SKOS.changeNote)]
     history_notes = [str(l) for l in g.objects(s, SKOS.historyNote)]
     if sources or change_notes or history_notes:
-        md += "\n## Verantwoording\n{: .no-toc .text-delta }\n\n"
+        md += "\n## Verantwoording\n{: .text-delta }\n\n"
         md += "<dl>\n"
         if sources:
             md += "<dt>Bron</dt>\n"
