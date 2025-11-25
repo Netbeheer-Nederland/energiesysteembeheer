@@ -19,3 +19,5 @@ callouts:
 aux_links:
   "Modellen van Netbeheer Nederland":
     - "/"
+
+heading_anchors: false
