@@ -6,7 +6,8 @@ from slugify import slugify
 
 # --- CONFIG ---
 INPUT_DIR = "begrippenkaders"
-OUTPUT_DIR = "docs/doc"
+OUTPUT_DIR = "docs"
+RESOURCE_DIR = "doc" # term/doc, id/doc pattern
 BASE_URL = "/begrippen"
 
 # Namespaces
@@ -53,6 +54,7 @@ def main():
                 info['broader'].append(concept_map[str(parent)]['label'])
 
     # Markdown genereren
+    os.mkdir(os.path.join(OUTPUT_DIR, RESOURCE_DIR))
     for uri, info in concept_map.items():
         subject = next(s for s in g.subjects() if str(s) == uri)
         generate_markdown(g, subject, info, concept_map)
