@@ -129,6 +129,8 @@ def generate_markdown(g, s, info, concept_map, alias_collection):
 title: {label}
 {parent_line}
 permalink: {target_permalink}
+redirect_from:
+  - f"/{SENSE}/{target_slug}"
 ---
 
 {{: .note }}
