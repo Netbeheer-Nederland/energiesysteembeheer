@@ -1,5 +1,5 @@
-@base <https://begrippen.netbeheernederland.nl/term> .
-@prefix : <https://begrippen.netbeheernederland.nl/term/> .
+@base <https://begrippen.netbeheernederland.nl/id> .
+@prefix : <https://begrippen.netbeheernederland.nl/id/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .

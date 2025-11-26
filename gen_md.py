@@ -7,8 +7,8 @@ from slugify import slugify
 # --- CONFIG ---
 INPUT_DIR = "begrippenkaders"
 OUTPUT_DIR = "docs"
-SENSE = "term"
-CONTENT = "doc" # term/doc, id/doc pattern
+SENSE = "id"
+CONTENT = "doc"
 BASE_URL = "/begrippen"
 
 # Namespaces
@@ -124,6 +124,7 @@ title: {label}
 permalink: /{CONTENT}/{info['slug']}
 redirect_from:
   - /{SENSE}/{info['slug']}
+  - /energiesysteembeheer/nl/page/{info['slug']}
 ---
 
 {{: .note }}
