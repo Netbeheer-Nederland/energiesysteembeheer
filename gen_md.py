@@ -7,10 +7,10 @@ from slugify import slugify
 # --- CONFIG ---
 INPUT_DIR = "begrippenkaders"
 OUTPUT_DIR = "docs"
-SENSE = "id"
+SENSE = "term"
 CONTENT = "doc"
 ALIAS_DIR = "alias"
-BASE_URL = "/begrippen"
+BASE_URL = "/energiesysteembeheer"
 
 def main():
     print(f"Laden van begrippen...")
