@@ -1,5 +1,6 @@
 import os
 import glob
+from collections import defaultdict # Nodig voor het groeperen
 from rdflib import Graph, Namespace, RDF, SKOS, DCTERMS, RDFS, URIRef, FOAF
 from slugify import slugify
 
@@ -11,14 +12,9 @@ CONTENT = "doc"
 ALIAS_DIR = "alias"
 BASE_URL = "/begrippen"
 
-# Namespaces
-PROV = Namespace("http://www.w3.org/ns/prov#")
-ADMS = Namespace("http://www.w3.org/ns/adms#")
-
 def main():
     print(f"Laden van begrippen...")
     
-    # Graph laden
     g = Graph()
     ttl_files = glob.glob(os.path.join(INPUT_DIR, "*.ttl"))
     
@@ -29,15 +25,13 @@ def main():
     for file_path in ttl_files:
         g.parse(file_path, format="turtle")
 
-    # Maak de Homepage (index.md)
     create_homepage(g)
 
-    # Indexeren van alle concepten
+    # Concepten indexeren
     concept_map = {}
     for s in g.subjects(RDF.type, SKOS.Concept):
         pref_label = g.value(s, SKOS.prefLabel, any=False) or "Naamloos"
         slug = slugify(str(pref_label))
-        
         concept_map[str(s)] = {
             "uri": str(s),
             "label": str(pref_label),
@@ -52,23 +46,27 @@ def main():
             if str(parent) in concept_map:
                 info['broader'].append(concept_map[str(parent)]['label'])
 
-    # Mappen structuur aanmaken
-    # 1. Voor de concepten (collectie)
+    # Mappen aanmaken
     path_content = os.path.join(OUTPUT_DIR, "_" + CONTENT)
-    if not os.path.exists(path_content):
-        os.makedirs(path_content)
-        
-    # 2. Voor de synoniemen (gewone pagina's of collectie, hier kiezen we gewone map)
     path_aliases = os.path.join(OUTPUT_DIR, ALIAS_DIR)
-    if not os.path.exists(path_aliases):
-        os.makedirs(path_aliases)
+    os.makedirs(path_content, exist_ok=True)
+    os.makedirs(path_aliases, exist_ok=True)
 
-    # Markdown genereren
+    # --- Dictionary om altLabels te verzamelen ---
+    # Structuur: { "afnemer": [ {"label": "Klant", "url": "/doc/klant"}, ... ] }
+    alias_collection = defaultdict(list)
+
+    # Markdown genereren voor begrippen
     for uri, info in concept_map.items():
         subject = next(s for s in g.subjects() if str(s) == uri)
-        generate_markdown(g, subject, info, concept_map)
+        
+        # We geven de alias_collection mee om te vullen
+        generate_markdown(g, subject, info, concept_map, alias_collection)
 
-    print(f"Klaar! {len(concept_map)} begrippen verwerkt.")
+    # Nu pas de alias-bestanden genereren
+    process_aliases(alias_collection)
+
+    print(f"Klaar! {len(concept_map)} begrippen en {len(alias_collection)} synoniemen verwerkt.")
 
 def create_homepage(g):
     scheme = g.value(predicate=RDF.type, object=SKOS.ConceptScheme)
@@ -103,17 +101,26 @@ Gebruik het nagivatiemenu of de zoekbalk om begrippen te vinden.
     with open(os.path.join(OUTPUT_DIR, "index.md"), "w", encoding="utf-8") as f:
         f.write(md)
 
-def generate_markdown(g, s, info, concept_map):
+def generate_markdown(g, s, info, concept_map, alias_collection):
     label = info['label']
     target_slug = info['slug']
     target_permalink = f"/{CONTENT}/{target_slug}"
     
-    # --- NIEUW: Genereer schaduwpagina's voor altLabels ---
-    alt_labels_raw = [str(l) for l in g.objects(s, SKOS.altLabel)]
-    for alt in alt_labels_raw:
-        generate_alias_file(alt, label, target_permalink)
+    # --- VERZAMELEN ZOEKTERMEN ---
+    alt_labels = [str(l) for l in g.objects(s, SKOS.altLabel)]
+    hidden_labels = [str(l) for l in g.objects(s, SKOS.hiddenLabel)]
+    
+    # Alles op één hoop (Just the Docs maakt geen onderscheid in redirect-gedrag)
+    all_search_terms = alt_labels + hidden_labels
+    
+    for term in all_search_terms:
+        alias_slug = slugify(term)
+        alias_collection[alias_slug].append({
+            "term": term, 
+            "target_label": label, 
+            "target_url": target_permalink
+        })
 
-    # --- Bestaande logica voor hoofdpagina ---
     parent_line = ""
     if info['broader']:
         parent_line = f"parent: {info['broader'][0]}"
@@ -122,9 +129,6 @@ def generate_markdown(g, s, info, concept_map):
 title: {label}
 {parent_line}
 permalink: {target_permalink}
-redirect_from:
-  - /{SENSE}/{target_slug}
-  - /energiesysteembeheer/nl/page/{target_slug}
 ---
 
 {{: .note }}
@@ -160,15 +164,14 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
             for example in examples: md += f"<dd>{example}</dd>\n"
         md += "</dl>\n"
 
-    # Terminologie (Ook altLabels weergeven in de tekst zelf)
-    hidden_labels = [str(l) for l in g.objects(s, SKOS.hiddenLabel)]
-    if alt_labels_raw or hidden_labels or notation:
+    # Terminologie
+    if alt_labels or hidden_labels or notation:
         md += "\n## Terminologie\n{: .text-delta }\n\n"
         md += "<dl>\n"
         md += f"<dt>Voorkeursterm</dt>\n<dd>{label}</dd>\n"
-        if alt_labels_raw:
+        if alt_labels:
             md += "<dt>Alternatieve term</dt>\n"
-            for alt_label in alt_labels_raw: md += f"<dd>{alt_label}</dd>\n"
+            for alt_label in alt_labels: md += f"<dd>{alt_label}</dd>\n"
         if hidden_labels:
             md += "<dt>Zoekterm</dt>\n"
             for hidden_label in hidden_labels: md += f"<dd>{hidden_label}</dd>\n"
@@ -236,41 +239,66 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
             for history_note in history_notes: md += f"<dd>{history_note}</dd>\n"
         md += "</dl>\n"
 
-    # Gebruik (placeholder voor gebruik door client-side JavaScript)
     md += '<div id="concept-usages" class="mt-6"></div>'
 
-    # Opslaan hoofdbestand
     filename = f"{info['slug']}.md"
     with open(os.path.join(OUTPUT_DIR, "_" + CONTENT, filename), "w", encoding="utf-8") as f:
         f.write(md)
 
-def generate_alias_file(alt_label, target_label, target_permalink):
+def process_aliases(alias_collection):
     """
-    Maakt een apart MD bestand voor de alternatieve term.
+    Kijkt naar alle verzamelde synoniemen.
+    - Is er 1 doel? -> Maak een Redirect pagina.
+    - Zijn er meer? -> Maak een Doorverwijspagina.
     """
-    alias_slug = slugify(alt_label)
-    
-    # De pijl HTML entity &rarr; werkt soms niet in YAML titels zonder quotes
-    # We gebruiken hier quotes om de string veilig te stellen.
-    md = f"""---
-title: "{alt_label} &rarr; {target_label}"
-redirect_to: {target_permalink}
+    for slug, targets in alias_collection.items():
+        
+        # De leesbare term pakken we van de eerste entry (ze zijn toch hetzelfde, op hoofdletters na)
+        readable_term = targets[0]['term']
+        filename = f"{slug}.md"
+        filepath = os.path.join(OUTPUT_DIR, ALIAS_DIR, filename)
+        
+        # SCENARIO 1: Uniek synoniem (Directe redirect)
+        if len(targets) == 1:
+            target = targets[0]
+            md = f"""---
+title: "{readable_term} &rarr; {target['target_label']}"
+nav_exclude: true
+search_exclude: false
+redirect_to: {target['target_url']}
 ---
-
-<meta http-equiv="refresh" content="0; url={target_permalink}">
+<meta http-equiv="refresh" content="0; url={target['target_url']}">
 
 # Doorverwijzing
-Je zoekt naar **{alt_label}**. Dit is een alternatieve term voor [{target_label}]({target_permalink}).
+Je zoekt naar **{readable_term}**. Dit is een synoniem voor [{target['target_label']}]({target['target_url']}).
 """
-    
-    filename = f"{alias_slug}.md"
-    path = os.path.join(OUTPUT_DIR, ALIAS_DIR, filename)
-    
-    # Check of bestand al bestaat (bij dubbele altLabels), anders overschrijven
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(md)
+            with open(filepath, "w", encoding="utf-8") as f:
+                f.write(md)
 
-# --- Helper Functies (ongewijzigd) ---
+        # SCENARIO 2: Dubbele alias (Doorverwijspagina)
+        else:
+            # We maken een lijstje met bullet points
+            list_items = ""
+            for t in targets:
+                list_items += f"- [{t['target_label']}]({t['target_url']})\n"
+
+            md = f"""---
+title: "{readable_term} (Doorverwijspagina)"
+---
+
+# {readable_term}
+
+De term **{readable_term}** kan verwijzen naar meerdere begrippen:
+
+{list_items}
+
+{{: .note }}
+Kies hierboven het begrip dat u zoekt.
+"""
+            with open(filepath, "w", encoding="utf-8") as f:
+                f.write(md)
+
+# --- Helper Functies ---
 
 def get_internal_links(g, subject, predicate, concept_map):
     links = []
@@ -282,7 +310,6 @@ def get_internal_links(g, subject, predicate, concept_map):
     return links
 
 def get_external_links(g, subject, predicate):
-    # Jouw originele helper functie...
     items = []
     for obj in g.objects(subject, predicate):
         label = g.value(obj, RDFS.label) or g.value(obj, SKOS.prefLabel) or g.value(obj, DCTERMS.title)
