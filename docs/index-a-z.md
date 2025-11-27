@@ -23,9 +23,8 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
   {% comment %} 2. De alt_labels: HTML met grijze tekst en pijl {% endcomment %}
   {% if p.alt_labels %}
     {% for alt in p.alt_labels %}
-      {% comment %} Let op de enkele en dubbele quotes voor de HTML string {% endcomment %}
-      {% assign alt_html = '<span class="grey-dk-000>' | append: alt | append: '</span> &arr; <a href="' | append: url | append: '">' | append: p.title | append: '</a>' %}
-
+      {% assign alt_span = '<span class="grey-dk-000">' | append: alt | append: '</span>' %}
+      {% assign display_string = alt_span | append: " &rarr; " | append: md_link %}
       {% assign entry = alt | append: "::" | append: alt_html %}
       {% assign entries_string = entries_string | append: entry | append: "|||" %}
     {% endfor %}
