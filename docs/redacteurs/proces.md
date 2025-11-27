@@ -10,4 +10,5 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
 
 *Deze pagina is een placeholder.*
 
-![Proces](assets/proces.drawio.svg)
+![Proces](/assets/proces.drawio.svg)
+
