@@ -129,6 +129,7 @@ def generate_markdown(g, s, info, concept_map, alias_collection):
 title: {label}
 {parent_line}
 permalink: {target_permalink}
+alt_labels:{''.join([f'\n  - {alt}' for alt in alt_labels])}
 redirect_from:
   - /{SENSE}/{target_slug}
 ---
