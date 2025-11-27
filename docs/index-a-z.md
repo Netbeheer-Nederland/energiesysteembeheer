@@ -1,3 +1,13 @@
+---
+title: Index A-Z
+nav_order: 5
+---
+
+{: .note }
+Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
+
+# Alfabetisch overzicht
+
 {% assign entries_string = "" %}
 
 {% comment %} --- STAP 1: Bouw de lijst met HTML/Markdown inbegrepen --- {% endcomment %}
