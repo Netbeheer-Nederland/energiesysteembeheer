@@ -21,7 +21,7 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
         </ul>
       {% endif %}
 
-      <h2>{{ char }}</h2>
+      <h2 style="text-delta">{{ char }}</h2>
 
       <ul>
 
@@ -39,3 +39,13 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
 {% if current_letter != "" %}
   </ul>
 {% endif %}
+
+<h3>Debug Modus</h3>
+<ul>
+  {% for p in site.html_pages %}
+    <li>
+      Titel: <strong>{{ p.title }}</strong> <br>
+      Interne URL: <code>{{ p.url }}</code>
+    </li>
+  {% endfor %}
+</ul>

@@ -30,7 +30,7 @@ defaults:
 
 color_scheme: nbnl
 logo: "/assets/images/logo.svg"
-fav_icon: "/assets/images/favicon.png"
+fav_icon_ico: "/assets/images/favicon.png"
 
 callouts:
   note:
