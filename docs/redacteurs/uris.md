@@ -1,33 +1,31 @@
 ---
-title: Identificatie
+title: URI-beleid
 parent: Redacteurs
 ---
 
-# Identificatie
+# URI-beleid
 Conceptversie
 {: .label .label-yellow }
-
-We kennen aan ieder begrip een betekenisloze, stabiele UUIDv4-code toe en leiden daar een URI uit af. De URI dient als persistente identifier binnen een Linked Data-context en ondersteunt daarmee de FAIR-principes voor herbruikbaarheid van data.
-
-We volgen de conventies uit de [Stelselcatalogus](https://www.stelselcatalogus.nl/documenten/linked_data_structuur) en [PLDN-URI-strategie](https://www.pldn.nl/wiki/Boek/URI-strategie).
 
 {: .text-delta }
 URI-patroon
 <dl>
+    <dt>Begrippenkader</dt>
+    <dd><code>https://begrippen.netbeheernederland.nl</code></dd>
     <dt>Begrip</dt>
-    <dd><code>https://begrippen.netbeheernederland.nl/id/{uuid}</code></dd>
-    <dt>Webpagina</dt>
-    <dd><code>https://begrippen.netbeheernederland.nl/doc/{uuid}</code></dd>
+    <dd><code>https://begrippen.netbeheernederland.nl/id/{id}</code></dd>
+    <dt>Begrip (beschrijving)</dt>
+    <dd><code>https://begrippen.netbeheernederland.nl/doc/{id}</code></dd>
 </dl>
 
-waarbij `{uuid}` wordt vervangen door de UUIDv4-code van het begrip.
+waarbij `{id}` wordt vervangen door de <a href="/energiesysteembeheer/doc/redacteurs/identificatie">identifier</a> van het begrip.
 
 ---
 
-{: .note }
-Het begrippenkader zelf wordt geïdentificeerd door de URI `https://begrippen.netbeheernederland.nl`.[^1]
+Voor begrippen volgen we - net als de [Stelselcatalogus](https://www.stelselcatalogus.nl/documenten/linked_data_structuur) en de [PLDN-URI-strategie](https://www.pldn.nl/wiki/Boek/URI-strategie) - de strategie beschreven in [sectie 4.1 van Cool URIs for the Semantic Web
+](https://www.w3.org/TR/cooluris/#r303gendocument).
 
-De UUIDv4-code wordt vastgelegd met [`dct:identifier`](http://purl.org/dc/terms/identifier).
+Voor het begrippenkader hanteren we enkel één URI, wat volstaat omdat het een [information resource](https://www.w3.org/TR/2004/REC-webarch-20041215/#def-information-resource) is.
 
 <details closed markdown="block">
   <summary>
@@ -40,5 +38,3 @@ De UUIDv4-code wordt vastgelegd met [`dct:identifier`](http://purl.org/dc/terms/
       skos:prefLabel "aansluiting"@nl .
   </pre>
 </details>
-
-[^1]: Het begrippenkader is een [information resource](#) en zodoende is er geen aparte documentatie-URI nodig.
