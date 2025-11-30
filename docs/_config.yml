@@ -45,3 +45,6 @@ plugins:
 
 search:
   heading_level: 1
+
+mermaid:
+  version: 9.1.3
