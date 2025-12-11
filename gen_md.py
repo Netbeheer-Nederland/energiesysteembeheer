@@ -144,7 +144,7 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
 """
 
     md += f'\n<meta name="concept-uri" content="{ str(s) }">\n'
-    md += f"\nURI: {str(s)}\n{{: .fs-2 .text-mono .text-grey-dk-000 .mb-4}}\n"
+    md += f"\n{str(s)}\n{{: .fs-2 .text-mono .text-grey-dk-000 .mb-4}}\n"
 
     notation = g.value(s, SKOS.notation)
     if notation: md += f"\n{notation}\n{{: .fs-4 .text-grey-dk-000 .fw-300 .float-right}}\n"
