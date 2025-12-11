@@ -151,7 +151,7 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
 
     definition = g.value(s, SKOS.definition)
     if definition:
-        md += f"\n{definition}\n{{: .fw-500}}\n"
+        md += f"\n{definition}\n{{: .fs-5}}\n"
 
     md += "\n---\n"
 
