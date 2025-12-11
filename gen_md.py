@@ -153,32 +153,32 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
     if definition:
         md += f"\n{definition}\n{{: .fw-500}}\n"
 
-    comments = [str(l) for l in g.objects(s, RDFS.comment)]
-    if comments:
-        md += "\n## Uitleg\n{{: .text-delta}}\n"
-        for comment in comments: md += f"\n{comment}\n"
-
-    scope_notes = [str(l) for l in g.objects(s, SKOS.scopeNote)]
-    if scope_notes:
-        md += "\n## Toelichting\n{{: .text-delta}}\n"
-        for scope_note in scope_notes: md += f"\n{scope_note}\n"
-
-    examples = [str(l) for l in g.objects(s, SKOS.example)]
-    if examples:
-        md += "\n## Voorbeeld\n{{: .text-delta}}\n"
-        md += f"\n{', '.join(examples)}\n"
-
-    if alt_labels:
-        md += "\n## Alternatieve term\n{{: .text-delta}}\n"
-        md += f"\n: {', '.join(alt_labels)}\n"
-
-    if hidden_labels:
-        md += "\n## Zoekterm\n{{: .text-delta}}\n"
-        md += f"\{', '.join(hidden_labels)}</em>\n"
-
     md += "\n---\n"
 
     md += "\n<dl>\n"
+
+    comments = [str(l) for l in g.objects(s, RDFS.comment)]
+    if comments:
+        md += "\n<dt>Uitleg</dt>\n"
+        for comment in comments: md += f"\n<dd>{comment}</dd>\n"
+
+    scope_notes = [str(l) for l in g.objects(s, SKOS.scopeNote)]
+    if scope_notes:
+        md += "\n<dt>Toelichting</dt>\n"
+        for scope_note in scope_notes: md += f"\n<dd>{scope_note}</dd>\n"
+
+    examples = [str(l) for l in g.objects(s, SKOS.example)]
+    if examples:
+        md += "\n<dt>Voorbeeld</dt>\n"
+        for example in examples: md += f"\n<dd>{example}</dd>\n"
+
+    if alt_labels:
+        md += "\n<dt>Alternatieve term</dt>\n"
+        for alt_label in alt_labels: md += f"\n<dd>{alt_label}</dd>\n"
+
+    if hidden_labels:
+        md += "\n<dt>Zoekterm</dt>\n"
+        for hidden_label in hidden_labels: md += f"\n<dd>{hidden_label}</dd>\n"
 
     broader = get_internal_links(g, s, SKOS.broader, concept_map)
     if broader:
