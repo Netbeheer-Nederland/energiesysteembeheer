@@ -143,6 +143,8 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
 # {label}
 """
 
+    md += f'\n<meta name="concept-uri" content="{ str(s) }">\n'
+
     notation = g.value(s, SKOS.notation)
     if notation: md += f"\n{notation}\n{{: .fs-4 .text-grey-dk-000 .fw-300 .float-right}}\n"
 
