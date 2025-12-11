@@ -151,24 +151,23 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
         md += f"\n> {definition}\n"
 
     comments = [str(l) for l in g.objects(s, RDFS.comment)]
-    if comments:
-        for comment in comments: md += f"\n{comment}\n"
+    for comment in comments: md += f"\n{comment}\n"
 
     scope_notes = [str(l) for l in g.objects(s, SKOS.scopeNote)]
-    if scope_notes:
-        for scope_note in scope_notes: md += f"\n{scope_note}\n"
+    for scope_note in scope_notes: md += f"\n{scope_note}\n"
 
     examples = [str(l) for l in g.objects(s, SKOS.example)]
     if examples:
-        md += f"\nVoorbeeld: {', '.join(examples)}\n"
+        md += f"\nVoorbeeld: <em>{'</em>, <em>'.join(examples)}</em>\n"
 
     if alt_labels:
-        md += f"\nAlternatieve term: {', '.join(alt_labels)}\n"
+        md += f"\nAlternatieve term: <em>{'</em>, <em>'.join(alt_labels)}</em>\n"
 
     if hidden_labels:
-        md += f"\nZoekterm: {', '.join(hidden_labels)}\n"
+        md += f"\nZoekterm: <em>{'</em>, <em>'.join(hidden_labels)}</em>\n"
 
     md += "\n---\n"
+
     md += "\n<dl>\n"
 
     broader = get_internal_links(g, s, SKOS.broader, concept_map)
