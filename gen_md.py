@@ -164,8 +164,8 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
             md += f"\ningediend\n{{: .label .label-yellow}}\n"
         case 'superseded':
             md += f"\nvervangen\n{{: .label .label-red}}\n"
-        case 'valid':
-            md += f"\ngeldig\n{{: .label .label-green}}\n"
+        # case 'valid':
+        #     md += f"\ngeldig\n{{: .label .label-green}}\n"
 
     md += f'\n<meta name="concept-uri" content="{ str(s) }">\n'
     md += f"\n{str(s)}\n{{: .fs-2 .text-mono .text-grey-dk-000 .mb-4}}\n"
