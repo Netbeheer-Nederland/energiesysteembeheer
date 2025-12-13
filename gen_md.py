@@ -1,8 +1,12 @@
 import os
 import glob
-from collections import defaultdict # Nodig voor het groeperen
+from collections import defaultdict
+from re import match # Nodig voor het groeperen
 from rdflib import Graph, Namespace, RDF, SKOS, DCTERMS, RDFS, URIRef, FOAF
 from slugify import slugify
+
+ADMS = Namespace("http://www.w3.org/ns/adms#")
+INSPIRE_STATUS = Namespace("https://inspire.ec.europa.eu/registry/status/")
 
 # --- CONFIG ---
 INPUT_DIR = "begrippenkaders"
@@ -32,11 +36,15 @@ def main():
     for s in g.subjects(RDF.type, SKOS.Concept):
         pref_label = g.value(s, SKOS.prefLabel, any=False) or "Naamloos"
         slug = slugify(str(pref_label))
+        status_values = list(g.objects(s, ADMS.status))  # returns URIs or Literals
+        status = status_values[0] if status_values else None # assumes one status per concept
+
         concept_map[str(s)] = {
             "uri": str(s),
             "label": str(pref_label),
             "slug": slug,
-            "broader": []
+            "broader": [],
+            "status_uri": str(status) if status else None
         }
 
     # Relaties leggen
@@ -127,6 +135,9 @@ def generate_markdown(g, s, info, concept_map, alias_collection):
 
     alt_labels_str = "".join([f"\n  - {alt}" for alt in alt_labels])
 
+    status_uri = info.get("status_uri")
+    status = status_uri.rstrip("/").split("/")[-1] if status_uri else None
+
     md = f"""---
 title: {label}
 {parent_line}
@@ -141,7 +152,20 @@ redirect_from:
 Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
 
 # {label}
+{{: .d-inline-block}}
 """
+
+    match status:
+        case 'invalid':
+            md += f"\nongeldig\n{{: .label .label-red}}\n"
+        case 'retired':
+            md += f"\nbuiten gebruik\n{{: .label .label-red}}\n"
+        case 'submitted':
+            md += f"\ningediend\n{{: .label .label-yellow}}\n"
+        case 'superseded':
+            md += f"\nvervangen\n{{: .label .label-red}}\n"
+        case 'valid':
+            md += f"\geldig\n{{: .label .label-green}}\n"
 
     md += f'\n<meta name="concept-uri" content="{ str(s) }">\n'
     md += f"\n{str(s)}\n{{: .fs-2 .text-mono .text-grey-dk-000 .mb-4}}\n"
