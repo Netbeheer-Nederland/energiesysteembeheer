@@ -103,6 +103,26 @@ Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
 {description_text}
 
 Gebruik het nagivatiemenu of de zoekbalk om begrippen te vinden.
+
+<div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; padding: 20px; margin: 20px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px;">
+  <div>
+    <h3 style="margin-top: 0;">Machineleesbare data</h3>
+    <p style="margin-bottom: 0;">
+      Dit begrippenkader is beschikbaar als linked data. 
+    </p>
+  </div>
+  
+  <a href="{{ '/begrippenkader.ttl' | relative_url }}" class="btn btn-purple" style="white-space: nowrap;" download="">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: text-bottom; margin-right: 5px;">
+      <circle cx="18" cy="5" r="3"></circle>
+      <circle cx="6" cy="12" r="3"></circle>
+      <circle cx="18" cy="19" r="3"></circle>
+      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+    </svg>
+    Download .ttl
+  </a>
+</div>
 """
     # Zorg dat output dir bestaat voor index.md
     if not os.path.exists(OUTPUT_DIR):
