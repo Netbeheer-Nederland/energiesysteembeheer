@@ -8,13 +8,13 @@ from jinja2 import Environment, FileSystemLoader
 INPUT_DIR = "begrippenkaders"
 DOCS_ROOT = "docs"
 BEGRIPPEN_DIR = os.path.join(DOCS_ROOT, "_doc") # Jekyll collectie map
+ALIAS_DIR = os.path.join(DOCS_ROOT, "alias")
 TEMPLATE_DIR = "templates"
 BASE_URL = "/energiesysteembeheer" # Voor absolute links in HTML (indien nodig)
 
 ADMS = Namespace("http://www.w3.org/ns/adms#")
 ISO_THES = Namespace("http://purl.org/iso25964/skos-thes#")
 
-# Mapping config (zelfde als eerder)
 NL_SBB_MAPPING = {
     "code": {"label": "Code", "pred": SKOS.notation, "type": "single"},
     "definitie": {"label": "Definitie", "pred": SKOS.definition, "type": "single"},
@@ -69,6 +69,8 @@ def main():
         with open(os.path.join(BEGRIPPEN_DIR, filename), "w", encoding="utf-8") as f:
             f.write(output)
         count += 1
+
+    generate_aliases(g, env, lookup, ALIAS_DIR)
 
     print(f"Gereed. {count} begrippen verwerkt.")
 
@@ -174,6 +176,54 @@ def generate_homepage(g, env, output_path):
 
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(output)
+
+def generate_aliases(g, env, lookup, output_dir):
+    print("Aliassen genereren...")
+    
+    template = env.get_template("alias.md.j2")
+    
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    count = 0
+    for s in g.subjects(RDF.type, SKOS.Concept):
+        if not isinstance(s, URIRef): continue
+        
+        uri = str(s)
+        if uri not in lookup: continue
+
+        # Haal data van het DOEL (waar we naar moeten redirecten)
+        target_id = lookup[uri]['id']
+        target_label = lookup[uri]['label']
+        # De URL waar we de bezoeker heen sturen
+        target_url = f"{BASE_URL}/doc/{target_id}" 
+
+        # Verzamel alle aliassen voor DIT begrip
+        aliases = []
+        aliases.extend([str(l) for l in g.objects(s, SKOS.altLabel)])
+        aliases.extend([str(l) for l in g.objects(s, SKOS.hiddenLabel)])
+
+        for alias in aliases:
+            alias_slug = slugify(alias)
+            
+            # UNIEK MAKEN: We plakken de ID aan de slug
+            # Bestand:  docs/_term/fiets-mer53.md
+            # URL:      /term/fiets-mer53
+            unique_slug = f"{alias_slug}-{target_id}"
+            
+            output = template.render(
+                alias_term=alias,
+                permalink=f"/term/{unique_slug}",
+                target_label=target_label,
+                target_url=target_url
+            )
+            
+            filename = f"{unique_slug}.md"
+            with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as f:
+                f.write(output)
+            count += 1
+
+    print(f"Klaar! {count} alias-redirects gegenereerd.")
 
 if __name__ == "__main__":
     main()
