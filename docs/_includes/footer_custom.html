@@ -44,8 +44,8 @@
 
 <!-- DE ALFABETISCHE LIJST (standaard verborgen) -->
 <ul class="nav-list" id="skos-az-list" style="display: none;">
-    <li id="skos-loading" style="text-align: center; padding: 10px; color: #666; font-size: 0.9em;">
-        Laden...
+    <li class="nav-list-item" id="skos-loading-container">
+        <span class="nav-list-link" id="skos-loading-msg">Laden...</span>
     </li>
 </ul>
 
@@ -57,7 +57,8 @@
     const originalList = document.querySelector('.site-nav > .nav-category + .nav-list');
     const toggleContainer = document.getElementById('skos-toggle-container');
     const azList = document.getElementById('skos-az-list');
-    const loadingMsg = document.getElementById('skos-loading');
+    const loadingContainer = document.getElementById('skos-loading-container');
+    const loadingMsg = document.getElementById('skos-loading-msg');
     const btn = document.getElementById('btn-toggle-nav');
 
     /* Variabele om bij te houden of we de data al hebben */
@@ -87,12 +88,12 @@
             html += '</li>';
           });
           
-          ulTarget.innerHTML = html;
-          loadingMsg.style.display = 'none'; /* Verberg 'Laden...' */
+          azList.innerHTML = html;
+          loadingContainer.style.display = 'none'; /* Verberg 'Laden...' */
           dataLoaded = true;
         })
         .catch(err => {
-          loadingMsg.textContent = "Fout bij laden begrippenlijst.";
+          loadingMsg.textContent = "Fout bij laden begrippenlijst";
           console.error(err);
         });
     }
