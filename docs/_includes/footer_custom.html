@@ -40,31 +40,57 @@
 <!--                -->
 
 <!-- DE WISSELKNOP (standaard verborgen) -->
-<span id="skos-toggle-container" class="fw-500"> - <a href="#" id="btn-toggle-nav">alfabatisch weergeven</a></span>
+<span id="skos-toggle-container" class="fw-500"> - <a href="#" id="btn-toggle-nav">alfabatisch</a></span>
 
 <!-- DE ALFABETISCHE LIJST (standaard verborgen) -->
-<div id="skos-az-list" style="display: none;">
-  <ul class="nav-list">
-    <!-- LET OP: Zorg dat 'site.doc' klopt met _config.yml -->
-    {% assign items = site.doc | sort: 'title' %}
-    
-    {% for page in items %}
-        <li class="nav-list-item">
-          <a href="{{ page.url | relative_url }}" class="nav-list-link">{{ page.title }}</a>
-        </li>
-    {% endfor %}
-  </ul>
-</div>
+<ul class="nav-list" id="skos-az-list" style="display: none;"></ul>
 
 <!-- HET SCRIPT (zet alles op de juiste plek en regelt de klik) -->
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     /* Selecteer elementen */
-    var sidebar = document.querySelector('.site-nav');
-    var originalList = document.querySelector('.site-nav > .nav-category + .nav-list');
-    var toggleContainer = document.getElementById('skos-toggle-container');
-    var azList = document.getElementById('skos-az-list');
-    var btn = document.getElementById('btn-toggle-nav');
+    const sidebar = document.querySelector('.site-nav');
+    const originalList = document.querySelector('.site-nav > .nav-category + .nav-list');
+    const toggleContainer = document.getElementById('skos-toggle-container');
+    const azList = document.getElementById('skos-az-list');
+    const btn = document.getElementById('btn-toggle-nav');
+
+    /* Variabele om bij te houden of we de data al hebben */
+    let dataLoaded = false;
+    const jsonUrl = "{{ '/assets/begrippenlijst.json' | relative_url }}";
+
+    /* Functie om JSON op te halen en te renderen */
+    function loadAndRenderData() {
+      if (dataLoaded) return; /* Al gedaan? Stop. */
+
+      fetch(jsonUrl)
+        .then(response => response.json())
+        .then(data => {
+          /* HTML bouwen */
+          let html = "";
+          data.forEach(function(item) {
+            /* Styling voor alias */
+            let style = "";
+            let suffix = "";
+            if (item.type === 'alias') {
+              style = 'style="font-style: italic; color: #666;"';
+              suffix = ' <span style="font-size: 0.8em; opacity: 0.6;">&#8627;</span>';
+            }
+            
+            html += '<li class="nav-list-item">';
+            html += '<a href="' + item.url + '" class="nav-list-link" ' + style + '>' + item.title + suffix + '</a>';
+            html += '</li>';
+          });
+          
+          ulTarget.innerHTML = html;
+          loadingMsg.style.display = 'none'; /* Verberg 'Laden...' */
+          dataLoaded = true;
+        })
+        .catch(err => {
+          loadingMsg.textContent = "Fout bij laden begrippenlijst.";
+          console.error(err);
+        });
+    }
 
     /* Functie om de weergave te bepalen (en op te slaan) */
     function setNavMode(mode) {
@@ -72,13 +98,14 @@
         /* Weergave: A-Z */
         originalList.style.display = 'none';
         azList.style.display = 'block';
-        btn.textContent = "hiërarchisch weergeven";
+        btn.textContent = "hiërarchisch";
         localStorage.setItem('skos-nav-pref', 'az');
+        loadAndRenderData();
       } else {
         /* Weergave: hiërarchie (boom) */
         originalList.style.display = 'block';
         azList.style.display = 'none';
-        btn.textContent = "alfabetisch weergeven"; 
+        btn.textContent = "alfabetisch"; 
         localStorage.setItem('skos-nav-pref', 'tree');
       }
     }
@@ -94,7 +121,7 @@
 
       /* --- GEHEUGEN CHECK --- */
       /* Kijk of er een voorkeur is opgeslagen. Zo niet, standaard 'tree'. */
-      var savedPref = localStorage.getItem('skos-nav-pref');
+      const savedPref = localStorage.getItem('skos-nav-pref');
       
       if (savedPref === 'az') {
         setNavMode('az');

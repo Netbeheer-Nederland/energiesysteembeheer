@@ -1,5 +1,4 @@
-import os
-import glob
+import os, glob, json, unicodedata
 from collections import defaultdict
 from slugify import slugify
 from jinja2 import Environment, FileSystemLoader
@@ -15,12 +14,13 @@ INPUT_DIR = "begrippenkader"
 DOCS_ROOT = "docs"
 TEMPLATE_DIR = "templates"
 
-# Output mappen
+# Output-locaties
 BEGRIPPEN_DIR = os.path.join(DOCS_ROOT, "_doc")  # Jekyll Collectie
 ALIAS_DIR = os.path.join(DOCS_ROOT, "alias")     # Redirects
 LIST_FILE = os.path.join(DOCS_ROOT, "lijst.md")  # A-Z Index
 INDEX_FILE = os.path.join(DOCS_ROOT, "index.md") # Homepage
 TTL_OUTPUT_FILE = os.path.join(DOCS_ROOT, "begrippenkader.ttl")
+BEGRIPPENLIJST_FILE = os.path.join(DOCS_ROOT, "assets", "begrippenlijst.json")
 
 # URL-instellingen
 # Let op: BASE_URL wordt hier gebruikt voor absolute links in gegenereerde lijsten.
@@ -99,6 +99,12 @@ def ensure_directory(path):
     """Maakt een map aan als deze nog niet bestaat."""
     if not os.path.exists(path):
         os.makedirs(path)
+
+def normalize_for_sort(text):
+    """Zorgt voor A-Z sortering zonder last te hebben van accenten (é -> e)."""
+    if not text: return ""
+    text = text.lower()
+    return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
 
 # ==============================================================================
 # 4. DATA-EXTRACTIE (ETL-LAAG)
@@ -285,64 +291,47 @@ def generate_aliases(g, env, lookup):
             count += 1
     return count
 
-def generate_list(g, env, lookup):
-    print(f" - A-Z Index genereren in {LIST_FILE}...")
-    template = env.get_template("lijst.md.j2")
+def generate_json_index(g, lookup):
+    print(f" - JSON Index genereren in {BEGRIPPENLIJST_FILE}...")
+    ensure_directory(os.path.dirname(BEGRIPPENLIJST_FILE))
     
-    all_items = []
+    index_items = []
 
     for s in g.subjects(RDF.type, SKOS.Concept):
         if not isinstance(s, URIRef): continue
         uri = str(s)
         if uri not in lookup: continue
         
-        pref_label = lookup[uri]['label']
-        target_ref = lookup[uri]['reference']
-        # Hier gebruiken we de BASE_URL omdat dit een platte lijst is met harde links
-        url = f"{BASE_URL}/doc/{target_ref}"
+        data = lookup[uri]
+        target_url = f"{BASE_URL}/doc/{data['reference']}"
         
-        # Voeg hoofdbegrip toe
-        all_items.append({
-            "sort_key": slugify(pref_label),
-            "label": pref_label,
-            "url": url,
-            "type": "main"
+        # Hoofdbegrip
+        index_items.append({
+            "title": data['label'],
+            "url": target_url,
+            "type": "concept",
+            "sort_key": normalize_for_sort(data['label'])
         })
 
-        # Voeg verwijzingen toe
+        # Aliassen
         aliases = [str(l) for l in g.objects(s, SKOS.altLabel)]
         for alias in aliases:
-            all_items.append({
-                "sort_key": slugify(alias),
-                "label": alias,
-                "url": url,
+            index_items.append({
+                "title": alias,
+                "url": target_url, # Verwijs direct naar het hoofdbegrip
                 "type": "alias",
-                "target_label": pref_label
+                "sort_key": normalize_for_sort(alias)
             })
 
-    # Sorteren en groeperen
-    all_items.sort(key=lambda x: x['sort_key'])
-    grouped_items = defaultdict(list)
+    # Sorteren op de genormaliseerde sleutel
+    index_items.sort(key=lambda x: x['sort_key'])
     
-    for item in all_items:
-        first_char = item['label'][0].upper()
-        if not first_char.isalpha():
-            first_char = '#'
-        grouped_items[first_char].append(item)
+    # Sleutel verwijderen voor opslaan (bespaart bytes)
+    for item in index_items:
+        del item['sort_key']
 
-    # Letters sorteren
-    sorted_letters = sorted(grouped_items.keys())
-    if '#' in sorted_letters: 
-        sorted_letters.remove('#')
-        sorted_letters.append('#')
-
-    output = template.render(
-        letters=sorted_letters,
-        grouped_items=grouped_items
-    )
-
-    with open(LIST_FILE, "w", encoding="utf-8") as f:
-        f.write(output)
+    with open(BEGRIPPENLIJST_FILE, "w", encoding="utf-8") as f:
+        json.dump(index_items, f, separators=(',', ':')) # Minified JSON
 
 # ==============================================================================
 # 6. MAIN EXECUTION FLOW
@@ -393,7 +382,7 @@ def main():
     n_aliases = generate_aliases(g, env, lookup)
     print(f"   -> {n_aliases} redirects aangemaakt.")
     
-    generate_list(g, env, lookup)
+    generate_json_index(g, env, lookup)
     print("   -> Begrippenlijst aangemaakt.")
 
     print("=== Klaar! ===")
