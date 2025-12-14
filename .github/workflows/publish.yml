@@ -38,7 +38,7 @@ jobs:
           -i rdfs \
           -a \
           -f human \
-          begrippenkaders/*.ttl
+          begrippenkader/*.ttl
 
       - name: Generate website from SKOS model
         run: python generate.py
