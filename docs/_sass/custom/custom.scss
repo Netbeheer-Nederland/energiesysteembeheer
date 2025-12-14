@@ -20,7 +20,7 @@
     content: "";
 }
 // Definition list on small screens: no columns
-@media (max-width: $sm) {
+@media (max-width: map-get($media-queries, sm)) {
     .main-content dl {
         display: block;
     }
