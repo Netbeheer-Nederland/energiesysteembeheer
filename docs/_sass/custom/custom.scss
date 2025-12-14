@@ -20,13 +20,18 @@
     content: "";
 }
 // Definition list on small screens: no columns
-@include mq(md) {
-    .main-content dt {
+@media (max-width: $mq-small) {
+    .main-content dl {
         display: block;
+    }
+    .main-content dt {
         text-align: left;
     }
     .main-content dt + dd {
         margin-top: 0;
+    }
+    .main-content dd {
+        margin-left: 0;
     }
 }
 
