@@ -3,9 +3,13 @@
     display: inline-block;
 }
 
-// Definition list: in the default grid template, the left-column is too small
+// Definition list: allow broader columns
 .main-content dl {
     grid-template-columns: fit-content(30%) 1fr;
+}
+// Definition list: more space between rows
+.main-content dt, .main-content dt + dd {
+    margin-top: 1em;
 }
 // Definition list: fix margin in multi-line items
 .main-content dt {
@@ -14,6 +18,16 @@
 // Definition list: remove colon
 .main-content dt::after {
     content: "";
+}
+// Definition list on small screens: no columns
+@include mq(md) {
+    .main-content dt {
+        display: block;
+        text-align: left;
+    }
+    .main-content dt + dd {
+        margin-top: 0;
+    }
 }
 
 // Navbar
