@@ -66,14 +66,10 @@
     const jsonUrl = "{{ '/assets/begrippenlijst.json' | relative_url }}";
 
     function scrollToActive() {
-      /* We gebruiken een timeout om zeker te weten dat de DOM getekend is */
-      setTimeout(function() {
-        var activeLink = azList.querySelector('.active');
-        if (activeLink) {
-          /* block: "center" zet hem mooi in het midden */
-          activeLink.scrollIntoView({block: "center", behavior: "auto"}); 
-        }
-      }, 200); /* 200ms wachttijd */
+      const activeLink = azList.querySelector('.active');
+      if (activeLink) {
+        activeLink.scrollIntoView({block: 'center'}); 
+      }
     }
 
     /* Functie om JSON op te halen en te renderen */
