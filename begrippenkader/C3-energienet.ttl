@@ -178,7 +178,6 @@
     skos:definition "stelsel van leidingen en daarmee verbonden hulpmiddelen ten behoeve van transport van energie"@nl ;
     skos:inScheme <> ;
     skos:prefLabel "energienet"@nl ;
-    skos:related :m9e2q ;
     adms:status status:valid .
 
 :2whwi a skos:Concept ;

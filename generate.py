@@ -1,8 +1,9 @@
-import os, glob, json, unicodedata, re, spacy
+import os, glob, json, unicodedata, spacy
 from slugify import slugify
 from jinja2 import Environment, FileSystemLoader
 from rdflib import Graph, Namespace, RDF, SKOS, DCTERMS, RDFS, URIRef, FOAF
 from pyshacl import validate
+from spacy.matcher import PhraseMatcher
 
 try:
     nlp = spacy.load("nl_core_news_sm")
@@ -112,62 +113,58 @@ def normalize_for_sort(text):
     text = text.lower()
     return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
 
-def build_lemma_dictionary(lookup, base_url):
+def build_matcher_and_url_map(lookup, base_url):
     """
-    Maakt een woordenboek van lemma -> URL.
-    SpaCy regelt de meervouden, dus we hoeven hier alleen de basisvorm op te slaan.
+    Creëert een spaCy PhraseMatcher en een bijbehorende map van match ID -> URL.
+    De matcher is gebaseerd op lemma's om meervouden en verbuigingen te herkennen.
     """
-    lemma_dict = {}
-    for uri, data in lookup.items():
+    matcher = PhraseMatcher(nlp.vocab, attr='LEMMA')
+    url_map = {}
+
+    for _, data in lookup.items():
         term = data['label']
         url = f"{base_url}/doc/{data['reference']}"
+        pattern = nlp(term) # Maak een patroon van de term
+        match_id = pattern.to_bytes() # Gebruik de hash van de term als uniek ID voor de match
+        matcher.add(match_id, [pattern])
+        url_map[match_id] = url
+        
+    return matcher, url_map
 
-        doc = nlp(term)
-        if not doc:
-            continue
-            
-        first_token = doc[0]
-        if ' ' in term and first_token.is_stop:
-            print(f"INFO: Overgeslagen voor auto-linking (stopwoord-lemma): '{term}' -> lemma '{first_token.lemma_}'")
-            continue
-
-        lemma = first_token.lemma_
-        lemma_dict[lemma.lower()] = url
-            
-    return lemma_dict
-
-def autolink_text(text, lemma_dict):
+def autolink_text(text, matcher, url_map, current_page_title=""):
     """
-    Vervangt termen in een tekst met links m.b.v. NLP lemmatisering.
+    Vervangt termen in een tekst met links via de spaCy PhraseMatcher.
     """
-    if not text or not lemma_dict:
+    if not text or not matcher:
         return text
 
-    # Verwerk de volledige tekst met spaCy
     doc = nlp(text)
-    
-    # We bouwen een nieuwe tekst op om conflicten met indexen te voorkomen
+    matches = matcher(doc)
+
+    valid_matches = [] # We bouwen een lijst met matches die we willen behouden
+    for match_id, start, end in matches:
+        span = doc[start:end]
+        if span.text.lower() != current_page_title.lower(): # Voorkom dat een pagina naar zichzelf linkt
+            valid_matches.append((match_id, start, end))
+
+    if not valid_matches:
+        return text
+
+    # Bouw de nieuwe tekst op om index-conflicten te voorkomen
     new_text_parts = []
     last_index = 0
 
-    for token in doc:
-        # Check of het lemma van het huidige woord in onze woordenlijst staat
-        if token.lemma_.lower() in lemma_dict:
-            # We hebben een match!
-            
-            # Voeg alles TUSSEN de vorige match en deze toe
-            new_text_parts.append(text[last_index:token.idx])
-            
-            # Voeg de nieuwe link toe
-            url = lemma_dict[token.lemma_.lower()]
-            link = f'<a href="{url}">{token.text}</a>'
-            new_text_parts.append(link)
-            
-            # Update de index
-            last_index = token.idx + len(token.text)
-    
-    # Voeg het laatste stukje van de tekst toe (na de laatste match)
-    new_text_parts.append(text[last_index:])
+    for match_id, start, end in valid_matches:
+        new_text_parts.append(text[last_index:doc[start].idx]) # Tekst tussen de vorige en deze match
+        
+        original_phrase = doc[start:end].text
+        url = url_map[match_id]
+        link = f'<a href="{url}">{original_phrase}</a>'
+        new_text_parts.append(link)
+        
+        last_index = doc[end-1].idx + len(doc[end-1].text) # Update de index
+        
+    new_text_parts.append(text[last_index:]) # Het laatste stuk tekst na de laatste match
     
     return "".join(new_text_parts)
 
@@ -195,18 +192,17 @@ def build_lookup(g):
             }
     return lookup
 
-def extract_concept_data(g, s, lookup, linking_dict):
+def extract_concept_data(g, s, lookup, matcher, url_map):
     """
     Verzamelt alle data voor één begrip op basis van de NL_SBB_MAPPING.
     Geeft een schone dictionary terug voor de Template.
     """
     uri = str(s)
     ref = get_reference(uri)
-    pref_label = str(g.value(s, SKOS.prefLabel) or local_id)
+    pref_label = str(g.value(s, SKOS.prefLabel) or ref)
     slug = lookup.get(uri, {}).get("slug", slugify(pref_label))
     
-    # Basis Metadata
-    data = {
+    data = { # Basis Metadata
         "uri": uri,
         "reference": ref,
         "voorkeursterm": pref_label,
@@ -217,8 +213,7 @@ def extract_concept_data(g, s, lookup, linking_dict):
         "parent_label": None
     }
 
-    # Velden die we willen auto-linken
-    fields_to_link = ["definitie", "uitleg", "toelichting", "voorbeeld"]
+    fields_to_link = ["definitie", "uitleg", "toelichting", "voorbeeld"] # Velden die we willen auto-linken
 
     # Dynamische extractie o.b.v. config
     for var_name, config in NL_SBB_MAPPING.items():
@@ -259,13 +254,14 @@ def extract_concept_data(g, s, lookup, linking_dict):
             data[var_name] = links
 
         # Auto linking
+        current_title = data.get("voorkeursterm", "")
         if var_name in fields_to_link:
             if config["type"] == "single" and data.get(var_name):
-                data[var_name] = autolink_text(data[var_name], linking_dict)
+                data[var_name] = autolink_text(data[var_name], matcher, url_map, current_title)
             elif config["type"] == "list" and data.get(var_name):
-                data[var_name] = [autolink_text(item, linking_dict) for item in data[var_name]]
+                data[var_name] = [autolink_text(item, matcher, url_map, current_title) for item in data[var_name]]
 
-    # Speciale logica: Parent bepalen voor kruimelpad (breadcrumbs)
+    # Speciale logica: parent bepalen voor kruimelpad (breadcrumbs)
     if data["heeft_bovenliggend_begrip"]:
         data["parent_label"] = data["heeft_bovenliggend_begrip"][0]["label"]
 
@@ -313,7 +309,7 @@ def generate_downloadable_ttl(g):
         print("FOUT: Kon TTL bestand niet wegschrijven.")
         raise(e)
 
-def generate_concepts(g, env, lookup):
+def generate_concepts(g, env, lookup, url_map):
     print(f" - Begrippen genereren in {BEGRIPPEN_DIR}...")
     template = env.get_template("begrip.md.j2")
     ensure_directory(BEGRIPPEN_DIR)
@@ -322,25 +318,7 @@ def generate_concepts(g, env, lookup):
     for s in g.subjects(RDF.type, SKOS.Concept):
         if not isinstance(s, URIRef): continue
         
-        data = extract_concept_data(g, s, lookup)
-        output = template.render(data)
-
-        filename = f"{data['reference']}.md"
-        with open(os.path.join(BEGRIPPEN_DIR, filename), "w", encoding="utf-8") as f:
-            f.write(output)
-        count += 1
-    return count
-
-def generate_concepts(g, env, lookup, linking_dict):
-    print(f" - Begrippen genereren in {BEGRIPPEN_DIR}...")
-    template = env.get_template("begrip.md.j2")
-    ensure_directory(BEGRIPPEN_DIR)
-
-    count = 0
-    for s in g.subjects(RDF.type, SKOS.Concept):
-        if not isinstance(s, URIRef): continue
-        
-        data = extract_concept_data(g, s, lookup, linking_dict)
+        data = extract_concept_data(g, s, lookup, url_map)
         output = template.render(data)
 
         filename = f"{data['reference']}.md"
@@ -417,12 +395,10 @@ def generate_json_index(g, lookup):
                 "sort_key": normalize_for_sort(alias)
             })
 
-    # Sorteren op de genormaliseerde sleutel
-    index_items.sort(key=lambda x: x['sort_key'])
+    index_items.sort(key=lambda x: x['sort_key']) # Sorteren op de genormaliseerde sleutel
     
-    # Sleutel verwijderen voor opslaan (bespaart bytes)
     for item in index_items:
-        del item['sort_key']
+        del item['sort_key'] # Sleutel verwijderen voor opslaan (bespaart bytes)
 
     with open(BEGRIPPENLIJST_FILE, "w", encoding="utf-8") as f:
         json.dump(index_items, f, separators=(',', ':')) # Minified JSON
@@ -466,12 +442,12 @@ def main():
 
     print("Index opbouwen...")
     lookup = build_lookup(g)
-    lemma_dict = build_lemma_dictionary(lookup, BASE_URL) 
+    matcher, url_map = build_matcher_and_url_map(lookup, BASE_URL)
 
     print("Bestanden genereren...")
     generate_homepage(g, env)
     
-    n_concepts = generate_concepts(g, env, lookup, lemma_dict)
+    n_concepts = generate_concepts(g, env, lookup, matcher, url_map)
     print(f"   -> {n_concepts} begrippenpagina's aangemaakt.")
     
     n_aliases = generate_aliases(g, env, lookup)
