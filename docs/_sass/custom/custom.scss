@@ -7,8 +7,8 @@
 .main-content dl {
     grid-template-columns: fit-content(30%) 1fr;
 }
-// Definition list: more space between rows
-.main-content dt, .main-content dt + dd {
+// Definition list: more space between (multi-line) items
+.main-content dt:nth-child(n+1), .main-content dt:nth-child(n+1) + dd {
     margin-top: 1em;
 }
 // Definition list: fix margin in multi-line items
