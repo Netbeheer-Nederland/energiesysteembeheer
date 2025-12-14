@@ -3,9 +3,9 @@
     display: inline-block;
 }
 
-// Definition list: allow broader columns
+// Definition list: fit column width to content
 .main-content dl {
-    grid-template-columns: fit-content(30%) 1fr;
+    grid-template-columns: fit-content(33%) 1fr;
 }
 // Definition list: more space between (multi-line) items
 .main-content dt:nth-child(n+2), .main-content dt:nth-child(n+2) + dd {
@@ -27,7 +27,7 @@
     .main-content dt {
         text-align: left;
     }
-    .main-content dt:nth-child(n+2) + dd {
+    .main-content dt:nth-child(n+1) + dd {
         margin-top: 0;
     }
     .main-content dd {
