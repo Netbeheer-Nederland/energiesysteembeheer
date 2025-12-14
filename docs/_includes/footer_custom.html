@@ -72,13 +72,23 @@
       fetch(jsonUrl)
         .then(response => response.json())
         .then(data => {
+
+          /* Huidige URL bepalen en normaliseren (laatste slash eraf) */
+          const currentPath = window.location.pathname.replace(/\/$/, "");
+
           /* HTML bouwen */
           let html = "";
 
           data.forEach(item => {
+            const itemUrlClean = item.url.replace(/\/$/, "");
+            const isActive = currentPath.endsWith(itemUrlClean) || itemUrlClean.endsWith(currentPath);
+            let cssClass = 'nav-list-link';
+            if (isActive) {
+              cssClass += ' active';
+            }
+
             const htmlContent = item.title;
-            const cssClass = "nav-list-link";
-            const extraAttrs = "";
+            let extraAttrs = "";
 
             if (item.type === 'alias') {
               /* Styling voor de alias zelf */
