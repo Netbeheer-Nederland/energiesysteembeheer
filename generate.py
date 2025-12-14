@@ -2,6 +2,7 @@ import os
 import glob
 from rdflib import Graph, Namespace, RDF, SKOS, DCTERMS, RDFS, URIRef, FOAF
 from slugify import slugify
+from collections import defaultdict
 from jinja2 import Environment, FileSystemLoader
 
 # --- CONFIGURATIE ---
@@ -71,6 +72,8 @@ def main():
         count += 1
 
     generate_aliases(g, env, lookup, ALIAS_DIR)
+
+    generate_list(g, env, lookup, os.path.join(DOCS_ROOT, "lijst.md"))
 
     print(f"Gereed. {count} begrippen verwerkt.")
 
@@ -196,7 +199,7 @@ def generate_aliases(g, env, lookup, output_dir):
         target_id = lookup[uri]['id']
         target_label = lookup[uri]['label']
         # De URL waar we de bezoeker heen sturen
-        target_url = f"{BASE_URL}/doc/{target_id}" 
+        target_url = f"/doc/{target_id}" 
 
         # Verzamel alle aliassen voor DIT begrip
         aliases = []
@@ -213,7 +216,6 @@ def generate_aliases(g, env, lookup, output_dir):
             
             output = template.render(
                 alias_term=alias,
-                permalink=f"/term/{unique_slug}",
                 target_label=target_label,
                 target_url=target_url
             )
@@ -224,6 +226,72 @@ def generate_aliases(g, env, lookup, output_dir):
             count += 1
 
     print(f"Klaar! {count} alias-redirects gegenereerd.")
+
+from collections import defaultdict
+
+def generate_list(g, env, lookup, output_path):
+    print("Begrippenlijst A-Z genereren...")
+    template = env.get_template("lijst.md.j2")
+    
+    # Lijst om alles te verzamelen
+    # Item format: { "sort_key": "...", "label": "...", "url": "...", "type": "main/alias", "target_label": "..." }
+    all_items = []
+
+    for s in g.subjects(RDF.type, SKOS.Concept):
+        if not isinstance(s, URIRef): continue
+        uri = str(s)
+        if uri not in lookup: continue
+        
+        # Voeg Voorkeursterm toe
+        pref_label = lookup[uri]['label']
+        target_id = lookup[uri]['id']
+        url = f"/doc/{target_id}" # Korte URL, Jekyll fixt de baseurl
+        
+        all_items.append({
+            "sort_key": slugify(pref_label), # Voor sorteren
+            "label": pref_label,
+            "url": url,
+            "type": "main"
+        })
+
+        # Voeg Aliassen toe (altLabel)
+        aliases = [str(l) for l in g.objects(s, SKOS.altLabel)]
+        
+        for alias in aliases:
+            all_items.append({
+                "sort_key": slugify(alias),
+                "label": alias,
+                "url": url, # Linkt direct naar het hoofdbegrip
+                "type": "alias",
+                "target_label": pref_label
+            })
+
+    # Sorteren op alfabet
+    all_items.sort(key=lambda x: x['sort_key'])
+
+    # Groeperen op eerste letter
+    grouped_items = defaultdict(list)
+    for item in all_items:
+        # Pak eerste letter, forceer hoofdletter. Negeer symbolen (stop in '#')
+        first_char = item['label'][0].upper()
+        if not first_char.isalpha():
+            first_char = '#'
+        grouped_items[first_char].append(item)
+
+    # Zorg dat de letters gesorteerd zijn voor de navigatie
+    sorted_letters = sorted(grouped_items.keys())
+    if '#' in sorted_letters: # '#' achteraan zetten
+        sorted_letters.remove('#')
+        sorted_letters.append('#')
+
+    # Renderen
+    output = template.render(
+        letters=sorted_letters,
+        grouped_items=grouped_items
+    )
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(output)
 
 if __name__ == "__main__":
     main()

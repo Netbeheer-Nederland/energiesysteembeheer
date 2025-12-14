@@ -1,0 +1,18 @@
+---
+title: Begrippenlijst A-Z
+nav_order: 2
+permalink: /begrippenlijst
+---
+
+# Begrippenlijst A-Z
+
+{% for letter, items in grouped_items.items() %}
+## {{ letter }}
+
+{% for item in items %}
+    {% if item.type == 'main' %}
+        [{{ item.label }}]({{ item.url }})
+    {% else %}
+        <span class="text-grey-dk-100">{{ item.label }}</span> &rarr; [{{ item.target_label }}]({{ item.url }})
+    {% endif %}
+{% endfor %}

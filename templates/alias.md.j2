@@ -1,16 +1,14 @@
 ---
-title: "{{ alias_term }}"
+title: "{{ alias_term }} &rarr; {{ target_label }}"
 nav_exclude: true
-permalink: {{ permalink }}
 redirect_to: {{ target_url }}
 ---
 
-<meta http-equiv="refresh" content="0; url={{ target_url }}">
+<meta http-equiv="refresh" content="0; url={{ target_url | relative_url }}">
 
 # Doorverwijzing
 
-Je zoekt naar **{{ alias_term }}**. 
-Je wordt doorverwezen naar: [{{ target_label }}]({{ target_url }}).
+Je zoekt naar **{{ alias_term }}**.  Je wordt doorverwezen naar: [{{ target_label }}]({{ target_url | relative_url }}).
 
 {: .note }
 Klik op de link als je niet automatisch wordt doorgestuurd.
