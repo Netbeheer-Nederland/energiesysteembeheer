@@ -125,7 +125,7 @@ def build_matcher_and_url_map(lookup, base_url):
         term = data['label']
         url = f"{base_url}/doc/{data['reference']}"
         pattern = nlp(term) # Maak een patroon van de term
-        match_id = pattern.to_bytes() # Gebruik de hash van de term als uniek ID voor de match
+        match_id = term
         matcher.add(match_id, [pattern])
         url_map[match_id] = url
         
@@ -145,7 +145,8 @@ def autolink_text(text, matcher, url_map, current_page_title=""):
     for match_id, start, end in matches:
         span = doc[start:end]
         if span.text.lower() != current_page_title.lower(): # Voorkom dat een pagina naar zichzelf linkt
-            valid_matches.append((match_id, start, end))
+            original_term_key = nlp.vocab.strings[match_id_hash]
+            valid_matches.append((original_term_key, start, end))
 
     if not valid_matches:
         return text
@@ -154,17 +155,26 @@ def autolink_text(text, matcher, url_map, current_page_title=""):
     new_text_parts = []
     last_index = 0
 
-    for match_id, start, end in valid_matches:
-        new_text_parts.append(text[last_index:doc[start].idx]) # Tekst tussen de vorige en deze match
+    # Sorteer matches op start-positie om overlap te voorkomen
+    # (dit is een extra veiligheidsmaatregel)
+    valid_matches.sort(key=lambda x: x[1])
+
+    for original_term_key, start, end in valid_matches:
+        # Voorkom dat matches binnen andere matches worden gelinkt
+        if doc[start].idx < last_index:
+            continue
+
+        new_text_parts.append(text[last_index:doc[start].idx])
         
         original_phrase = doc[start:end].text
-        url = url_map[match_id]
-        link = f'<a href="{url}">{original_phrase}</a>'
+        url = url_map[original_term_key]
+        tooltip = "Automatisch herkend begrip"
+        link = f'<a href="{url}" class="auto-link" title="{tooltip}">{original_phrase}</a>'
         new_text_parts.append(link)
         
-        last_index = doc[end-1].idx + len(doc[end-1].text) # Update de index
+        last_index = doc[end-1].idx + len(doc[end-1].text)
         
-    new_text_parts.append(text[last_index:]) # Het laatste stuk tekst na de laatste match
+    new_text_parts.append(text[last_index:])
     
     return "".join(new_text_parts)
 

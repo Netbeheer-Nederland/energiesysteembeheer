@@ -40,3 +40,13 @@
     scrollbar-width: thin;
     scrollbar-color: #d9e7ef transparent;
 }
+
+// Auto link
+.auto-link {
+  text-decoration: none;
+  border-bottom: 1px dotted $link-color;
+  cursor: help;
+}
+.auto-link:hover {
+  border-bottom-style: solid;
+}
