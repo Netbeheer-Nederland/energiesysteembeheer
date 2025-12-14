@@ -121,20 +121,24 @@ def build_lemma_dictionary(lookup, base_url):
     for uri, data in lookup.items():
         term = data['label']
         url = f"{base_url}/doc/{data['reference']}"
-        
-        # We gebruiken het lemma van de term als sleutel
-        # We processen de term met spaCy om het lemma te vinden
+
         doc = nlp(term)
-        if doc and len(doc) > 0:
-            # Voor multi-word termen, pak de root. Voor de meeste: het woord zelf.
-            lemma = doc[0].lemma_
-            lemma_dict[lemma.lower()] = url
+        if not doc:
+            continue
+            
+        first_token = doc[0]
+        if ' ' in term and first_token.is_stop:
+            print(f"INFO: Overgeslagen voor auto-linking (stopwoord-lemma): '{term}' -> lemma '{first_token.lemma_}'")
+            continue
+
+        lemma = first_token.lemma_
+        lemma_dict[lemma.lower()] = url
             
     return lemma_dict
 
 def autolink_text(text, lemma_dict):
     """
-    Vervangt termen in een tekst met Markdown-links m.b.v. NLP lemmatisering.
+    Vervangt termen in een tekst met links m.b.v. NLP lemmatisering.
     """
     if not text or not lemma_dict:
         return text
@@ -154,9 +158,9 @@ def autolink_text(text, lemma_dict):
             # Voeg alles TUSSEN de vorige match en deze toe
             new_text_parts.append(text[last_index:token.idx])
             
-            # Voeg de nieuwe Markdown-link toe
+            # Voeg de nieuwe link toe
             url = lemma_dict[token.lemma_.lower()]
-            link = f'[{token.text}]({url})'
+            link = f'<a href="{url}">{token.text}</a>'
             new_text_parts.append(link)
             
             # Update de index
