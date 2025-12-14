@@ -4,6 +4,7 @@ from collections import defaultdict
 from slugify import slugify
 from jinja2 import Environment, FileSystemLoader
 from rdflib import Graph, Namespace, RDF, SKOS, DCTERMS, RDFS, URIRef, FOAF
+from pyshacl import validate
 
 # ==============================================================================
 # CONFIGURATIE & PADEN
@@ -27,6 +28,10 @@ TTL_OUTPUT_FILE = os.path.join(DOCS_ROOT, "begrippenkader.ttl")
 BASE_URL = "/energiesysteembeheer"
 PUBLISH_BASE_URI = "https://begrippen.netbeheernederland.nl" # komt overeen met @base in TTL
 CONCEPT_NAMESPACE = "https://begrippen.netbeheernederland.nl/id/" # komt overeen met @prefix : in TTL
+
+# Validatie instellingen
+# URL naar het SHACL profiel van NL-SBB (Geonovum)
+NL_SBB_SHACL_URL = "https://raw.githubusercontent.com/geonovum/NL-SBB/main/profiles/skos-ap-nl.ttl"
 
 # RDF Namespaces
 ADMS = Namespace("http://www.w3.org/ns/adms#")
@@ -357,6 +362,22 @@ def main():
     for file_path in ttl_files:
         g.parse(file_path, format="turtle")
     
+    print("SHACL-validatie uitvoeren...")
+    conforms, _, v_text = validate(
+        g,
+        shacl_graph=NL_SBB_SHACL_URL,
+        inference='rdfs',
+        abort_on_first=False,
+        meta_shacl=False,
+        advanced=True
+    )
+    if not conforms:
+        print("!!! SHACL VALIDATIE NIET GESLAAGD !!!")
+        print(v_text)
+        exit(1) # Stop het script met een error code
+    else:
+        print("SHACL Validatie geslaagd.")
+
     print("TTL genereren...")
     generate_downloadable_ttl(g)
 

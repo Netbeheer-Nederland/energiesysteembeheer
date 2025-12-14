@@ -30,16 +30,6 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements.txt
 
-      - name: Validate against NL-SBB SHACL
-        run: |
-          pyshacl \
-          -s 'https://raw.githubusercontent.com/geonovum/NL-SBB/main/profiles/skos-ap-nl.ttl' \
-          -m \
-          -i rdfs \
-          -a \
-          -f human \
-          begrippenkader/*.ttl
-
       - name: Generate website from SKOS model
         run: python generate.py
 
