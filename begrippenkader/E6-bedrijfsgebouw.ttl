@@ -1,0 +1,50 @@
+@base <https://begrippen.netbeheernederland.nl> .
+@prefix : <https://begrippen.netbeheernederland.nl/id/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix status: <https://inspire.ec.europa.eu/registry/status/> .
+
+:hd723 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het beheren van bedrijfsgebouwen en beschikbaar stellen van faciliteiten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "bedrijfsgebouw (domein)"@nl ;
+    skos:topConceptOf <> ;
+    adms:status status:valid .
+
+:b2cpf a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :hd723 ;
+    skos:definition "vrijwillige verplaatsing van een persoon van een bepaalde locatie naar een andere locatie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "reisbeweging"@nl ;
+    adms:status status:valid .
+
+:nqxgt a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :hd723 ;
+    skos:definition "gebouw waar duurzame uitoefening van de activiteiten van de netbeheerder plaatsvindt, niet zijnde een gebouw dat onderdeel uitmaakt van het energienet"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "bedrijfsgebouw"@nl ;
+    adms:status status:valid .
+
+:pap84 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :hd723 ;
+    skos:definition "algemene aanpak die een organisatie hanteert om bedrijfsgebouwen en faciliteiten te beheren zodat zij haar doelstellingen realiseert"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "bedrijfsgebouwenstrategie"@nl ;
+    adms:status status:valid .
+
+:qbzka a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :hd723 ;
+    skos:definition "voorwerp of dienst die het gebruik van een bedrijfsgebouw ondersteunt"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "facilitair product"@nl ;
+    adms:status status:valid .
+
+### Einde NBility ###

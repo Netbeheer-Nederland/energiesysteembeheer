@@ -1,0 +1,36 @@
+@base <https://begrippen.netbeheernederland.nl> .
+@prefix : <https://begrippen.netbeheernederland.nl/id/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+:ma2mm a foaf:Document ;
+    dct:title "Begrippencode gas"@nl ;
+    foaf:page <https://wetten.overheid.nl/jci1.3:c:BWBR0037923> .
+
+:rbf76 a foaf:Document ;
+    dct:title "Begrippencode elektriciteit"@nl ;
+    foaf:page <https://wetten.overheid.nl/jci1.3:c:BWBR0037938> .
+
+:kweqa a foaf:Document ;
+    dct:title "Elektriciteitswet 1998"@nl ;
+    foaf:page <https://wetten.overheid.nl/jci1.3:c:BWBR0009755> .
+
+:6cpic a foaf:Document ;
+    dct:title "Energiewet"@nl ;
+    foaf:page <https://wetten.overheid.nl/jci1.3:c:BWBR0050714> .
+
+:wmqnb a foaf:Document ;
+    dct:title "Gaswet"@nl ;
+    foaf:page <https://wetten.overheid.nl/jci1.3:c:BWBR0011440> .
+
+:2i83j a foaf:Document ;
+    dct:title "NBility"@nl ;
+    foaf:page <https://nbility-model.github.io> .
+
+:xsjys a foaf:Document ;
+    dct:title "Netcode elektriciteit"@nl ;
+    foaf:page <https://wetten.overheid.nl/jci1.3:c:BWBR0037940> .
+
+:wqe42 a foaf:Document ;
+    dct:title "Verordening (EU) 2016/631 (NC RfG)"@nl ;
+    foaf:page <http://data.europa.eu/eli/reg/2016/631/oj> .

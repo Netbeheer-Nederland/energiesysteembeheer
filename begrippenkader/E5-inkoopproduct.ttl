@@ -1,0 +1,74 @@
+@base <https://begrippen.netbeheernederland.nl> .
+@prefix : <https://begrippen.netbeheernederland.nl/id/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix status: <https://inspire.ec.europa.eu/registry/status/> .
+
+:kh8ar a skos:Concept ;
+    dct:source :2i83j ;
+    skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het verkrijgen van goederen en diensten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "inkoopproduct (domein)"@nl ;
+    skos:topConceptOf <> ;
+    adms:status status:valid .
+
+:myhcw a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :kh8ar ;
+    skos:definition "afspraak om goederen of diensten te leveren aan de netbeheerder tegen een overeengekomen prijs, eventueel onder de voorwaarden van een inkoopovereenkomst"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "inkooporder"@nl ;
+    adms:status status:valid .
+
+:n8p46 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :kh8ar ;
+    skos:definition "afspraak over de voorwaarden waaronder een partij goederen of diensten levert aan de netbeheerder"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "inkoopovereenkomst"@nl ;
+    adms:status status:valid .
+
+:rgd7i a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :kh8ar ;
+    skos:definition "mate waarin een inkoopleverancier gestelde doelen of verplichtingen volbrengt"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "inkoopleveranciersprestatie"@nl ;
+    adms:status status:valid .
+
+:tkk9n a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :kh8ar ;
+    skos:definition "partij die tegen betaling goederen of diensten levert aan de netbeheerder"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "inkoopleverancier"@nl ;
+    adms:status status:valid .
+
+:yfda4 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :kh8ar ;
+    skos:definition "algemene aanpak die een organisatie hanteert om goederen en diensten te verkrijgen zodat zij haar doelstellingen realiseert"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "inkoopstrategie"@nl ;
+    adms:status status:valid .
+
+:hgmjw a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :kh8ar ;
+    skos:definition "tegen betaling verkregen product of dienst"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "inkoopproduct"@nl ;
+    adms:status status:valid .
+
+:hwsr2 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :kh8ar ;
+    skos:definition "door een organisatie in detail voorgenomen handelswijze om goederen en diensten te verkrijgen zodat zij haar doelstellingen realiseert"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "inkoopplan"@nl ;
+    adms:status status:valid .
+
+### Einde NBility ###

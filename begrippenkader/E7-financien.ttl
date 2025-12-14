@@ -1,0 +1,106 @@
+@base <https://begrippen.netbeheernederland.nl> .
+@prefix : <https://begrippen.netbeheernederland.nl/id/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix status: <https://inspire.ec.europa.eu/registry/status/> .
+
+:3c3y4 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het verkrijgen en beheren van financiën"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "financiën (domein)"@nl ;
+    skos:topConceptOf <> ;
+    adms:status status:valid .
+
+:4yss8 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :3c3y4 ;
+    skos:definition "handeling waarmee een organisatie het gebruik van haar financiële middelen bewaakt"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "financiële beheersmaatregel"@nl ;
+    adms:status status:valid .
+
+:6n74j a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :3c3y4 ;
+    skos:definition "overzicht van de financiële situatie van een organisatie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "financieel verslag"@nl ;
+    adms:status status:valid .
+
+:92sc3 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :3c3y4 ;
+    skos:definition "geldelijke waardering van een gebeurtenis"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "financieel feit"@nl ;
+    adms:status status:valid .
+
+:9pndp a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :3c3y4 ;
+    skos:definition "raadgeving die primair verband houdt met de financiën"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "financieel advies"@nl ;
+    adms:status status:valid .
+
+:i9k8h a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :3c3y4 ;
+    skos:definition "verstrekking van benodigde geldmiddelen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "financiering"@nl ;
+    adms:status status:valid .
+
+:kc4nf a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :3c3y4 ;
+    skos:definition "door een organisatie in detail voorgenomen handelswijze om financiën te besturen zodat zij haar doelstellingen realiseert"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "financieel plan"@nl ;
+    adms:status status:valid .
+
+:kksms a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :3c3y4 ;
+    skos:definition "direct beschikbaar geld of direct opeisbaar tegoed"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "liquide middel"@nl ;
+    adms:status status:valid .
+
+:mx2e3 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :3c3y4 ;
+    skos:definition "opdracht aan een financiële instelling om geld over te dragen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "betalingsopdracht"@nl ;
+    adms:status status:valid .
+
+:ykgkq a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :3c3y4 ;
+    skos:definition "vaststelling van de geldelijke waarde van bezittingen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "waardering"@nl ;
+    adms:status status:valid .
+
+:yndhe a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :3c3y4 ;
+    skos:definition "geldelijke waardering van een toestand"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "financiële stand"@nl ;
+    adms:status status:valid .
+
+:z943q a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :3c3y4 ;
+    skos:definition "algemene aanpak die een organisatie hanteert om financiën te besturen zodat zij haar doelstellingen realiseert"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "financiële strategie"@nl ;
+    adms:status status:valid .
+
+### Einde NBility ###

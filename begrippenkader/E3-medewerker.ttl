@@ -1,0 +1,130 @@
+@base <https://begrippen.netbeheernederland.nl> .
+@prefix : <https://begrippen.netbeheernederland.nl/id/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix status: <https://inspire.ec.europa.eu/registry/status/> .
+
+:p7fwc a skos:Concept ;
+    dct:source :2i83j ;
+    skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het werven en inzetbaar houden van medewerkers"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "medewerker (domein)"@nl ;
+    skos:topConceptOf <> ;
+    adms:status status:valid .
+
+:zbszm a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :p7fwc ;
+    skos:definition "groep mensen binnen een organisatie die een gezamenlijk doel nastreven"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "organisatieonderdeel"@nl ;
+    adms:status status:valid .
+
+:zimsp a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :p7fwc ;
+    skos:definition "document dat bevestigt dat een natuurlijk persoon kennis, vaardigheden, competenties of kwalificaties heeft behaald"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "persoonscertificaat"@nl ;
+    adms:status status:valid .
+
+:2sfb8 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :p7fwc ;
+    skos:definition "afspraak waarbij een natuurlijk persoon, niet als onderneming, zich verbindt in opdracht van een organisatie werk te verrichten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "medewerkersovereenkomst"@nl ;
+    adms:status status:valid .
+
+:7pxww a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :p7fwc ;
+    skos:definition "mate waarin een medewerker gestelde doelen of verplichtingen volbrengt"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "medewerkersprestatie"@nl ;
+    adms:status status:valid .
+
+:bgdgg a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :p7fwc ;
+    skos:definition "gestructureerd en georganiseerd initiatief gericht op het bevorderen van de algehele gezondheid, welzijn en veerkracht van medewerkers"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "vitaliteitsprogramma"@nl ;
+    adms:status status:valid .
+
+:esh9k a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :p7fwc ;
+    skos:definition "natuurlijk persoon die activiteiten uitvoert in opdracht van een organisatie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "medewerker"@nl ;
+    adms:status status:valid .
+
+:fywym a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :p7fwc ;
+    skos:definition "verzameling van kennis, ervaring en persoonlijke vaardigheden om een functie, taak of rol met succes te vervullen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "competentie"@nl ;
+    adms:status status:valid .
+
+:jy83f a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :p7fwc ;
+    skos:definition "(meestal financiële) vergoeding voor arbeid en de daaraan verbonden onkosten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "medewerkersbeloning"@nl ;
+    adms:status status:valid .
+
+:m2n8i a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :p7fwc ;
+    skos:definition "activiteit gericht op het aantrekken van nieuwe medewerkers"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "wervingsactie"@nl ;
+    adms:status status:valid .
+
+:mqydy a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :p7fwc ;
+    skos:definition "toestemming om gedurende een bepaalde periode afwezig te zijn op het werk"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "verlof"@nl ;
+    adms:status status:valid .
+
+:nyiff a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :p7fwc ;
+    skos:definition "algemene aanpak die een organisatie hanteert om medewerkers te werven en inzetbaar te houden zodat zij haar doelstellingen realiseert"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "medewerkersstrategie"@nl ;
+    adms:status status:valid .
+
+:qqc6r a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :p7fwc ;
+    skos:definition "functie binnen een organisatieonderdeel, te vervullen door één medewerker"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "arbeidsplaats"@nl ;
+    adms:status status:valid .
+
+:rc8rs a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :p7fwc ;
+    skos:definition "door een organisatie in detail voorgenomen handelswijze om medewerkers te werven en inzetbaar te houden zodat zij haar doelstellingen realiseert"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "medewerkersplan"@nl ;
+    adms:status status:valid .
+
+:rej29 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :p7fwc ;
+    skos:definition "afwezigheid op het werk als gevolg van ziekte of gezondheidsproblemen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "ziekteverzuim"@nl ;
+    adms:status status:valid .
+
+### Einde NBility ###

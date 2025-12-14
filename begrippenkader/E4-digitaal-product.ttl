@@ -1,0 +1,58 @@
+@base <https://begrippen.netbeheernederland.nl> .
+@prefix : <https://begrippen.netbeheernederland.nl/id/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix status: <https://inspire.ec.europa.eu/registry/status/> .
+
+:fea44 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het ontwikkelen en beheren van digitale producten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "digitaal product (domein)"@nl ;
+    skos:topConceptOf <> ;
+    adms:status status:valid .
+
+:cg3tc a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :fea44 ;
+    skos:definition "algemene aanpak die een organisatie hanteert om digitale producten te ontwikkelen en beheren zodat zij haar doelstellingen realiseert"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "digitaalproductstrategie"@nl ;
+    adms:status status:valid .
+
+:crps9 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :fea44 ;
+    skos:definition "dienst voor het leveren van beheerde software"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "digitaal product"@nl ;
+    adms:status status:valid .
+
+:deh27 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :fea44 ;
+    skos:definition "verandering van een digitaal product"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "digitaalproductwijziging"@nl ;
+    adms:status status:valid .
+
+:khbsm a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :fea44 ;
+    skos:definition "levering van een digitaal product"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "digitaalproductinstantie"@nl ;
+    adms:status status:valid .
+
+:ttqph a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :fea44 ;
+    skos:definition "mate waarin de instantie van een digitaal product afgesproken prestatiedoelen behaalt"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "digitaalproductprestatie"@nl ;
+    adms:status status:valid .
+
+### Einde NBility ###

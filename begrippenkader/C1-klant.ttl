@@ -1,0 +1,177 @@
+@base <https://begrippen.netbeheernederland.nl> .
+@prefix : <https://begrippen.netbeheernederland.nl/id/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix status: <https://inspire.ec.europa.eu/registry/status/> .
+
+:yp6xq a skos:Concept ;
+    dct:source :2i83j ;
+    skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het bedienen van klanten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "klant (domein)"@nl ;
+    skos:topConceptOf <> ;
+    adms:status status:valid .
+
+:9gjm2 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "(potentiële) afnemer van een product of dienst van de netbeheerder"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "klant"@nl ;
+    skos:scopeNote "Iemand die impact ondervindt van bedrijfsactiviteiten van de netbeheerder, beschouwen we ook als klant. In dat geval neemt deze klant bijvoorbeeld informatiediensten af."@nl ;
+    adms:status status:valid .
+
+:4gf4k a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "geldbedrag dat een klant krijgt voor schade aan diens installatie ten gevolge van werkzaamheden in opdracht van de netbeheerder"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "schadevergoeding"@nl ;
+    adms:status status:valid .
+
+:4hn63 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "verlies van potentiële inkomsten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "inkomstenverlies"@nl ;
+    adms:status status:valid .
+
+:4jmic a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "subjectieve beleving van een klant naar aanleiding van direct of indirect contact met de netbeheerder"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "klantervaring"@nl ;
+    adms:status status:valid .
+
+:4ypk6 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "aansprakelijkstelling van schade aan het energienet veroorzaakt door derden, anders dan door energiediefstal"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "schadeverhaal"@nl ;
+    adms:status status:valid .
+
+:m9e2q a skos:Concept ;
+    dct:source :6cpic ;
+    skos:broader :9gjm2 ;
+    skos:definition "ieder die van een netbeheerder de beschikking heeft gekregen over een aansluiting"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "aangeslotene"@nl ;
+    skos:related :gnhiy,
+        :x6zcz ;
+    adms:status status:valid .
+
+:6m4pq a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "toestand waarin er een actieve aansluiting is zonder leveringsovereenkomst"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "contractloze situatie"@nl ;
+    adms:status status:valid .
+
+:6qms9 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "al dan niet tastbaar iets dat de netbeheerder aanbiedt om aan een wens of behoefte te voldoen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "klantproduct"@nl ;
+    adms:status status:valid .
+
+:8k4y6 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "aaneengesloten periode waarbij interactief informatie wordt uitgewisseld tussen een klant en de netbeheerder"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "klantcontactmoment"@nl ;
+    adms:status status:valid .
+
+:8qpg4 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "geldbedrag dat een klant krijgt voor de onderbreking van de transportdienst ten gevolge van een storing"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "storingscompensatie"@nl ;
+    adms:status status:valid .
+
+:at2z4 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "weergave van een betalingsverplichting van of aan een klant"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "klantfactuur"@nl ;
+    adms:status status:valid .
+
+:c2bcn a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "formeel aanbod tot het sluiten van een overeenkomst, opgesteld op verzoek van een (potentiële) klant"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "klantofferte"@nl ;
+    adms:status status:valid .
+
+:fsihx a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "verkrijgen van energie om het technische dan wel administratieve verschil tussen de invoeding en afname te compenseren"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "netverliescompensatie"@nl ;
+    adms:status status:valid .
+
+:grpae a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "aan een klant gerichte officiële kennisgeving van een verandering in de status van een dienst"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "klantnotificatie"@nl ;
+    adms:status status:valid .
+
+:hnm49 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "situatie waarbij op illegale wijze energie wordt onttrokken aan het energienet"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "energiediefstal"@nl ;
+    adms:status status:valid .
+
+:st3fm a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "vraag van een klant om iets te doen of te laten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "klantverzoek"@nl ;
+    skos:scopeNote "Hoewel een klacht slechts een uiting is van ontevredenheid, beschouwen we deze als een klantverzoek omdat de netbeheerder hier binnen een bepaalde termijn opvolging aan moet geven."@nl ;
+    adms:status status:valid .
+
+:4nwzw a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :yp6xq ;
+    skos:definition "afspraak tussen een klant en de netbeheerder over wat ze met elkaar of voor elkaar zullen gaan doen of laten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "klantovereenkomst"@nl ;
+    adms:status status:valid .
+
+### Einde NBility ###
+
+:9ayny a skos:Concept ;
+    dct:source :xsjys ;
+    skos:broader :st3fm ;
+    skos:definition "aanvraag voor het beschikbaar stellen van capaciteit voor het transport van energie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "transportverzoek"@nl ;
+    skos:scopeNote "Hieronder wordt verstaan een verzoek om het verhogen van de gecontracteerde transportcapaciteit. Bij een kleinverbruikaansluiting is de gecontracteerde transportcapaciteit gelijk aan de aansluitcapaciteit en is een verhoging van de aansluitcapaciteit een impliciet transportverzoek."@nl ;
+    adms:status status:valid .
+
+:ch3fz a skos:Concept ;
+    skos:broader :4nwzw ;
+    skos:definition "periode tussen de ontvangst van de aansluitovereenkomst door de netbeheerder en de beschikbaarstelling van de daarin overeengekomen fysieke aansluitverbinding(en) aan de contractpartij"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "aansluittermijn"@nl ;
+    skos:related :gnhiy,
+        :x6zcz ;
+    adms:status status:submitted .
+

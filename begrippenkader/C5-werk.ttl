@@ -1,0 +1,122 @@
+@base <https://begrippen.netbeheernederland.nl> .
+@prefix : <https://begrippen.netbeheernederland.nl/id/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix status: <https://inspire.ec.europa.eu/registry/status/> .
+
+:mfxqp a skos:Concept ;
+    dct:source :2i83j ;
+    skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het uitvoeren van werkzaamheden aan energienetten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "werk (domein)"@nl ;
+    skos:topConceptOf <> ;
+    adms:status status:valid .
+
+:b2rw2 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :mfxqp ;
+    skos:definition "omschrijving van alle werkzaamheden die uitgevoerd moeten worden"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "werkplan"@nl ;
+    adms:status status:valid .
+
+:dcn3d a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :mfxqp ;
+    skos:definition "omschrijving die laat zien hoe een netaanpassing er technisch uit gaat zien"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "voorlopig of definitief ontwerp"@nl ;
+    adms:status status:valid .
+
+:hcti3 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :mfxqp ;
+    skos:definition "fysieke of logische verplaatsing van goederen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "goederenbeweging"@nl ;
+    adms:status status:valid .
+
+:hpykk a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :mfxqp ;
+    skos:definition "vermogen van medewerkers om werkactiviteiten uit te voeren"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "uitvoeringscapaciteit"@nl ;
+    adms:status status:valid .
+
+:ibyz6 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :mfxqp ;
+    skos:definition "gebruiksvoorwerp zoals een stuk gereedschap (bouwmaterieel) of voertuig (rollend materieel) dat wordt gebruikt om te werken aan het energienet"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "werkmiddel"@nl ;
+    adms:status status:valid .
+
+:iqdz2 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :mfxqp ;
+    skos:definition "regelmatig terugkerend werk, met een norm voor de benodigde uren, materialen en/of instructies"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "standaard werkproduct"@nl ;
+    adms:status status:valid .
+
+:kjsga a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :mfxqp ;
+    skos:definition "globale planning van werkzaamheden aan energienetten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "werkportfolio"@nl ;
+    adms:status status:valid .
+
+:mrwhx a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :mfxqp ;
+    skos:definition "autorisatie voor het uitvoeren van werk aan een energienet"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "werkopdracht"@nl ;
+    adms:status status:valid .
+
+:scaxj a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :mfxqp ;
+    skos:definition "product bestemd om verwerkt te worden tot netcomponent"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "materiaal"@nl ;
+    adms:status status:valid .
+
+:sz3jx a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :mfxqp ;
+    skos:definition "weergave van een ter plaatse aangebrachte of geconstateerde wijziging van het energienet"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "netrevisie of bevinding"@nl ;
+    adms:status status:valid .
+
+:t7eta a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :mfxqp ;
+    skos:definition "(gevraagde, geplande of daadwerkelijke) verbruik van de capaciteit van medewerkers"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "medewerkerinzet"@nl ;
+    adms:status status:valid .
+
+:t8nfd a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :mfxqp ;
+    skos:definition "ter plaatse aanbrengen van wenselijk geachte veranderingen aan energienetten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "werkactiviteit"@nl ;
+    adms:status status:valid .
+
+:twpht a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :mfxqp ;
+    skos:definition "beschikking op een aanvraag, die toestaat voorgenomen activiteiten voor bepaalde tijd te verrichten die in de wet- of regelgeving verboden zijn"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "uitvoeringsvergunning"@nl ;
+    adms:status status:valid .
+
+### Einde NBility ###

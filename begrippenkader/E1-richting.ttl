@@ -1,0 +1,170 @@
+@base <https://begrippen.netbeheernederland.nl> .
+@prefix : <https://begrippen.netbeheernederland.nl/id/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix status: <https://inspire.ec.europa.eu/registry/status/> .
+
+:4ik9g a skos:Concept ;
+    dct:source :2i83j ;
+    skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het opstellen en besturen van de bedrijfsrichting"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "richting (domein)"@nl ;
+    skos:topConceptOf <> ;
+    adms:status status:valid .
+
+:28x73 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "mate waarin een organisatie een gesteld doel of verplichting volbrengt"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "bedrijfsprestatie"@nl ;
+    adms:status status:valid .
+
+:2fkba a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "effect van onzekerheid ten aanzien van de beperking van rechten en vrijheden van personen als gevolg van de verwerking van hun persoonsgegevens"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "privacyrisico"@nl ;
+    adms:status status:valid .
+
+:3nhy9 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "officiële uitleg of verklaring van de activiteiten van de netbeheerder aan een niet-financiële regulator"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "verantwoordingsrapport"@nl ;
+    adms:status status:valid .
+
+:3t2ri a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "effect van onzekerheid ten aanzien van de doelstellingen of resultaten van een organisatie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "bedrijfsrisico"@nl ;
+    adms:status status:valid .
+
+:43erg a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "document dat een organisatie gebruikt om haar activiteiten te herstellen na een ontwrichtend incident"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "bedrijfscontinuïteitsplan"@nl ;
+    adms:status status:valid .
+
+:6bmak a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "algemene bepaling in het recht die in beginsel een bindende werking heeft"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "rechtsregel"@nl ;
+    adms:status status:valid .
+
+:6tths a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "effect van onzekerheid ten aanzien van het behoud van de vertrouwelijkheid, de integriteit en de beschikbaarheid van informatie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "informatiebeveiligingsrisico"@nl ;
+    adms:status status:valid .
+
+:8hyqi a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "globale planning van gewenste veranderingen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "veranderportfolio"@nl ;
+    adms:status status:valid .
+
+:8ts8e a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "verandering van de structuur en/of werkwijze van een organisatie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "veranderinitiatief"@nl ;
+    adms:status status:valid .
+
+:92bmx a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "door een organisatie in detail voorgenomen handelswijze om haar doelstellingen te realiseren"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "bedrijfsplan"@nl ;
+    adms:status status:valid .
+
+:aqj2q a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "raadgeving die primair verband houdt met het recht"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "juridisch advies"@nl ;
+    adms:status status:valid .
+
+:948e3 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "samenhangende reeks activiteiten in communicatie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "campagne"@nl ;
+    adms:status status:valid .
+
+:ezg9p a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "ongewenst voorval dat voortvloeit uit bedrijfsactiviteiten en mogelijk schade of letsel tot gevolg heeft"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "VGMK-incident"@nl ;
+    adms:status status:valid .
+
+:hq7cm a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "idee voor een nieuw goed, dienst of proces, of combinatie daarvan"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "innovatie"@nl ;
+    adms:status status:valid .
+
+:idgi9 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "beschrijving van de huidige en/of toekomstige structuur en werking van een organisatie om deze te begrijpen, te communiceren en te beheren"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "architectuurproduct"@nl ;
+    adms:status status:valid .
+
+:js99p a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "noodsituatie waarbij het energietransport ernstig verstoord kan raken"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "crisis"@nl ;
+    adms:status status:valid .
+
+:q3kcq a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "afspraak tussen partijen in of rond de energiesector om een gemeenschappelijk doel na te streven"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "samenwerkingsverband"@nl ;
+    adms:status status:valid .
+
+:tfcwh a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "algemene aanpak die een organisatie hanteert om haar missie, visie, kernwaarden en doelstellingen te realiseren"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "bedrijfsstrategie"@nl ;
+    adms:status status:valid .
+
+:xwfc2 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :4ik9g ;
+    skos:definition "voorschrift ter bescherming van de veiligheid, de gezondheid, het milieu en/of de kwaliteit van werk"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "VGMK-richtlijn"@nl ;
+    adms:status status:valid .
+
+### Einde NBility ###

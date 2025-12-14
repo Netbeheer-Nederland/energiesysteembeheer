@@ -40,11 +40,8 @@ jobs:
           -f human \
           begrippenkaders/*.ttl
 
-      - name: Generate Markdown from SKOS model
+      - name: Generate website from SKOS model
         run: python generate.py
-
-      - name: Publish TTL file
-        run: python publish_ttl.py
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1

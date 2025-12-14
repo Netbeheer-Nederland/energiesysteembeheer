@@ -1,0 +1,26 @@
+@base <https://begrippen.netbeheernederland.nl> .
+@prefix : <https://begrippen.netbeheernederland.nl/id/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix status: <https://inspire.ec.europa.eu/registry/status/> .
+
+:6qcid a skos:Concept ;
+    dct:source :2i83j ;
+    skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het meten van energietransport en energienetten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "meting (domein)"@nl ;
+    skos:topConceptOf <> ;
+    adms:status status:valid .
+
+:7antr a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :6qcid ;
+    skos:definition "aan het energienet gerelateerde waardebepaling met behulp van een meetinstrument"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "meting"@nl ;
+    adms:status status:valid .
+
+### Einde NBility ###

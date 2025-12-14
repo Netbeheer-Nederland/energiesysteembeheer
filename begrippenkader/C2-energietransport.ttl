@@ -1,0 +1,132 @@
+@base <https://begrippen.netbeheernederland.nl> .
+@prefix : <https://begrippen.netbeheernederland.nl/id/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix status: <https://inspire.ec.europa.eu/registry/status/> .
+
+:amkgz a skos:Concept ;
+    dct:source :2i83j ;
+    skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het transporteren van energie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "energietransport (domein)"@nl ;
+    skos:topConceptOf <> ;
+    adms:status status:valid .
+
+:4fay3 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :amkgz ;
+    skos:definition "vermogen van een netcomponent om te voldoen aan functionele eisen of doelstellingen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "netcomponentprestatie"@nl ;
+    adms:status status:valid .
+
+:4gbga a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :amkgz ;
+    skos:definition "toestand van een of meer regelbare eenheden (zoals schakelaars) in het energienet die van invloed zijn op het energietransport"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "bedieningssituatie"@nl ;
+    adms:status status:valid .
+
+:8brw9 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :amkgz ;
+    skos:definition "niet gewenste verandering in de werking van een netcomponent, netdeel of bijbehorende bedrijfsomstandigheden"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "storing"@nl ;
+    adms:status status:valid .
+
+:9gw6a a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :amkgz ;
+    skos:definition "omschrijving van de bedieningshandelingen die uitgevoerd moeten worden en die leiden tot een gewenste bedrijfssituatie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "bedieningsplan"@nl ;
+    adms:status status:valid .
+
+:9itxn a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :amkgz ;
+    skos:definition "verzameling van instellingen van een netcomponent die de werking ervan bepalen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "netcomponentconfiguratie"@nl ;
+    adms:status status:valid .
+
+:e8i8x a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :amkgz ;
+    skos:definition "interruptie of beperking van het transport van energie bij één of meer afnemers"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "onderbreking"@nl ;
+    adms:status status:valid .
+
+:ejnnq a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :amkgz ;
+    skos:definition "analyse van energietransport binnen het bestaande energienet om benodigde aanpassingen in transport te bepalen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "transportanalyse"@nl ;
+    adms:status status:valid .
+
+:m7tnf a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :amkgz ;
+    skos:definition "situatie waarbij een of meer netfuncties tijdelijk niet kunnen worden gebruikt"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "niet-beschikbaarheid"@nl ;
+    adms:status status:valid .
+
+:rg6qt a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :amkgz ;
+    skos:definition "verrichting die de bedrijfstoestand van een netdeel wijzigt"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "bedieningshandeling"@nl ;
+    adms:status status:submitted .
+
+:sfjx4 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :amkgz ;
+    skos:definition "maatregel die door de netbeheerder wordt geactiveerd door een wijziging van het productie- en/of belastingspatroon op een of meer aansluitingen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "opregel- of afregelactie"@nl ;
+    adms:status status:submitted .
+
+:9hnxd a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :amkgz ;
+    skos:definition "bij een netbeheerder ingediende planning van energie-uitwisseling"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "transportprognose"@nl ;
+    skos:scopeNote "In een volgende versie van NBility wordt deze mogelijk gewijzigd naar energieplanning."@nl ;
+    adms:status status:submitted .
+
+:bpm8z a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :amkgz ;
+    skos:definition "verplaatsing van energie via een energienet"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "energietransport"@nl ;
+    adms:status status:valid .
+
+### Einde NBility ###
+
+:jwdiz a skos:Concept ;
+    dct:source :6cpic ;
+    skos:broader :bpm8z ;
+    skos:definition "energietransport op regionaal of lokaal niveau"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "distributie"@nl ;
+    adms:status status:submitted .
+
+:ra9pp a skos:Concept ;
+    dct:source :6cpic ;
+    skos:broader :bpm8z ;
+    skos:definition "energietransport op nationaal of internationaal niveau"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "transmissie"@nl ;
+    adms:status status:submitted .
+

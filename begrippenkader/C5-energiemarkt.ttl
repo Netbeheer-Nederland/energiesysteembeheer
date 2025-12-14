@@ -1,0 +1,724 @@
+@base <https://begrippen.netbeheernederland.nl> .
+@prefix : <https://begrippen.netbeheernederland.nl/id/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix status: <https://inspire.ec.europa.eu/registry/status/> .
+
+:he89b a skos:Concept ;
+    dct:source :2i83j ;
+    skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het faciliteren van de energiemarkt"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "energiemarkt (domein)"@nl ;
+    skos:topConceptOf <> ;
+    adms:status status:valid .
+
+:39t96 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :he89b ;
+    skos:definition "aanbod aan een netbeheerder om het productie- en/of belastingspatroon op een of meer aansluitingen te wijzigen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "opregel- of afregelaanbod"@nl ;
+    skos:scopeNote "In NBility 2.3 bekend als 'opregel- of afregelaanbod', maar verandert in NBility 2.4 naar verwachting van naam."@nl ;
+    adms:status status:submitted .
+
+:hc9px a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :he89b ;
+    skos:definition "partij die een rol vervult binnen de energiemarkt"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "marktpartij"@nl ;
+    skos:scopeNote "Onder marktpartijen verstaan we niet de afnemers of toezichthouders van de energiemarkt."@nl ;
+    adms:status status:valid .
+
+:gtj7b a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :he89b ;
+    skos:definition "samenstel van energietechnisch materiaal en leidingen van een aangeslotene, te rekenen na het overdrachtspunt van de aansluiting"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "installatie"@nl ;
+    adms:status status:valid .
+
+:tibcm a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :he89b ;
+    skos:definition "afname dan wel invoeding van energie op een energienet"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "energie-uitwisseling"@nl ;
+    adms:status status:valid .
+
+:gnhiy a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :he89b ;
+    skos:definition "recht op het gebruik van één of meer verbindingen tussen een energienet en een onroerende zaak"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "aansluiting"@nl ;
+    skos:scopeNote "In deze definitie is een aansluiting een gebruiksrecht op één of meer verbindingen met een energienet zoals een appartementsrecht een gebruiksrecht is op één of meer delen van een gebouw. Dit onderscheid tussen de aansluiting als gebruiksrecht en de aansluitverbindingen waar dat recht op rust, maakt de aansluiting eenduidig identificeerbaar."@nl ;
+    adms:status status:valid .
+
+:7ff3k a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :he89b ;
+    skos:definition "vraag van een marktpartij om iets te doen, niet zijnde een marktprocesverzoek"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "marktverzoek"@nl ;
+    adms:status status:valid .
+
+:7qmcr a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :he89b ;
+    skos:definition "gebied waarin de te verwachten behoefte aan transport redelijkerwijs kan leiden tot een structureel tekort aan transportcapaciteit"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "congestiegebied"@nl ;
+    adms:status status:valid .
+
+:dwdpm a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :he89b ;
+    skos:definition "(virtuele) handelsplaats voor energie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "energiemarkt"@nl ;
+    adms:status status:valid .
+
+:ihyma a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :he89b ;
+    skos:definition "verrichten van een dienst door een marktpartij op een aansluiting"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "marktactiviteit"@nl ;
+    adms:status status:valid .
+
+:n9fke a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :he89b ;
+    skos:definition "gewenste energietransport op lange termijn"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "transportbehoefte"@nl ;
+    adms:status status:valid .
+
+:rd339 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :he89b ;
+    skos:definition "verwachting van de hoeveelheid energie die moet worden opgeregeld of afgeregeld om het energietransport te handhaven"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "opregel- of afregelbehoefte"@nl ;
+    adms:status status:submitted .
+
+:wyxhe a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :he89b ;
+    skos:definition "handeling waarbij de netbeheerder gegevens toegankelijk maakt, buiten de reguliere bedrijfsactiviteiten om"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "netbeheerdataverstrekking"@nl ;
+    adms:status status:valid .
+
+:xbzft a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :he89b ;
+    skos:definition "verklaring dat uitgewisselde energie een marktpartij toebehoort"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "energietoerekening"@nl ;
+    adms:status status:valid .
+
+### Einde NBility ###
+
+:3jypg a skos:Concept ;
+    skos:broader :fqqa7 ;
+    skos:definition "plek waar zich het overdrachtspunt van een aansluiting of netkoppeling bevindt"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "aansluitlocatie"@nl ;
+    adms:status status:valid .
+
+
+:6kkad a skos:Concept ;
+    dct:source :wqe42 ;
+    skos:broader :zr8ka ;
+    skos:definition "eenheid of verzameling van eenheden die elektriciteit opwekt, die ofwel niet-synchroon ofwel via vermogenselektronica via één overdrachtspunt met het energienet is verbonden"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "power park module"@nl ;
+    skos:related :fqqa7,
+        :w9pqm ;
+    adms:status status:submitted .
+
+:74crk a skos:Concept ;
+    skos:altLabel "G-CSC"@nl ;
+    skos:broader :erdf4 ;
+    skos:definition "capaciteitssturingscontract tussen een netbeheerder en een CSP met betrekking tot een groep van aansluitingen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "groepscapaciteitssturingscontract"@nl ;
+    skos:related :apcsk,
+        :gnhiy,
+        :x6zcz ;
+    adms:status status:submitted .
+
+:7qf3d a skos:Concept ;
+    skos:broader :kwdt2 ;
+    skos:definition "laadinstallatie met een laadpunt geschikt voor het laden met een capaciteit van 50 kW of meer"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "snellaadinstallatie"@nl ;
+    skos:related :qffcy ;
+    adms:status status:submitted .
+
+:97gd7 a skos:Concept ;
+    dct:source :rbf76 ;
+    skos:broader :wmkrz ;
+    skos:definition "eenheid die actief vermogen vanuit het net kan afnemen en in het net kan injecteren door omzetting van elektrische energie in een vorm van energie die kan worden opgeslagen, de opslag van die energie en de daaropvolgende omzetting van die energie in elektrische energie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "elektriciteitsopslageenheid"@nl ;
+    adms:status status:valid .
+
+:9p2c3 a skos:Concept ;
+    dct:source :ma2mm ;
+    skos:altLabel "HD"@nl ;
+    skos:broader :6n8tj ;
+    skos:definition "drukniveau hoger dan 200 mbar en lager dan of gelijk aan 8 bar"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "hoge druk"@nl ;
+    adms:status status:submitted .
+
+:9x498 a skos:Concept ;
+    skos:broader :zh4p4 ;
+    skos:definition "transportrecht dat altijd geldt"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "volledig vast transportrecht"@nl ;
+    adms:status status:submitted ;
+    foaf:page :xsjys .
+
+:9yxny a skos:Concept ;
+    skos:altLabel "blokstroom"@nl ;
+    skos:broader :s9htw ;
+    skos:definition "transportrecht dat geldt gedurende vooraf vastgestelde tijdsblokken"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "tijdsblokgebonden transportrecht"@nl ;
+    adms:status status:submitted ;
+    foaf:page :xsjys .
+
+:ad8dm a skos:Concept ;
+    skos:broader :s9htw ;
+    skos:definition "transportrecht dat geldt gedurende een vooraf bepaald aandeel van de totale tijd, zonder koppeling aan vaste tijdstippen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "tijdsduurgebonden transportrecht"@nl ;
+    adms:status status:submitted ;
+    foaf:page :xsjys .
+
+:akq32 a skos:Concept ;
+    dct:source :rbf76 ;
+    skos:altLabel "slimme meter"@nl ;
+    skos:broader :rnny7 ;
+    skos:definition "meetinrichting die voldoet aan het Besluit op afstand uitleesbare meetinrichtingen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "op afstand uitleesbare kleinverbruikmeetinrichting"@nl ;
+    skos:scopeNote "(Mogelijk enige) deel van een op afstand uitleesbare kleinverbruikmeetinrichting is de comptabele energiehoeveelheidsmeter met communicatiefunctionaliteit. Deze staat ook wel bekend als slimme meter."@nl ;
+    adms:status status:valid .
+
+:anskq a skos:Concept ;
+    dct:source :ma2mm ;
+    skos:altLabel "EHD"@nl ;
+    skos:broader :6n8tj ;
+    skos:definition "drukniveau hoger dan 8 bar"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "extrahoge druk"@nl ;
+    adms:status status:submitted .
+
+:at98s a skos:Concept ;
+    skos:broader :zjfey ;
+    skos:definition "bieding redispatch op verzoek van de netbeheerder, tegen niet-marktgebaseerde voorwaarden"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "niet-marktgebaseerde bieding redispatch"@nl ;
+    skos:related :x6zcz ;
+    adms:status status:submitted .
+
+:bc7pb a skos:Concept ;
+    dct:source :wqe42 ;
+    skos:broader :zr8ka ;
+    skos:definition "ondeelbaar geheel van installaties die samen elektrische energie kunnen opwekken op dusdanige wijze dat de frequentie van de opgewekte spanning, het toerental van de generator en de frequentie van de netspanning in constante verhouding tot elkaar staan en dus synchroon lopen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "synchrone elektriciteitsproductie-eenheid"@nl ;
+    adms:status status:submitted .
+
+:e2ifi a skos:Concept ;
+    dct:source :rbf76 ;
+    skos:altLabel "SJA"@nl ;
+    skos:broader :y4yex ;
+    skos:definition "verwachte afname op een aansluiting bij gestandaardiseerde condities en op basis van een genormaliseerd jaar"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "standaardjaarafname"@nl ;
+    skos:related :3j33z,
+        :gnhiy ;
+    adms:status status:valid .
+
+:esdhd a skos:Concept ;
+    skos:altLabel "EHS"@nl ;
+    skos:broader :w8e9z ;
+    skos:definition "spanningsniveau van 220 kV of hoger"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "extrahoogspanning"@nl ;
+    skos:scopeNote "Spanningsniveaus worden op verschillende manieren gedefinieerd. Deze definitie gaat uit van de door netbeheerders meest gebruikte indeling. Andere indelingen kennen vaak geen extrahoogspanning."@nl ;
+    adms:status status:submitted .
+
+:eyp3g a skos:Concept ;
+    dct:source :6cpic ;
+    skos:broader :gnhiy ;
+    skos:definition "administratief punt waar energie-uitwisseling wordt toegerekend aan een marktdeelnemer"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "allocatiepunt"@nl ;
+    adms:status status:valid .
+
+:f3ssk a skos:Concept ;
+    dct:source :ma2mm ;
+    skos:altLabel "LD"@nl ;
+    skos:broader :6n8tj ;
+    skos:definition "drukniveau van 200 mbar of lager"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "lage druk"@nl ;
+    adms:status status:submitted .
+
+:gsewd a skos:Concept ;
+    dct:source :wqe42 ;
+    skos:broader :gtj7b ;
+    skos:definition "hoogste hoeveelheid energie per tijdseenheid die een installatie continu met het energienet kan en mag uitwisselen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "maximumcapaciteit"@nl ;
+    skos:related :w9pqm ;
+    adms:status status:valid .
+
+:irw4s a skos:Concept ;
+    skos:altLabel "TS"@nl ;
+    skos:broader :w8e9z ;
+    skos:definition "spanningsniveau van doorgaans 25 kV of hoger en lager dan 110 kV"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "tussenspanning"@nl ;
+    skos:scopeNote "Spanningsniveaus worden op verschillende manieren gedefinieerd. Deze definitie gaat uit van de door netbeheerders meest gebruikte indeling. Andere indelingen kennen vaak geen tussenspanning."@nl ;
+    adms:status status:submitted .
+
+:jchwi a skos:Concept ;
+    skos:altLabel "C-CSC"@nl ;
+    skos:broader :erdf4 ;
+    skos:definition "capaciteitssturingscontract met betrekking tot meerdere aansluitingen en met meerdere aangeslotenen als collectieve contractpartij"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "collectief capaciteitssturingscontract"@nl ;
+    skos:related :gnhiy,
+        :m9e2q ;
+    adms:status status:submitted .
+
+:jdy8n a skos:Concept ;
+    dct:source :rbf76 ;
+    skos:altLabel "SJI"@nl ;
+    skos:broader :y4yex ;
+    skos:definition "verwachte invoeding op een aansluiting bij gestandaardiseerde condities en op basis van een genormaliseerd jaar"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "standaardjaarinvoeding"@nl ;
+    skos:related :gnhiy,
+        :j8cpp ;
+    adms:status status:valid .
+
+:ksh8h a skos:Concept ;
+    skos:altLabel "biedplichtcontract"@nl ;
+    skos:broader :zjfey ;
+    skos:definition "bieding op verzoek van de netbeheerder, op basis van een contract voor redispatchcapaciteit en tegen marktgebaseerde voorwaarden"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "bieding onder contract voor redispatchcapaciteit"@nl ;
+    skos:related :fkhn8,
+        :x6zcz ;
+    adms:status status:submitted .
+
+:mkiqp a skos:Concept ;
+    skos:altLabel "BRP"@nl ;
+    skos:broader :hc9px ;
+    skos:definition "natuurlijk persoon of rechtspersoon die verantwoordelijk is voor de onbalans die hij, of degene die hij vertegenwoordigt, veroorzaakt in het energienet en die door de netbeheerder als balancerinsverantwoordelijke is toegelaten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "balanceringsverantwoordelijke"@nl ;
+    skos:related :w9pqm,
+        :x6zcz ;
+    adms:status status:valid .
+
+:mrhy7 a skos:Concept ;
+    skos:altLabel "MS"@nl ;
+    skos:broader :w8e9z ;
+    skos:definition "spanningsniveau hoger dan 1 kV in geval van wisselspanning en hoger dan 1,5 kV in geval van gelijkspanning en gewoonlijk lager dan 25 kV"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "middenspanning"@nl ;
+    skos:scopeNote "Spanningsniveaus worden op verschillende manieren gedefinieerd. Deze definitie gaat uit van de door netbeheerders meest gebruikte indeling. Andere veelgebruikte bovengrenzen voor middenspanning zijn 35, 50 en 110 kV."@nl ;
+    adms:status status:submitted .
+
+:nk6nx a skos:Concept ;
+    skos:broader :kwdt2 ;
+    skos:definition "algemeen toegankelijke laadinstallatie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "publieke laadinstallatie"@nl ;
+    adms:status status:submitted .
+
+:nkmyz a skos:Concept ;
+    skos:broader :zjfey ;
+    skos:definition "bieding redispatch zonder verzoek van de netbeheerder"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "vrije bieding redispatch"@nl ;
+    skos:related :x6zcz ;
+    adms:status status:submitted .
+
+:p8zjw a skos:Concept ;
+    skos:altLabel "HS"@nl ;
+    skos:broader :w8e9z ;
+    skos:definition "spanningsniveau van 110 kV of hoger en lager dan 220 kV"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "hoogspanning"@nl ;
+    skos:scopeNote "Spanningsniveaus worden op verschillende manieren gedefinieerd. Deze definitie gaat uit van de door netbeheerders meest gebruikte indeling. Andere veelgebruikte ondergrenzen voor hoogspanning zijn 1, 25, 35 en 50 kV. Er is niet altijd een bovengrens."@nl ;
+    adms:status status:submitted .
+
+:qi8ja a skos:Concept ;
+    skos:altLabel "LS"@nl ;
+    skos:broader :w8e9z ;
+    skos:definition "spanningsniveau van 1 kV of lager in geval van wisselspanning en 1,5 kV of lager in geval van gelijkspanning"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "laagspanning"@nl ;
+    adms:status status:submitted .
+
+:qwxzm a skos:Concept ;
+    skos:broader :kwdt2 ;
+    skos:definition "niet algemeen toegankelijke laadinstallatie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "private laadinstallatie"@nl ;
+    adms:status status:submitted .
+
+:rehzn a skos:Concept ;
+    dct:source :xsjys ;
+    skos:broader :gtj7b ;
+    skos:definition "installatie voor het verbruiken van energie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "verbruiksinstallatie"@nl ;
+    adms:status status:valid .
+
+:tz4pf a skos:Concept ;
+    skos:altLabel "reststroom"@nl ;
+    skos:broader :s9htw ;
+    skos:definition "transportrecht dat de netbeheerder kort voor gebruik vrijgeeft"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "volledig variabel transportrecht"@nl ;
+    adms:status status:submitted ;
+    foaf:page :xsjys .
+
+:win7s a skos:Concept ;
+    dct:source :ma2mm,
+        :rbf76 ;
+    skos:altLabel "GVB"@nl ;
+    skos:broader :gnhiy ;
+    skos:definition "grote aansluiting, een aansluiting op een gesloten distributiesysteem, of een aansluiting van een afnemer zoals bedoeld in <a href=\"https://wetten.overheid.nl/jci1.3:c:BWBR0009755&hoofdstuk=1&paragraaf=1&artikel=1&z=2022-10-01&g=2022-10-01\">artikel 1, tweede of derde lid, van de Elektriciteitswet 1998</a>"@nl ;
+    skos:editorialNote "In aanvulling op de definities in de begrippencodes, wordt ook een aansluiting op een gesloten distributiesysteem beschouwd als grootverbruikaansluiting."@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "grootverbruikaansluiting"@nl ;
+    skos:related :cq27t,
+        :xzkx7 ;
+    adms:status status:valid .
+
+:x8xgk a skos:Concept ;
+    dct:source :rbf76 ;
+    skos:broader :fqqa7 ;
+    skos:definition "door aangeslotene gevraagde en door de netbeheerder ter beschikking gestelde hoeveelheid energie per tijdseenheid die via het overdrachtspunt van een aansluiting kan worden uitgewisseld"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "aansluitcapaciteit"@nl ;
+    adms:status status:valid .
+
+:ykaas a skos:Concept ;
+    dct:source :6cpic ;
+    skos:broader :gnhiy ;
+    skos:definition "aansluiting waarbij meerdere onroerende zaken voor de toepassing van de aansluiting worden beschouwd als één onroerende zaak"@nl ;
+    skos:hiddenLabel "cable pooling"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "gezamenlijke aansluiting"@nl ;
+    adms:status status:submitted .
+
+:zqagh a skos:Concept ;
+    dct:source :ma2mm,
+        :rbf76 ;
+    skos:broader :gnhiy ;
+    skos:definition "aaneengesloten en samenhangend deel van een energienet van één netbeheerder, waarbinnen de processen allocatie en reconciliatie plaatsvinden"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "netgebied"@nl ;
+    skos:related :w9pqm,
+        :x6zcz ;
+    adms:status status:valid .
+
+:6hz4b a skos:Concept ;
+    dct:source :rbf76 ;
+    skos:broader :tibcm ;
+    skos:definition "uren van de dag waarvoor, in geval van een meetinrichting met dubbel telwerk, de met het energienet uitgewisselde energie wordt geregistreerd door het laagtelwerk"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "laaguren"@nl ;
+    skos:related :fprn3 ;
+    adms:status status:valid .
+
+:apcsk a skos:Concept ;
+    skos:broader :hc9px ;
+    skos:definition "partij die namens of met instemming van een aangeslotene congestiemanagementdiensten levert aan een netbeheerder"@nl ;
+    skos:hiddenLabel "congestiebeheersdienstverlener"@nl,
+        "congestiemanagementdienstverlener"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "CSP"@nl ;
+    skos:scopeNote "CSP staat voor congestion service provider."@nl ;
+    adms:status status:valid ;
+    foaf:page :rbf76 .
+
+:bp9rr a skos:Concept ;
+    dct:source :rbf76 ;
+    skos:broader :dwk8c ;
+    skos:definition "maximale capaciteit die op een aansluiting of groep van aansluitingen mag worden gebruikt"@nl ;
+    skos:hiddenLabel "GTV"@nl,
+        "gecontracteerd transportvermogen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "gecontracteerde transportcapaciteit"@nl ;
+    skos:related :gnhiy,
+        :m9e2q ;
+    adms:status status:valid .
+
+:bwjrm a skos:Concept ;
+    dc:source [ dct:title "Energiedrager" ;
+            foaf:page <https://www.cbs.nl/nl-nl/onze-diensten/methoden/begrippen/energiedrager> ] ;
+    skos:altLabel "productsoort"@nl ;
+    skos:broader :tibcm ;
+    skos:definition "medium dat bruikbare energie bevat"@nl ;
+    skos:example "elektriciteit"@nl,
+        "gas"@nl,
+        "waterstof"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "energiedrager"@nl ;
+    adms:status status:valid .
+
+:cq27t a skos:Concept ;
+    dct:source :6cpic ;
+    skos:broader :gnhiy ;
+    skos:definition "aansluiting met een doorlaatwaarde groter dan 3 x 80 Ampère voor elektriciteit of 40 m3(n) per uur voor gas"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "grote aansluiting"@nl ;
+    skos:related :fqqa7 ;
+    skos:scopeNote "Een aansluiting voor een streng van lichtmasten, waarbij elke lichtmast een eigen overdrachtspunt heeft met een doorlaatwaarde van ten hoogste 1 x 6 Ampère, geldt als kleine aansluiting, ongeacht het aantal overdrachtspunten."@nl ;
+    adms:status status:valid .
+
+:fkhn8 a skos:Concept ;
+    skos:broader :4nwzw ;
+    skos:definition "afspraak om op verzoek van de netbeheerder biedingen redispatch te doen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "contract voor redispatchcapaciteit"@nl ;
+    skos:related :x6zcz ;
+    adms:status status:submitted .
+
+:fprn3 a skos:Concept ;
+    dct:source :rbf76 ;
+    skos:broader :tc4xn ;
+    skos:definition "telwerk van een meetinrichting met twee of meer telwerken dat gebruikt wordt of kan worden voor de bepaling van de met het energienet uitgewisselde energie tijdens laaguren"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "laagtelwerk"@nl ;
+    skos:related :6hz4b ;
+    adms:status status:valid .
+
+:kqpi3 a skos:Concept ;
+    dct:source :kweqa,
+        :wmqnb ;
+    skos:broader :gtj7b ;
+    skos:definition "installatie voor het produceren van energie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "productie-installatie"@nl ;
+    adms:status status:valid .
+
+:masrd a skos:Concept ;
+    dct:source :ma2mm,
+        :rbf76 ;
+    skos:altLabel "KVB"@nl ;
+    skos:broader :gnhiy ;
+    skos:definition "kleine aansluiting, niet zijnde een aansluiting op een gesloten distributiesysteem of een aansluiting van een afnemer zoals bedoeld in <a href=\"https://wetten.overheid.nl/jci1.3:c:BWBR0009755&hoofdstuk=1&paragraaf=1&artikel=1&z=2022-10-01&g=2022-10-01\">artikel 1, tweede of derde lid, van de Elektriciteitswet 1998</a>"@nl ;
+    skos:editorialNote "In aanvulling op de definities in de begrippencodes, wordt ook een aansluiting op een gesloten distributiesysteem niet beschouwd als kleinverbruikaansluiting."@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "kleinverbruikaansluiting"@nl ;
+    skos:related :pp2se,
+        :xzkx7 ;
+    adms:status status:valid .
+
+:pp2se a skos:Concept ;
+    dct:source :6cpic ;
+    skos:broader :gnhiy ;
+    skos:definition "aansluiting met een doorlaatwaarde kleiner dan of gelijk aan 3 x 80 Ampère voor elektriciteit of 40 m3(n) per uur voor gas"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "kleine aansluiting"@nl ;
+    skos:scopeNote "Een aansluiting voor een streng van lichtmasten, waarbij elke lichtmast een eigen overdrachtspunt heeft met een doorlaatwaarde van ten hoogste 1 x 6 Ampère, geldt als kleine aansluiting, ongeacht het aantal overdrachtspunten."@nl ;
+    adms:status status:valid .
+
+:qffcy a skos:Concept ;
+    skos:broader :zebbw ;
+    skos:definition "één of meer connectoren voor het laden of ontladen van één mobiel apparaat tegelijk"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "laadpunt"@nl ;
+    adms:status status:submitted .
+
+:rnny7 a skos:Concept ;
+    dct:source :rbf76 ;
+    skos:broader :877a7 ;
+    skos:definition "meetinrichting bij een kleinverbruikaansluiting"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "kleinverbruikmeetinrichting"@nl ;
+    skos:related :masrd ;
+    adms:status status:valid .
+
+:tc4xn a skos:Concept ;
+    dct:source :rbf76 ;
+    skos:broader :877a7 ;
+    skos:definition "samenstel van cijferrollen dan wel een dataregister waarin de totale hoeveelheid uitgewisselde energie wordt vastgelegd"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "telwerk"@nl ;
+    adms:status status:valid .
+
+:wmkrz a skos:Concept ;
+    dct:source :xsjys ;
+    skos:broader :gtj7b ;
+    skos:definition "installatie voor het opslaan van energie"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "opslaginstallatie"@nl ;
+    adms:status status:valid .
+
+:zebbw a skos:Concept ;
+    skos:broader :kwdt2 ;
+    skos:definition "ondeelbaar geheel van elektrisch materieel en leidingen voor het opladen en/of ontladen van mobiele apparaten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "elektriciteitslaadeenheid"@nl ;
+    adms:status status:submitted .
+
+:3j33z a skos:Concept ;
+    skos:altLabel "levering"@nl,
+        "verbruik"@nl ;
+    skos:broader :yn3hb ;
+    skos:definition "onttrekking van energie aan het energienet"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "afname"@nl ;
+    skos:related :w9pqm ;
+    adms:status status:valid .
+
+:877a7 a skos:Concept ;
+    dct:source :6cpic ;
+    skos:broader :gnhiy ;
+    skos:definition "instrument of samenstel van instrumenten met een meetfunctie dat ten minste de invoeding, onttrekking of het verbruik van elektriciteit of gas meet, met uitzondering van hulpmiddelen die de meetfunctie ondersteunen en die onderdeel zijn van een aansluiting"@nl ;
+    skos:hiddenLabel "meter"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "meetinrichting"@nl ;
+    adms:status status:valid .
+
+:erdf4 a skos:Concept ;
+    dct:source :xsjys ;
+    skos:altLabel "CSC"@nl ;
+    skos:broader :4nwzw ;
+    skos:definition "afspraak om op verzoek van de netbeheer de energie-uitwisseling op een aansluiting tijdelijk boven of beneden een bepaalde grens te houden, ten behoeve van congestiebeheersing"@nl ;
+    <http://www.w3.org/2004/02/skos/core#hiddenLabel:> "CBC"@nl,
+        "capaciteitsbeperkingscontract"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "capaciteitssturingscontract"@nl ;
+    skos:related :bp9rr ;
+    adms:status status:valid .
+
+:j8cpp a skos:Concept ;
+    skos:altLabel "opwek"@nl,
+        "productie"@nl,
+        "teruglevering"@nl ;
+    skos:broader :yn3hb ;
+    skos:definition "inbrenging van energie op het energienet"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "invoeding"@nl ;
+    adms:status status:valid .
+
+:y4yex a skos:Concept ;
+    skos:broader :tibcm ;
+    skos:definition "hoeveelheid energie-uitwisseling op basis van een genormaliseerd jaar"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "standaardjaarvolume"@nl ;
+    adms:status status:valid .
+
+:yn3hb a skos:Concept ;
+    skos:altLabel "leveringsrichting"@nl ;
+    skos:broader :tibcm ;
+    skos:definition "kant waarop energie beweegt"@nl ;
+    skos:example "afname"@nl,
+        "invoeding"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "energierichting"@nl ;
+    skos:related :3j33z,
+        :j8cpp ;
+    adms:status status:valid .
+
+:zh4p4 a skos:Concept ;
+    skos:broader :gnhiy ;
+    skos:definition "recht van een aangeslotene om energie te transporteren over het energienet"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "transportrecht"@nl ;
+    skos:related :m9e2q,
+        :w9pqm ;
+    adms:status status:submitted ;
+    foaf:page :xsjys .
+
+:zr8ka a skos:Concept ;
+    dct:source :wqe42 ;
+    skos:broader :kqpi3 ;
+    skos:definition "synchrone elektriciteitsproductie-eenheid of power park module"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "elektriciteitsproductie-eenheid"@nl ;
+    adms:status status:valid .
+
+:6n8tj a skos:Concept ;
+    skos:broader :fqqa7 ;
+    skos:definition "bereik van overdruk waarin een systeem opereert"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "drukniveau"@nl ;
+    adms:status status:submitted .
+
+:s9htw a skos:Concept ;
+    skos:broader :zh4p4 ;
+    skos:definition "transportrecht dat niet altijd geldt"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "alternatief transportrecht"@nl ;
+    adms:status status:submitted .
+
+:zjfey a skos:Concept ;
+    dct:source :xsjys ;
+    skos:broader :39t96 ;
+    skos:definition "aanbod om op een aansluiting op te regelen of af te regelen ten opzichte van een prognose voor die aansluiting"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "bieding redispatch"@nl ;
+    skos:related :9hnxd,
+        :gnhiy ;
+    skos:scopeNote "Een prognose wordt op de dag voorafgaand aan het transport ingediend."@nl ;
+    adms:status status:submitted .
+
+:kwdt2 a skos:Concept ;
+    skos:broader :gtj7b ;
+    skos:definition "installatie voor het opladen en/of ontladen van mobiele apparaten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "laadinstallatie"@nl ;
+    adms:status status:valid .
+
+:w8e9z a skos:Concept ;
+    skos:broader :fqqa7 ;
+    skos:definition "elektrisch spanningsbereik waarin een systeem opereert"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "spanningsniveau"@nl ;
+    adms:status status:submitted .
+
+:fqqa7 a skos:Concept ;
+    dct:source :ma2mm,
+        :rbf76 ;
+    skos:altLabel "aansluitpunt"@nl ;
+    skos:broader :gnhiy ;
+    skos:definition "overeengekomen grens waarop de verantwoordelijkheid overgaat van het energienet van de netbeheerder naar de installatie van de aangeslotene, of tussen twee energienetten"@nl ;
+    skos:editorialNote "Ten opzichte van de regelgeving, waarin het overdrachtspunt als een ‘fysiek punt’ wordt opgevat, biedt dit begrippenkader een preciezere definitie: een overeengekomen grens voor een eenduidige verantwoordelijkheidsverdeling, los van de fysieke realisatie."@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "overdrachtspunt"@nl ;
+    adms:status status:valid .
+
+:x6zcz a skos:Concept ;
+    dct:source :kweqa,
+        :wmqnb ;
+    skos:altLabel "NB"@nl ;
+    skos:broader :hc9px ;
+    skos:definition "vennootschap die op grond van de wet is aangewezen voor het beheer van een of meer energienetten, niet zijnde gesloten distributiesystemen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "netbeheerder"@nl ;
+    skos:related :w9pqm,
+        :xzkx7 ;
+    adms:status status:valid .
+

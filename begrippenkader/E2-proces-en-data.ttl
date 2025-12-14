@@ -1,0 +1,74 @@
+@base <https://begrippen.netbeheernederland.nl> .
+@prefix : <https://begrippen.netbeheernederland.nl/id/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix status: <https://inspire.ec.europa.eu/registry/status/> .
+
+:8cc2t a skos:Concept ;
+    dct:source :2i83j ;
+    skos:definition "bedrijfsobjecten die een netbeheerder bestuurt bij het ontwikkelen en beheren van processen en data"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "proces en data (domein)"@nl ;
+    skos:topConceptOf <> ;
+    adms:status status:valid .
+
+:efpt8 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :8cc2t ;
+    skos:definition "algoritme bedoeld om bij toepassing op een dataset waardevolle informatie te genereren"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "data-analysemodel"@nl ;
+    adms:status status:valid .
+
+:fk9cc a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :8cc2t ;
+    skos:definition "samenhangende hoeveelheid werk met een welgedefinieerde aanleiding en een welgedefinieerd eindresultaat, waarvan kwaliteit en doorlooptijd bewaakt moeten worden"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "case"@nl ;
+    adms:status status:valid .
+
+:hbjgn a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :8cc2t ;
+    skos:definition "verzameling gegevens die als geheel wordt verwerkt"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "dataset"@nl ;
+    adms:status status:valid .
+
+:hkwx8 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :8cc2t ;
+    skos:definition "document dat bestemd is om te bewaren door de organisatie die het heeft gemaakt of ontvangen bij de uitvoering van haar activiteiten"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "archiefstuk"@nl ;
+    adms:status status:valid .
+
+:m7tgb a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :8cc2t ;
+    skos:definition "beperking waar een dataset aan moet voldoen"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "datakwaliteitsregel"@nl ;
+    adms:status status:valid .
+
+:tx473 a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :8cc2t ;
+    skos:definition "verzameling handelingen die toegang biedt tot één of meer datasets"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "dataservice"@nl ;
+    adms:status status:valid .
+
+:98ywt a skos:Concept ;
+    dct:source :2i83j ;
+    skos:broader :8cc2t ;
+    skos:definition "ordening van repetitief uit te voeren werk, gericht op een beoogd resultaat"@nl ;
+    skos:inScheme <> ;
+    skos:prefLabel "proces"@nl ;
+    adms:status status:valid .
+
+### Einde NBility ###
