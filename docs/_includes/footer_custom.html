@@ -63,9 +63,7 @@
 
     function scrollToActive() {
       const activeLink = azList.querySelector('.active');
-      if (activeLink) {
-        activeLink.scrollIntoView({block: 'center'}); 
-      }
+      if (activeLink) activeLink.scrollIntoView({block: 'center'}); 
     }
 
     function loadAndRenderData() {
@@ -82,14 +80,10 @@
             const itemUrlClean = item.url.replace(/\/$/, "");
             const isActive = item.type !== 'alias' && (currentPath.endsWith(itemUrlClean) || itemUrlClean.endsWith(currentPath));
             let cssClass = 'nav-list-link';
-            if (isActive) {
-              cssClass += ' active';
-            }
+            if (isActive) cssClass += ' active';
 
             let itemHTML = item.title;
-            if (item.type === 'alias') {
-                itemHTML = '<span class="text-grey-dk-000">' + item.title + ' &rarr; </span>' + item.target_label;
-            }
+            if (item.type === 'alias') itemHTML = '<span class="text-grey-dk-000">' + item.title + ' &rarr; </span>' + item.target_label;
 
             listHTML += '<li class="nav-list-item">';
             listHTML += '<a href="' + item.url + '" class="' + cssClass + '">' + itemHTML + '</a>';
@@ -133,11 +127,7 @@
       originalList.id = "skos-tree-list";
 
       const savedPref = localStorage.getItem('skos-nav-pref');
-      if (savedPref === 'az') {
-        setNavMode('az');
-      } else {
-        setNavMode('tree');
-      }
+      if (savedPref === 'az') setNavMode('az');
 
       btn.addEventListener('click', function() {
         if (azList.style.display === 'none') {
