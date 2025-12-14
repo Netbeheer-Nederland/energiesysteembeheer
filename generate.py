@@ -319,7 +319,7 @@ def generate_downloadable_ttl(g):
         print("FOUT: Kon TTL bestand niet wegschrijven.")
         raise(e)
 
-def generate_concepts(g, env, lookup, url_map):
+def generate_concepts(g, env, lookup, matcher, url_map):
     print(f" - Begrippen genereren in {BEGRIPPEN_DIR}...")
     template = env.get_template("begrip.md.j2")
     ensure_directory(BEGRIPPEN_DIR)
@@ -328,7 +328,7 @@ def generate_concepts(g, env, lookup, url_map):
     for s in g.subjects(RDF.type, SKOS.Concept):
         if not isinstance(s, URIRef): continue
         
-        data = extract_concept_data(g, s, lookup, url_map)
+        data = extract_concept_data(g, s, lookup, matcher, url_map)
         output = template.render(data)
 
         filename = f"{data['reference']}.md"
