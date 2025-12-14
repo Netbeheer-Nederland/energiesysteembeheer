@@ -3,9 +3,9 @@
     display: inline-block;
 }
 
-// Definition list: broader left-column
+// Definition list: in the default grid template, the left-column is too small
 .main-content dl {
-    grid-template: auto / 15em 1fr;
+    grid-template: none;
 }
 // Definition list: fix margin in multi-line items
 .main-content dt {
