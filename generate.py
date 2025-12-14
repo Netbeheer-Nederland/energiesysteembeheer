@@ -142,9 +142,9 @@ def autolink_text(text, matcher, url_map, current_page_title=""):
     matches = matcher(doc)
 
     valid_matches = [] # We bouwen een lijst met matches die we willen behouden
-    for match_id, start, end in matches:
+    for match_id_hash, start, end in matches:
         span = doc[start:end]
-        if span.text.lower() != current_page_title.lower(): # Voorkom dat een pagina naar zichzelf linkt
+        if span.text.lower() != current_page_title.lower(): # De match_id is een integer hash. We vertalen hem terug naar de originele string.
             original_term_key = nlp.vocab.strings[match_id_hash]
             valid_matches.append((original_term_key, start, end))
 
