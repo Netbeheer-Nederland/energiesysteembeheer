@@ -3,7 +3,7 @@ from slugify import slugify
 from jinja2 import Environment, FileSystemLoader
 from rdflib import Graph, Namespace, RDF, SKOS, DCTERMS, RDFS, URIRef, FOAF
 from pyshacl import validate
-from spacy.matcher import PhraseMatcher
+from spacy.matcher import Matcher
 from pattern.nl import pluralize, attributive
 
 try:
@@ -115,7 +115,7 @@ def normalize_for_sort(text):
     return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
 
 def build_matcher_and_url_map(lookup, base_url):
-    matcher = PhraseMatcher(nlp.vocab)
+    matcher = Matcher(nlp.vocab)
     url_map = {}
 
     for _, data in lookup.items():
@@ -126,64 +126,58 @@ def build_matcher_and_url_map(lookup, base_url):
         pattern = []
 
         for token in doc:
-            base_word = token.text.lower()
-            
-            if token.pos_ == 'NOUN': # Strategie voor zelfstandige naamwoorden
-                singular = token.text
-                plural = pluralize(singular)
-                pattern.append({"LOWER": {"IN": [singular.lower(), plural.lower()]}}) 
-
-            elif token.pos_ == 'ADJ': # Strategie voor bijvoeglijke naamwoorden
-                predicative_form = base_word
-                attributive_form = attributive(predicative_form)
-                forms = {
-                    predicative_form.lower(), 
-                    attributive_form.lower()
-                }
+            if token.pos_ == 'NOUN':
+                forms = {token.text.lower(), pluralize(token.text).lower()}
                 pattern.append({"LOWER": {"IN": list(forms)}})
-                
-            else: # Fallback
-                 pattern.append({"LOWER": token.text.lower()})
+            elif token.pos_ == 'ADJ':
+                forms = {token.text.lower(), attributive(token.text).lower()}
+                pattern.append({"LOWER": {"IN": list(forms)}})
+            else:
+                pattern.append({"LOWER": token.text.lower()})
 
-        match_id = term
-        matcher.add(match_id, [pattern])
+        match_id = term # Gebruik de term als de sleutel. De Matcher zal dit intern hashen.
+        
+        matcher.add(match_id, [pattern]) # Voeg het patroon toe. De Matcher verwacht een lijst van patronen.
         url_map[match_id] = url
         
     return matcher, url_map
 
 def autolink_text(text, matcher, url_map, current_page_title=""):
     """
-    Vervangt termen in een tekst met links via de spaCy PhraseMatcher.
+    Vervangt termen in een tekst met Markdown-links via de spaCy Matcher.
     """
     if not text or not matcher:
         return text
 
     doc = nlp(text)
+    # De Matcher retourneert (match_id_hash, start, end)
     matches = matcher(doc)
-
-    valid_matches = [] # We bouwen een lijst met matches die we willen behouden
+    
+    # Filter de matches om zelf-referenties en overlap te voorkomen
+    # Sorteer op startpositie, en dan op lengte (langste eerst)
+    matches.sort(key=lambda x: (x[1], -(x[2] - x[1])))
+    
+    final_matches = []
+    last_end = -1
     for match_id_hash, start, end in matches:
+        # Voorkom dat matches binnen andere, langere matches worden gelinkt
+        if start < last_end:
+            continue
+            
         span = doc[start:end]
-        if span.text.lower() != current_page_title.lower(): # De match_id is een integer hash. We vertalen hem terug naar de originele string.
-            original_term_key = nlp.vocab.strings[match_id_hash]
-            valid_matches.append((original_term_key, start, end))
+        original_term_key = nlp.vocab.strings[match_id_hash]
 
-    if not valid_matches:
+        if span.text.lower() != current_page_title.lower():
+            final_matches.append((original_term_key, start, end))
+            last_end = end
+    
+    if not final_matches:
         return text
 
-    # Bouw de nieuwe tekst op om index-conflicten te voorkomen
+    # Bouw de nieuwe tekst op
     new_text_parts = []
     last_index = 0
-
-    # Sorteer matches op start-positie om overlap te voorkomen
-    # (dit is een extra veiligheidsmaatregel)
-    valid_matches.sort(key=lambda x: x[1])
-
-    for original_term_key, start, end in valid_matches:
-        # Voorkom dat matches binnen andere matches worden gelinkt
-        if doc[start].idx < last_index:
-            continue
-
+    for original_term_key, start, end in final_matches:
         new_text_parts.append(text[last_index:doc[start].idx])
         
         original_phrase = doc[start:end].text
