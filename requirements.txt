@@ -1,6 +1,11 @@
+# RDF & SKOS verwerking
 rdflib
-python-slugify
 pyshacl
+
+# Templating & bestandsgeneratie
+python-slugify
 jinja2
+
+# Natural Language Processing (NLP)
 spacy
 pattern3

@@ -29,9 +29,16 @@ jobs:
 
       - name: Install Python dependencies
         run: pip install -r requirements.txt
-
-      - name: Download SpaCy Dutch model
         run: python -m spacy download nl_core_news_sm
+
+      - name: Debug Installed Packages
+        run: |
+          echo "--- pip freeze output ---"
+          pip freeze
+          echo "--- pip show pattern3 output ---"
+          pip show pattern3
+          echo "--- pip show pattern output ---"
+          pip show pattern || echo "Package 'pattern' not found, which is good."
 
       - name: Generate website from SKOS model
         run: python generate.py
