@@ -199,7 +199,7 @@ def generate_aliases(g, env, lookup, output_dir):
         target_id = lookup[uri]['id']
         target_label = lookup[uri]['label']
         # De URL waar we de bezoeker heen sturen
-        target_url = f"/doc/{target_id}" 
+        target_url = f"/doc/{target_id}"
 
         # Verzamel alle aliassen voor DIT begrip
         aliases = []
@@ -245,7 +245,7 @@ def generate_list(g, env, lookup, output_path):
         # Voeg Voorkeursterm toe
         pref_label = lookup[uri]['label']
         target_id = lookup[uri]['id']
-        url = f"/doc/{target_id}" # Korte URL, Jekyll fixt de baseurl
+        url = f"{BASE_URL}/doc/{target_id}"
         
         all_items.append({
             "sort_key": slugify(pref_label), # Voor sorteren
