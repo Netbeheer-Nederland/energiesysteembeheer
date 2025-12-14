@@ -74,20 +74,26 @@
         .then(data => {
           /* HTML bouwen */
           let html = "";
-          data.forEach(function(item) {
-            /* Styling voor alias */
-            let style = "";
-            let suffix = "";
+
+          data.forEach(item => {
+            const htmlContent = item.title;
+            const cssClass = "nav-list-link";
+            const extraAttrs = "";
+
             if (item.type === 'alias') {
-              style = 'style="font-style: italic; color: #666;"';
-              suffix = ' <span style="font-size: 0.8em; opacity: 0.6;">&#8627;</span>';
+              /* Styling voor de alias zelf */
+              extraAttrs = 'style="font-style: italic; color: #555;"';
+              
+              /* De pijl en de doelterm toevoegen */
+              /* We gebruiken een <span> voor de doelterm om hem wat lichter/kleiner te maken */
+              htmlContent += ' <span style="font-weight: normal; color: #999; font-size: 0.85em;">&rarr; ' + item.target_label + '</span>';
             }
             
             html += '<li class="nav-list-item">';
-            html += '<a href="' + item.url + '" class="nav-list-link" ' + style + '>' + item.title + suffix + '</a>';
+            html += '<a href="' + item.url + '" class="' + cssClass + '" ' + extraAttrs + '>' + htmlContent + '</a>';
             html += '</li>';
           });
-          
+
           azList.innerHTML = html;
           loadingContainer.style.display = 'none'; /* Verberg 'Laden...' */
           dataLoaded = true;

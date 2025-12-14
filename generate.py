@@ -320,6 +320,7 @@ def generate_json_index(g, lookup):
                 "title": alias,
                 "url": target_url, # Verwijs direct naar het hoofdbegrip
                 "type": "alias",
+                "target_label": data['label'],
                 "sort_key": normalize_for_sort(alias)
             })
 
