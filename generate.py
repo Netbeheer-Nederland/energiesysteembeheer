@@ -115,10 +115,10 @@ def normalize_for_sort(text):
     return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
 
 def build_matcher_and_url_map(lookup, base_url):
-    matcher = PhraseMatcher(nlp.vocab, attr='LOWER') # We matchen alles op lowercase
+    matcher = PhraseMatcher(nlp.vocab)
     url_map = {}
 
-    for uri, data in lookup.items():
+    for _, data in lookup.items():
         term = data['label']
         url = f"{base_url}/doc/{data['reference']}"
         
@@ -129,17 +129,21 @@ def build_matcher_and_url_map(lookup, base_url):
             base_word = token.text.lower()
             
             if token.pos_ == 'NOUN': # Strategie voor zelfstandige naamwoorden
-                forms = {base_word, pluralize(base_word).lower()}
-                pattern.append({"LOWER": {"IN": list(forms)}})
-                
+                singular = token.text
+                plural = pluralize(singular)
+                pattern.append({"LOWER": {"IN": [singular.lower(), plural.lower()]}}) 
+
             elif token.pos_ == 'ADJ': # Strategie voor bijvoeglijke naamwoorden
                 predicative_form = base_word
-                attributive_form = attributive(base_word).lower()
-                forms = {predicative_form, attributive_form}
+                attributive_form = attributive(predicative_form)
+                forms = {
+                    predicative_form.lower(), 
+                    attributive_form.lower()
+                }
                 pattern.append({"LOWER": {"IN": list(forms)}})
                 
             else: # Fallback
-                pattern.append({"LOWER": base_word})
+                 pattern.append({"LOWER": token.text.lower()})
 
         match_id = term
         matcher.add(match_id, [pattern])
