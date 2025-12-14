@@ -4,7 +4,7 @@ from jinja2 import Environment, FileSystemLoader
 from rdflib import Graph, Namespace, RDF, SKOS, DCTERMS, RDFS, URIRef, FOAF
 from pyshacl import validate
 from spacy.matcher import PhraseMatcher
-from pattern.nl import pluralize
+from pattern.nl import pluralize, attributive
 
 try:
     nlp = spacy.load("nl_core_news_sm")
@@ -115,33 +115,31 @@ def normalize_for_sort(text):
     return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
 
 def build_matcher_and_url_map(lookup, base_url):
-    """
-    Creëert een spaCy PhraseMatcher met een hybride, grammaticaal bewuste strategie.
-    - Voor zelfstandige naamwoorden: matcht op expliciete lijst van enkel-/meervoud.
-    - Voor bijvoeglijke naamwoorden: matcht op lemma om verbuigingen te vangen.
-    """
-    matcher = PhraseMatcher(nlp.vocab) 
+    matcher = PhraseMatcher(nlp.vocab, attr='LOWER') # We matchen alles op lowercase
     url_map = {}
 
-    for _, data in lookup.items():
+    for uri, data in lookup.items():
         term = data['label']
         url = f"{base_url}/doc/{data['reference']}"
         
         doc = nlp(term)
         pattern = []
 
-        # Bouw het patroon token voor token, met de juiste strategie per woordsoort
         for token in doc:
-            if token.pos_ == 'NOUN': # Strategie 1: zelfstandige naamwoorden -> expliciete lijst
-                singular = token.text
-                plural = pluralize(singular)
-                pattern.append({"LOWER": {"IN": [singular.lower(), plural.lower()]}}) # We matchen op de letterlijke lowercase tekst uit de lijst
+            base_word = token.text.lower()
+            
+            if token.pos_ == 'NOUN': # Strategie voor zelfstandige naamwoorden
+                forms = {base_word, pluralize(base_word).lower()}
+                pattern.append({"LOWER": {"IN": list(forms)}})
                 
-            elif token.pos_ == 'ADJ': # Strategie 2: Bijvoeglijke Naamwoorden -> Lemma match
-                pattern.append({"LEMMA": token.lemma_}) # Dit vangt 'rood' -> 'rode', 'primair' -> 'primaire', etc.
+            elif token.pos_ == 'ADJ': # Strategie voor bijvoeglijke naamwoorden
+                predicative_form = base_word
+                attributive_form = attributive(base_word).lower()
+                forms = {predicative_form, attributive_form}
+                pattern.append({"LOWER": {"IN": list(forms)}})
                 
-            else: # Fallback voor andere woorden (voegwoorden, etc.)
-                pattern.append({"LOWER": token.text.lower()}) # Match op de letterlijke tekst, dit is het veiligst
+            else: # Fallback
+                pattern.append({"LOWER": base_word})
 
         match_id = term
         matcher.add(match_id, [pattern])

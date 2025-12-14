@@ -27,22 +27,9 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
 
-      - name: Install and Verify Dependencies
+      - name: Install Python dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential
-          python -m pip install --upgrade pip
-          
-          # Eerste poging
-          python -m pip install -r requirements.txt
-          
-          # VERIFICATIE STAP
-          echo "Verifying 'pattern' import..."
-          python -c "from pattern.nl import pluralize; print('Import successful!')" || \
-          (echo "Initial import failed. Forcing reinstall of pattern3." && \
-           python -m pip install --force-reinstall --no-cache-dir pattern3 && \
-           python -c "from pattern.nl import pluralize; print('Reinstall import successful!')")
-
+          pip install -r requirements.txt
           python -m spacy download nl_core_news_sm
 
       - name: Generate website from SKOS model
