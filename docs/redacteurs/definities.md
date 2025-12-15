@@ -3,9 +3,6 @@ title: Definities
 parent: Redacteurs
 ---
 
-{: .note }
-Kijk gerust rond! Aan deze website wordt momenteel nog gewerkt.
-
 # Definities
 
 *Deze pagina is een placeholder.*

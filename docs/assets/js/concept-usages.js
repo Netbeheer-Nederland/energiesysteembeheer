@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     const currentUri = metaTag.getAttribute('content');
     // TODO: allow multiple and move to config
-    const jsonPath = 'https://netbeheer-nederland.github.io/stelsel/registers/concept_usages.json'; 
+    const jsonPath = 'https://netbeheer-nederland.github.io/stelsel/registers/concept_usages.json';
 
     try {
         const response = await fetch(jsonPath);
@@ -70,6 +70,6 @@ document.addEventListener("DOMContentLoaded", async function() {
         container.innerHTML = html;
 
     } catch (error) {
-        console.warn("Kon model usages niet laden:", error);
+        console.warn("Kon gebruik in modellen niet vinden:", error);
     }
 });
