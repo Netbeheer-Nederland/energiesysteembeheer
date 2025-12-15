@@ -33,7 +33,7 @@ BEGRIPPENLIJST_FILE = os.path.join(DOCS_ROOT, "assets", "begrippenlijst.json") #
 # URL-instellingen
 # Let op: BASE_URL wordt hier gebruikt voor absolute links in gegenereerde lijsten.
 # Voor interne navigatie vertrouwen we op `baseurl` in Jekyll's `_config.yml`.
-BASE_URL = "/energiesysteembeheer"
+BASE_URL = ""
 PUBLISH_BASE_URI = "https://begrippen.netbeheernederland.nl" # komt overeen met @base in TTL
 CONCEPT_NAMESPACE = "https://begrippen.netbeheernederland.nl/id/" # komt overeen met @prefix : in TTL
 
