@@ -4,33 +4,33 @@
 }
 
 // Definition list: fit column width to content
-.main-content dl {
+dl.concept-properties {
     grid-template-columns: fit-content(33%) 1fr;
 }
 // Definition list: more space between (multi-line) items
-.main-content dt:nth-child(n+2), .main-content dt:nth-child(n+2) + dd {
+dl.concept-properties dt:nth-child(n+2), dl.concept-properties dt:nth-child(n+2) + dd {
     margin-top: 1em;
 }
 // Definition list: fix margin in multi-line items
-.main-content dt {
+dl.concept-properties dt {
     margin-bottom: 0;
 }
 // Definition list: remove colon
-.main-content dt::after {
+dl.concept-properties dt::after {
     content: "";
 }
 // Definition list on smaller screens: no columns
 @media (max-width: map-get($media-queries, lg)) {
-    .main-content dl {
+    dl.concept-properties {
         display: block;
     }
-    .main-content dt {
+    dl.concept-properties dt {
         text-align: left;
     }
-    .main-content dt:nth-child(n+1) + dd {
+    dl.concept-properties dt:nth-child(n+1) + dd {
         margin-top: 0;
     }
-    .main-content dd {
+    dl.concept-properties dd {
         margin-left: 0;
     }
 }
