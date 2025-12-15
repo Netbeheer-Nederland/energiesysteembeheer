@@ -4,11 +4,10 @@ parent: Redacteurs
 ---
 
 # URI-strategie
-Conceptversie
 
 Met deze URI-strategie borgen we een persistente en webvriendelijke identificatie in lijn met [Linked Data](https://www.w3.org/DesignIssues/LinkedData.html)- en [FAIR-principes](https://www.go-fair.org/fair-principles/).
 
-URI-patroon
+URI-syntax
 {: .text-delta }
 
 <dl>
@@ -28,17 +27,10 @@ Het begrippenkader is een [information resource](https://www.w3.org/TR/2004/REC-
 
 Voor begrippen volgen we de strategie beschreven in [sectie 4.1 van Cool URIs for the Semantic Web](https://www.w3.org/TR/cooluris/#r303gendocument). Hiermee sluiten we aan bij conventies uit de [Stelselcatalogus](https://www.stelselcatalogus.nl/documenten/linked_data_structuur) en de [PLDN-URI-strategie](https://www.pldn.nl/wiki/Boek/URI-strategie). Deze strategie maakt onderscheid tussen de identiteit van het begrip (`/id/{id}`) en het document dat een beschrijving van het begrip biedt (`/doc/{id}`), en schrijft een automatisch doorverwijzingsmechanisme voor om de documentatie te bereiken.[^1]
 
-<details closed markdown="block">
-  <summary>
-    Voorbeeldcode
-  </summary>
-  {: .text-delta }
-  <pre>
-  <https://begrippen.netbeheernederland.nl/id/da2a9>
-      a skos:Concept ;
-      skos:prefLabel "aansluiting"@nl .
-  </pre>
-</details>
+{: .text-delta }
+Voorbeeld
+
+Het begrip met NanoID `yp6xq` krijgt de URI `https://begrippen.netbeheernederland.nl/id/yp6xq`.
 
 ---
 
