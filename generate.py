@@ -25,10 +25,10 @@ TEMPLATE_DIR = "templates"
 # Output-locaties
 BEGRIPPEN_DIR = os.path.join(DOCS_ROOT, "_doc")  # Jekyll Collectie
 ALIAS_DIR = os.path.join(DOCS_ROOT, "alias")     # Redirects
-LIST_FILE = os.path.join(DOCS_ROOT, "lijst.md")  # A-Z Index
 INDEX_FILE = os.path.join(DOCS_ROOT, "index.md") # Homepage
 TTL_OUTPUT_FILE = os.path.join(DOCS_ROOT, "begrippenkader.ttl")
-BEGRIPPENLIJST_FILE = os.path.join(DOCS_ROOT, "assets", "begrippenlijst.json")
+JSON_OUTPUT_FILE = os.path.join(DOCS_ROOT, "begrippen.json") # lookup-tabel (referentie -> voorkeursterm)
+BEGRIPPENLIJST_FILE = os.path.join(DOCS_ROOT, "assets", "begrippenlijst.json") # voor de A-Z navigatie
 
 # URL-instellingen
 # Let op: BASE_URL wordt hier gebruikt voor absolute links in gegenereerde lijsten.
@@ -308,7 +308,7 @@ def generate_homepage(g, env):
         val_desc = g.value(scheme, RDFS.comment)
         if val_desc: description = str(val_desc)
 
-    output = template.render(title=title, description=description)
+    output = template.render(naam=title, uitleg=description)
     
     with open(INDEX_FILE, "w", encoding="utf-8") as f:
         f.write(output)
@@ -332,6 +332,28 @@ def generate_downloadable_ttl(g):
         print("FOUT: Kon TTL bestand niet wegschrijven.")
         raise(e)
 
+def generate_downloadable_json(g):
+    """
+    Zet de graph om naar een JSON-bestand met mappings van referentie naar voorkeursterm.
+    Dit stelt ontwikkelaars in staat om in hun GUI de referenties te vervangen.
+    """
+    print(f" - Downloadbare JSON genereren in {JSON_OUTPUT_FILE}...")
+
+    # Dictionary: { "mer53": { "label": "laagtelwerk", "uri": "..." } }
+    lookup = {}
+
+    for s, _, o in g.triples((None, SKOS.prefLabel, None)):
+        s_str = str(s)
+        if s_str.startswith(PUBLISH_BASE_URI):
+            local_id = s_str.replace(PUBLISH_BASE_URI, "")
+            lookup[local_id] = {
+                "label": str(o),
+                "uri": s_str
+            }
+
+    with open(JSON_OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(lookup, f, ensure_ascii=False, indent=2)
+
 def generate_concepts(g, env, lookup, matcher, url_map):
     print(f" - Begrippen genereren in {BEGRIPPEN_DIR}...")
     template = env.get_template("begrip.md.j2")
@@ -348,7 +370,8 @@ def generate_concepts(g, env, lookup, matcher, url_map):
         with open(os.path.join(BEGRIPPEN_DIR, filename), "w", encoding="utf-8") as f:
             f.write(output)
         count += 1
-    return count
+    
+    print(f"   -> {count} begrippenpagina's aangemaakt.")
 
 def generate_aliases(g, env, lookup):
     print(f" - Aliassen genereren in {ALIAS_DIR}...")
@@ -383,7 +406,8 @@ def generate_aliases(g, env, lookup):
             with open(os.path.join(ALIAS_DIR, filename), "w", encoding="utf-8") as f:
                 f.write(output)
             count += 1
-    return count
+
+    print(f"   -> {count} redirects aangemaakt.")
 
 def generate_json_index(g, lookup):
     print(f" - JSON Index genereren in {BEGRIPPENLIJST_FILE}...")
@@ -460,24 +484,21 @@ def main():
     else:
         print("SHACL Validatie geslaagd.")
 
-    print("TTL genereren...")
     generate_downloadable_ttl(g)
 
-    print("Index opbouwen...")
+    generate_downloadable_json(g)
+
     lookup = build_lookup(g)
+
     matcher, url_map = build_matcher_and_url_map(lookup, BASE_URL)
 
-    print("Bestanden genereren...")
     generate_homepage(g, env)
     
-    n_concepts = generate_concepts(g, env, lookup, matcher, url_map)
-    print(f"   -> {n_concepts} begrippenpagina's aangemaakt.")
+    generate_concepts(g, env, lookup, matcher, url_map)
     
-    n_aliases = generate_aliases(g, env, lookup)
-    print(f"   -> {n_aliases} redirects aangemaakt.")
+    generate_aliases(g, env, lookup)
     
     generate_json_index(g, lookup)
-    print("   -> Begrippenlijst aangemaakt.")
 
     print("=== Klaar! ===")
 
