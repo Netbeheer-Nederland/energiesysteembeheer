@@ -1,0 +1,4 @@
+_build/
+_site/
+vendor/
+Gemfile.lock

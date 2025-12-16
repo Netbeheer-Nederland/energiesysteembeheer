@@ -1,0 +1,100 @@
+---
+title: {{ voorkeursterm }}
+{% if parent_label %}parent: {{ parent_label }}{% endif %}
+permalink: {{ permalink }}
+redirect_from:
+  - /id/{{ reference }}
+  - /energiesysteembeheer/nl/page/{{ slug }}
+---
+
+# {{ voorkeursterm }}
+{: .d-inline-block }
+
+{% if status == 'invalid' %}
+Ongeldig
+{: .label .label-red }
+{% elif status == 'retired' %}
+Buiten gebruik
+{: .label .label-red }
+{% elif status == 'submitted' %}
+Ingediend
+{: .label .label-yellow }
+{% elif status == 'superseded' %}
+Vervangen
+{: .label .label-red }
+{% elif status != 'valid' %}
+Onbekende status
+{: .label .label-red }
+{% endif %}
+
+<meta name="concept-uri" content="{{ uri }}">
+
+{{ uri }}
+{: .fs-2 .text-mono .text-grey-dk-000 .mb-4 .mt-0 }
+
+{% if code %}
+{{ code }}
+{: .fs-4 .text-grey-dk-000 .fw-300 .float-right }
+{% endif %}
+
+{% if definitie %}
+{{ definitie }}
+{: .fs-5}
+{% endif %}
+
+---
+
+<dl class="concept-properties">
+
+{% macro render_field(key, values) %}
+  {% if values %}
+    <dt>{{ mapping[key].label }}</dt>
+    {% if mapping[key].type == 'single' %}
+      <dd>{{ values }}</dd>
+    {% elif mapping[key].type == 'list' %}
+      {% for val in values %}<dd>{{ val }}</dd>{% endfor %}
+    {% else %}
+      {% for link in values %}
+        <dd>
+          {# We bouwen de string: {{ 'url' | relative_url }} #}
+          <a href="{{ '{{' }} '{{ link.url }}' | relative_url {{ '}}' }}">
+            {{ link.label }}
+          </a>
+        </dd>
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{{ render_field('uitleg', uitleg) }}
+{{ render_field('toelichting', toelichting) }}
+{{ render_field('voorbeeld', voorbeeld) }}
+
+{{ render_field('alternatieve_term', alternatieve_term) }}
+{{ render_field('zoekterm', zoekterm) }}
+
+{{ render_field('heeft_bovenliggend_begrip', heeft_bovenliggend_begrip) }}
+{{ render_field('heeft_onderliggend_begrip', heeft_onderliggend_begrip) }}
+{{ render_field('is_onderdeel_van', is_onderdeel_van) }}
+{{ render_field('omvat', omvat) }}
+{{ render_field('is_specialisatie_van', is_specialisatie_van) }}
+{{ render_field('is_generalisatie_van', is_generalisatie_van) }}
+{{ render_field('is_exemplaar_van', is_exemplaar_van) }}
+{{ render_field('is_categorie_van', is_categorie_van) }}
+{{ render_field('is_gerelateerd_aan', is_gerelateerd_aan) }}
+
+{{ render_field('is_exact_overeenkomstig', is_exact_overeenkomstig) }}
+{{ render_field('is_vrijwel_overeenkomstig', is_vrijwel_overeenkomstig) }}
+{{ render_field('heeft_overeenkomstig_bovenliggend', heeft_overeenkomstig_bovenliggend) }}
+{{ render_field('heeft_overeenkomstig_onderliggend', heeft_overeenkomstig_onderliggend) }}
+{{ render_field('is_overeenkomstig_verwant', is_overeenkomstig_verwant) }}
+
+{{ render_field('heeft_bron', heeft_bron) }}
+
+{{ render_field('redactionele_notitie', redactionele_notitie) }}
+{{ render_field('wijzigingsnotitie', wijzigingsnotitie) }}
+{{ render_field('historie_notitie', historie_notitie) }}
+
+</dl>
+
+<div id="concept-usages" class="mt-6"></div>

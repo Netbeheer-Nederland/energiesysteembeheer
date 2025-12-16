@@ -1,13 +1,14 @@
-import os, glob, json, unicodedata, spacy
+import sys, os, glob, json, unicodedata, spacy
 from slugify import slugify
 from jinja2 import Environment, FileSystemLoader
 from rdflib import Graph, Namespace, RDF, SKOS, DCTERMS, RDFS, URIRef, FOAF
+from rdflib.namespace import split_uri
 from pyshacl import validate
 from spacy.matcher import Matcher
 from pattern.nl import pluralize, attributive
 
 try:
-    nlp = spacy.load("nl_core_news_sm")
+    nlp = spacy.load("nl_core_news_sm", disable=["ner", "parser", "lemmatizer"])
     print("SpaCy Nederlands model geladen.")
 except OSError:
     print("FOUT: SpaCy Nederlands model niet gevonden. Draai: python -m spacy download nl_core_news_sm")
@@ -17,29 +18,21 @@ except OSError:
 # CONFIGURATIE & PADEN
 # ==============================================================================
 
-# Paden (relatief aan scriptlocatie)
-INPUT_DIR = "begrippenkader"
-DOCS_ROOT = "docs"
+# Paden
+BUILD_DIR = sys.argv[1] if len(sys.argv) > 1 else "docs" # Gebruik voor local build: `python generate.py _build`
 TEMPLATE_DIR = "templates"
+TTL_DIR = "begrippenkader"
+CONCEPT_DIR = os.path.join(BUILD_DIR, "_doc") # Jekyll-collectie in _config.yml
+ALIAS_DIR = os.path.join(BUILD_DIR, "alias") # altLabel redirects
+ALPHABETIC_NAV_FILE = os.path.join(BUILD_DIR, "assets", "begrippenlijst.json") # bronbestand voor de A-Z navigatie
+HOMEPAGE_FILE = os.path.join(BUILD_DIR, "index.md")
+DOWNLOADABLE_TTL_FILE = os.path.join(BUILD_DIR, "begrippenkader.ttl")
+DOWNLOADABLE_JSON_FILE = os.path.join(BUILD_DIR, "begrippen.json") # lookup-tabel (referentie -> voorkeursterm en uri)
 
-# Output-locaties
-BEGRIPPEN_DIR = os.path.join(DOCS_ROOT, "_doc")  # Jekyll Collectie
-ALIAS_DIR = os.path.join(DOCS_ROOT, "alias")     # Redirects
-INDEX_FILE = os.path.join(DOCS_ROOT, "index.md") # Homepage
-TTL_OUTPUT_FILE = os.path.join(DOCS_ROOT, "begrippenkader.ttl")
-JSON_OUTPUT_FILE = os.path.join(DOCS_ROOT, "begrippen.json") # lookup-tabel (referentie -> voorkeursterm)
-BEGRIPPENLIJST_FILE = os.path.join(DOCS_ROOT, "assets", "begrippenlijst.json") # voor de A-Z navigatie
-
-# URL-instellingen
-# Let op: BASE_URL wordt hier gebruikt voor absolute links in gegenereerde lijsten.
-# Voor interne navigatie vertrouwen we op `baseurl` in Jekyll's `_config.yml`.
-BASE_URL = ""
-PUBLISH_BASE_URI = "https://begrippen.netbeheernederland.nl" # komt overeen met @base in TTL
-CONCEPT_NAMESPACE = "https://begrippen.netbeheernederland.nl/id/" # komt overeen met @prefix : in TTL
-
-# Validatie instellingen
-# URL naar het SHACL profiel van NL-SBB (Geonovum)
-NL_SBB_SHACL_URL = "https://raw.githubusercontent.com/geonovum/NL-SBB/main/profiles/skos-ap-nl.ttl"
+# TTL-instellingen
+TTL_BASE = "https://begrippen.netbeheernederland.nl"
+TTL_DEFAULT_PREFIX = "https://begrippen.netbeheernederland.nl/id/"
+TTL_SHACL = "https://raw.githubusercontent.com/geonovum/NL-SBB/main/profiles/skos-ap-nl.ttl"
 
 # RDF Namespaces
 ADMS = Namespace("http://www.w3.org/ns/adms#")
@@ -96,7 +89,8 @@ def get_reference(uri_str):
     """
     Haalt de 'referentie' uit de URI conform NL URI-Strategie.
     """
-    return uri_str.rstrip("/").split("/")[-1]
+    _, local_name = split_uri(uri_str)
+    return local_name
 
 def get_status(g, s):
     """Haalt de ADMS status op van een concept (bijv. 'valid', 'deprecated')."""
@@ -114,13 +108,13 @@ def normalize_for_sort(text):
     text = text.lower()
     return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
 
-def build_matcher_and_url_map(lookup, base_url):
+def build_matcher_and_url_map(lookup):
     matcher = Matcher(nlp.vocab)
     url_map = {}
 
     for _, data in lookup.items():
         term = data['label']
-        url = f"{base_url}/doc/{data['reference']}"
+        url = f"/doc/{data['reference']}"
         
         doc = nlp(term)
         pattern = []
@@ -150,26 +144,25 @@ def autolink_text(text, matcher, url_map, current_page_title=""):
         return text
 
     doc = nlp(text)
-    # De Matcher retourneert (match_id_hash, start, end)
     matches = matcher(doc)
     
-    # Filter de matches om zelf-referenties en overlap te voorkomen
     # Sorteer op startpositie, en dan op lengte (langste eerst)
     matches.sort(key=lambda x: (x[1], -(x[2] - x[1])))
     
     final_matches = []
     last_end = -1
-    for match_id_hash, start, end in matches:
-        # Voorkom dat matches binnen andere, langere matches worden gelinkt
-        if start < last_end:
-            continue
-            
-        span = doc[start:end]
-        original_term_key = nlp.vocab.strings[match_id_hash]
 
-        if span.text.lower() != current_page_title.lower():
-            final_matches.append((original_term_key, start, end))
-            last_end = end
+    for match_id_hash, start, end in matches:
+        if start < last_end:
+            continue # Voorkom dat matches binnen andere, langere matches worden gelinkt
+
+        original_term_key = nlp.vocab.strings[match_id_hash] # Haal de originele key op ('voorkeursterm')
+
+        if original_term_key.lower() == current_page_title.lower():
+            continue # Sla over: dit is een verwijzing naar zichzelf
+
+        final_matches.append((original_term_key, start, end))
+        last_end = end
     
     if not final_matches:
         return text
@@ -182,7 +175,7 @@ def autolink_text(text, matcher, url_map, current_page_title=""):
         
         original_phrase = doc[start:end].text
         url = url_map[original_term_key]
-        link = f'<a href="{url}" class="auto-link">{original_phrase}</a>'
+        link = f'<a href="{{{{ \'{url}\' | relative_url }}}}" class="auto-link">{original_phrase}</a>'
         new_text_parts.append(link)
         
         last_index = doc[end-1].idx + len(doc[end-1].text)
@@ -260,7 +253,7 @@ def extract_concept_data(g, s, lookup, matcher, url_map):
                 if obj_uri in lookup:
                     target_reference = lookup[obj_uri]['reference']
                     links.append({
-                        "url": f"{BASE_URL}/doc/{target_reference}",
+                        "url": f"/doc/{target_reference}",
                         "label": lookup[obj_uri]['label']
                     })
             data[var_name] = links
@@ -296,7 +289,7 @@ def extract_concept_data(g, s, lookup, matcher, url_map):
 
 def generate_homepage(g, env):
     print(" - Homepage genereren...")
-    template = env.get_template("index.md.j2")
+    template = env.get_template("index.md.jinja2")
     
     scheme = g.value(predicate=RDF.type, object=SKOS.ConceptScheme)
     title = "Begrippenkader"
@@ -310,24 +303,24 @@ def generate_homepage(g, env):
 
     output = template.render(naam=title, uitleg=description)
     
-    with open(INDEX_FILE, "w", encoding="utf-8") as f:
+    with open(HOMEPAGE_FILE, "w", encoding="utf-8") as f:
         f.write(output)
 
 def generate_downloadable_ttl(g):
     """
     Schrijft de volledige graph weg als één genormaliseerd Turtle-bestand.
     """
-    print(f" - Downloadbare TTL genereren in {TTL_OUTPUT_FILE}...")
+    print(f" - Downloadbare TTL genereren in {DOWNLOADABLE_TTL_FILE}...")
     
     # Bind de lege prefix (:) aan de juiste namespace
-    g.bind("", Namespace(CONCEPT_NAMESPACE))
+    g.bind("", Namespace(TTL_DEFAULT_PREFIX))
     # Bind andere veelgebruikte prefixes
     g.bind("skos", SKOS)
     g.bind("dct", DCTERMS)
     g.bind("adms", ADMS)
 
     try:
-        g.serialize(destination=TTL_OUTPUT_FILE, format="turtle", base=PUBLISH_BASE_URI)
+        g.serialize(destination=DOWNLOADABLE_TTL_FILE, format="turtle", base=TTL_BASE)
     except Exception as e:
         print("FOUT: Kon TTL bestand niet wegschrijven.")
         raise(e)
@@ -337,27 +330,27 @@ def generate_downloadable_json(g):
     Zet de graph om naar een JSON-bestand met mappings van referentie naar voorkeursterm.
     Dit stelt ontwikkelaars in staat om in hun GUI de referenties te vervangen.
     """
-    print(f" - Downloadbare JSON genereren in {JSON_OUTPUT_FILE}...")
+    print(f" - Downloadbare JSON genereren in {DOWNLOADABLE_JSON_FILE}...")
 
     # Dictionary: { "mer53": { "label": "laagtelwerk", "uri": "..." } }
     lookup = {}
 
     for s, _, o in g.triples((None, SKOS.prefLabel, None)):
         s_str = str(s)
-        if s_str.startswith(CONCEPT_NAMESPACE):
-            local_id = s_str.replace(CONCEPT_NAMESPACE, "")
+        if s_str.startswith(TTL_DEFAULT_PREFIX):
+            local_id = s_str.replace(TTL_DEFAULT_PREFIX, "")
             lookup[local_id] = {
                 "label": str(o),
                 "uri": s_str
             }
 
-    with open(JSON_OUTPUT_FILE, "w", encoding="utf-8") as f:
+    with open(DOWNLOADABLE_JSON_FILE, "w", encoding="utf-8") as f:
         json.dump(lookup, f, ensure_ascii=False, indent=2)
 
 def generate_concepts(g, env, lookup, matcher, url_map):
-    print(f" - Begrippen genereren in {BEGRIPPEN_DIR}...")
-    template = env.get_template("begrip.md.j2")
-    ensure_directory(BEGRIPPEN_DIR)
+    print(f" - Begrippen genereren in {CONCEPT_DIR}...")
+    template = env.get_template("begrip.md.jinja2")
+    ensure_directory(CONCEPT_DIR)
 
     count = 0
     for s in g.subjects(RDF.type, SKOS.Concept):
@@ -367,7 +360,7 @@ def generate_concepts(g, env, lookup, matcher, url_map):
         output = template.render(data)
 
         filename = f"{data['reference']}.md"
-        with open(os.path.join(BEGRIPPEN_DIR, filename), "w", encoding="utf-8") as f:
+        with open(os.path.join(CONCEPT_DIR, filename), "w", encoding="utf-8") as f:
             f.write(output)
         count += 1
     
@@ -375,7 +368,7 @@ def generate_concepts(g, env, lookup, matcher, url_map):
 
 def generate_aliases(g, env, lookup):
     print(f" - Aliassen genereren in {ALIAS_DIR}...")
-    template = env.get_template("alias.md.j2")
+    template = env.get_template("alias.md.jinja2")
     ensure_directory(ALIAS_DIR)
 
     count = 0
@@ -410,8 +403,8 @@ def generate_aliases(g, env, lookup):
     print(f"   -> {count} redirects aangemaakt.")
 
 def generate_json_index(g, lookup):
-    print(f" - JSON Index genereren in {BEGRIPPENLIJST_FILE}...")
-    ensure_directory(os.path.dirname(BEGRIPPENLIJST_FILE))
+    print(f" - JSON Index genereren in {ALPHABETIC_NAV_FILE}...")
+    ensure_directory(os.path.dirname(ALPHABETIC_NAV_FILE))
     
     index_items = []
 
@@ -421,7 +414,7 @@ def generate_json_index(g, lookup):
         if uri not in lookup: continue
         
         data = lookup[uri]
-        target_url = f"{BASE_URL}/doc/{data['reference']}"
+        target_url = f"/doc/{data['reference']}"
         
         # Hoofdbegrip
         index_items.append({
@@ -447,7 +440,7 @@ def generate_json_index(g, lookup):
     for item in index_items:
         del item['sort_key'] # Sleutel verwijderen voor opslaan (bespaart bytes)
 
-    with open(BEGRIPPENLIJST_FILE, "w", encoding="utf-8") as f:
+    with open(ALPHABETIC_NAV_FILE, "w", encoding="utf-8") as f:
         json.dump(index_items, f, separators=(',', ':')) # Minified JSON
 
 # ==============================================================================
@@ -461,9 +454,9 @@ def main():
     
     print("RDF-data inlezen...")
     g = Graph()
-    ttl_files = glob.glob(os.path.join(INPUT_DIR, "*.ttl"))
+    ttl_files = glob.glob(os.path.join(TTL_DIR, "*.ttl"))
     if not ttl_files:
-        print(f"FOUT: Geen .ttl bestanden gevonden in {INPUT_DIR}")
+        print(f"FOUT: Geen .ttl bestanden gevonden in {TTL_DIR}")
         return
     for file_path in ttl_files:
         g.parse(file_path, format="turtle")
@@ -471,7 +464,7 @@ def main():
     print("SHACL-validatie uitvoeren...")
     conforms, _, v_text = validate(
         g,
-        shacl_graph=NL_SBB_SHACL_URL,
+        shacl_graph=TTL_SHACL,
         inference='rdfs',
         abort_on_first=False,
         meta_shacl=False,
@@ -490,7 +483,7 @@ def main():
 
     lookup = build_lookup(g)
 
-    matcher, url_map = build_matcher_and_url_map(lookup, BASE_URL)
+    matcher, url_map = build_matcher_and_url_map(lookup)
 
     generate_homepage(g, env)
     

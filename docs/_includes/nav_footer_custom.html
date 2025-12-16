@@ -19,6 +19,7 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
+    const baseUrl = "{{ site.baseurl }}";
     const sidebar = document.querySelector('.site-nav');
     const navCategory = document.querySelector('.nav-category');
     const originalList = document.querySelector('.site-nav > .nav-category + .nav-list');
@@ -48,7 +49,7 @@
 
           data.forEach(item => {
             const itemUrlClean = item.url.replace(/\/$/, "");
-            const isActive = item.type !== 'alias' && (currentPath.endsWith(itemUrlClean) || itemUrlClean.endsWith(currentPath));
+            const isActive = item.type !== 'alias' && currentPath.endsWith(itemUrlClean);
             let cssClass = 'nav-list-link';
             if (isActive) cssClass += ' active';
 
@@ -56,7 +57,7 @@
             if (item.type === 'alias') itemHTML = '<span class="text-grey-dk-000">' + item.title + ' &rarr; </span>' + item.target_label;
 
             listHTML += '<li class="nav-list-item">';
-            listHTML += '<a href="' + item.url + '" class="' + cssClass + '">' + itemHTML + '</a>';
+            listHTML += '<a href="' + baseUrl + item.url + '" class="' + cssClass + '">' + itemHTML + '</a>';
             listHTML += '</li>';
           });
 
