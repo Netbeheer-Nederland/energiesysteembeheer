@@ -9,3 +9,6 @@ jinja2
 # Natural Language Processing (NLP)
 spacy
 PatternLite
+
+# OS-agnostische task runner
+invoke

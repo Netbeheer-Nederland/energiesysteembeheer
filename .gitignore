@@ -1,4 +1,6 @@
 _build/
 _site/
 vendor/
+tools/
+__pycache__/
 Gemfile.lock

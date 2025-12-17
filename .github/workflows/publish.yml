@@ -21,30 +21,29 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # --- SETUP PYTHON & RUBY ---
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
           cache: 'pip'
 
-      - name: Install Python dependencies
-        run: |
-          pip install -r requirements.txt
-          python -m spacy download nl_core_news_sm
-
-      - name: Generate website from SKOS model
-        run: python generate.py
-
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
-          bundler-cache: true # Dit zorgt dat hij je Gemfile leest en cached!
+          bundler-cache: true
 
-      - name: Build Site with Jekyll
+      # --- INSTALL & BUILD VIA INVOKE ---
+      - name: Install Dependencies & Setup
         run: |
-          bundle exec jekyll build -s docs -d _site
+          pip install -r requirements.txt
+          inv setup
 
+      - name: Build Site via Invoke
+        run: inv build
+
+      # --- DEPLOY ---
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

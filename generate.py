@@ -19,7 +19,7 @@ except OSError:
 # ==============================================================================
 
 # Paden
-BUILD_DIR = sys.argv[1] if len(sys.argv) > 1 else "docs" # Gebruik voor local build: `python generate.py _build`
+BUILD_DIR = sys.argv[1] if len(sys.argv) > 1 else "docs"
 TEMPLATE_DIR = "templates"
 TTL_DIR = "begrippenkader"
 CONCEPT_DIR = os.path.join(BUILD_DIR, "_doc") # Jekyll-collectie in _config.yml
