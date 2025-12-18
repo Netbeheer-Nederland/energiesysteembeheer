@@ -78,7 +78,7 @@ class VeldDefinitie:
     type: VeldType
     auto_link: bool = False
 
-# De blauwdruk van een begrippenpagina
+# De blauwdruk van een begrippenpagina op basis van NL-SBB
 BEGRIPPEN_SCHEMA = {
     # Metadata
     "code":        VeldDefinitie("Code", NS["skos"].notation, VeldType.TEKST_ENKEL),
@@ -116,10 +116,6 @@ BEGRIPPEN_SCHEMA = {
 
 # ==============================================================================
 # 3. CORE LOGICA
-# ==============================================================================
-
-# ==============================================================================
-# VERBETERDE VERSIES (Invoegen in je script)
 # ==============================================================================
 
 class ContentLinker:
@@ -303,8 +299,8 @@ def process_concept(graph: Graph, concept: URIRef, lookup: dict, linker: Content
         data[field_key] = value
 
     # Breadcrumb helper
-    if data.get("heeft_bovenliggend"):
-        data["parent_label"] = data["heeft_bovenliggend"][0]["label"]
+    if data.get("heeft_bovenliggend_begrip"):
+        data["parent_label"] = data["heeft_bovenliggend_begrip"][0]["label"]
 
     return data
 
