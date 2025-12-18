@@ -5,7 +5,7 @@ parent: Redacteurs
 
 # NBility
 
-De topbegrippen van het begrippenkader worden gevormd door de NBility-bedrijfsobjecten. Dit zorgt voor duidelijkheid over eigenaarschap voor wat betreft de begrippen en hun definities. Elk nieuw begrip moet onder een van deze topbegrippen worden gehangen, direct of indirect.
+De topbegrippen van het begrippenkader worden gevormd door de NBility-bedrijfsobjecten. Dit zorgt voor duidelijkheid over eigenaarschap. Elk nieuw begrip moet onder een van deze topbegrippen worden gehangen, direct of indirect.
 
 ## Wat is NBility?
 
