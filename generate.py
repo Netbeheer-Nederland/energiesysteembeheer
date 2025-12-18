@@ -34,7 +34,7 @@ class ProjectPaths:
     def output_aliases(self) -> str: return os.path.join(self.root, "alias")
     
     @property
-    def output_index(self) -> str: return os.path.join(self.root, "assets", "begrippenlijst.json")
+    def output_nav(self) -> str: return os.path.join(self.root, "assets", "json", "alphabetical-nav.json")
     
     @property
     def output_homepage(self) -> str: return os.path.join(self.root, "index.md")
@@ -328,7 +328,7 @@ def generate_site(graph: Graph, paths: ProjectPaths):
                 f.write(template.render(alias_term=str(alias), target_label=target['label'], target_url=f"/doc/{target['reference']}"))
 
     # JSON alfabetische nav
-    print(f" - Index: {paths.output_index}")
+    print(f" - Index: {paths.output_nav}")
     index_items = []
     for uri, data in lookup.items():
         url = f"/doc/{data['reference']}"
@@ -339,8 +339,8 @@ def generate_site(graph: Graph, paths: ProjectPaths):
             index_items.append({"title": str(alias), "url": url, "type": "alias", "target_label": data['label'], "sort": get_normalized_sort_key(str(alias))})
     
     index_items.sort(key=lambda x: x.pop('sort')) # Sorteer en verwijder direct de sort key
-    ensure_dir(paths.output_index)
-    with open(paths.output_index, "w", encoding="utf-8") as f:
+    ensure_dir(paths.output_nav)
+    with open(paths.output_nav, "w", encoding="utf-8") as f:
         json.dump(index_items, f, separators=(',', ':'))
 
     # Downloadable TTL

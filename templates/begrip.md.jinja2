@@ -98,4 +98,5 @@ Onbekende status
 </dl>
 
 <div id="concept-usages" class="mt-6"></div>
-<script src="{{ '/assets/js/concept-usages.js' | relative_url }}"></script>
+{# We bouwen de string: {{ 'url' | relative_url }} #}
+<script src="{{ '{{' }} '/assets/js/concept-usages.js' | relative_url {{ '}}' }}"></script>

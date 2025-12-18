@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const loadingMsg = document.getElementById('skos-loading-msg');
 
     let dataLoaded = false;
-    const jsonUrl = `${baseUrl}/assets/begrippenlijst.json`;
+    const jsonUrl = `${baseUrl}/assets/json/alphabetical-nav.json`;
 
     function scrollToActive() {
         const activeLink = azList.querySelector('.active');
